@@ -1,0 +1,449 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Code-review-Openzeppelin-IAccessControl | w33d&#39;s blog</title>
+        <meta name="author" content="last emo boy" />
+        <meta name="description" content="Harbor for the last emo boy" />
+        <meta name="keywords" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+        <link rel="icon" href="/images/avatar.png" />
+        <script src="https://cdn.staticfile.org/vue/3.2.47/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.3.0/css/all.min.css" />
+<link rel="stylesheet" href="/css/fonts.min.css" />
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+
+
+<script src="https://cdn.staticfile.org/highlight.js/11.7.0/highlight.min.js"></script>
+<link
+    rel="stylesheet"
+    href="https://cdn.staticfile.org/highlight.js/11.7.0/styles/obsidian.min.css"
+/>
+<script src="/js/lib/highlight.js"></script>
+
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+    <meta name="generator" content="Hexo 6.3.0"></head>
+    <body>
+        <div id="layout">
+            <transition name="fade">
+                <div id="loading" v-show="loading">
+                    <div id="loading-circle">
+                        <h2>LOADING</h2>
+                        <p>加载过慢请开启缓存 浏览器默认开启</p>
+                        <img src="/images/loading.gif" />
+                    </div>
+                </div>
+            </transition>
+            <nav id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <div id="desktop-menu">
+        <a class="title" href="/">
+            <span>W33D&#39;S BLOG</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;Home</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;About</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;Archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;Categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;Tags</span>
+        </a>
+        
+    </div>
+    <div id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;W33D&#39;S BLOG</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </div>
+</nav>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+            <transition name="into">
+                <div id="main" v-show="!loading">
+                    <div class="article">
+    <div>
+        <h1>Code-review-Openzeppelin-IAccessControl</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/6/26
+        </span>
+        
+        
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/Solidity/" style="color: #03a9f4">Solidity</a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/Coding/" style="color: #ff7d73">Coding</a>
+            </span>
+            
+        </span>
+        
+    </div>
+    
+    <div class="content" v-pre>
+        <h1 id="概述："><a href="#概述：" class="headerlink" title="概述："></a>概述：</h1><p>这段代码定义了一个名为IAccessControl的接口，提供了角色控制的功能。通过该接口，可以进行以下操作：</p>
+<p>分配角色：可以将某个角色授权给指定的帐户。</p>
+<p>撤销角色：可以从指定的帐户中撤销某个角色的授权。</p>
+<p>查询角色：可以检查某个帐户是否被授予了指定的角色。</p>
+<p>管理角色管理员：可以查询和更改角色的管理员角色。</p>
+<p>此外，该接口定义了一些事件，用于在角色授权和撤销时发出通知。</p>
+<span id="more"></span>
+
+<h1 id="完整代码："><a href="#完整代码：" class="headerlink" title="完整代码："></a>完整代码：</h1><pre><code class="solidity">// SPDX-License-Identifier: MIT
+// OpenZeppelin Contracts v4.4.1 (access/IAccessControl.sol)
+
+pragma solidity ^0.8.0;
+
+/**
+ * @dev External interface of AccessControl declared to support ERC165 detection.
+ */
+interface IAccessControl &#123;
+    /**
+     * @dev Emitted when `newAdminRole` is set as ``role``&#39;s admin role, replacing `previousAdminRole`
+     *
+     * `DEFAULT_ADMIN_ROLE` is the starting admin for all roles, despite
+     * &#123;RoleAdminChanged&#125; not being emitted signaling this.
+     *
+     * _Available since v3.1._
+     */
+    event RoleAdminChanged(bytes32 indexed role, bytes32 indexed previousAdminRole, bytes32 indexed newAdminRole);
+
+    /**
+     * @dev Emitted when `account` is granted `role`.
+     *
+     * `sender` is the account that originated the contract call, an admin role
+     * bearer except when using &#123;AccessControl-_setupRole&#125;.
+     */
+    event RoleGranted(bytes32 indexed role, address indexed account, address indexed sender);
+
+    /**
+     * @dev Emitted when `account` is revoked `role`.
+     *
+     * `sender` is the account that originated the contract call:
+     *   - if using `revokeRole`, it is the admin role bearer
+     *   - if using `renounceRole`, it is the role bearer (i.e. `account`)
+     */
+    event RoleRevoked(bytes32 indexed role, address indexed account, address indexed sender);
+
+    /**
+     * @dev Returns `true` if `account` has been granted `role`.
+     */
+    function hasRole(bytes32 role, address account) external view returns (bool);
+
+    /**
+     * @dev Returns the admin role that controls `role`. See &#123;grantRole&#125; and
+     * &#123;revokeRole&#125;.
+     *
+     * To change a role&#39;s admin, use &#123;AccessControl-_setRoleAdmin&#125;.
+     */
+    function getRoleAdmin(bytes32 role) external view returns (bytes32);
+
+    /**
+     * @dev Grants `role` to `account`.
+     *
+     * If `account` had not been already granted `role`, emits a &#123;RoleGranted&#125;
+     * event.
+     *
+     * Requirements:
+     *
+     * - the caller must have ``role``&#39;s admin role.
+     */
+    function grantRole(bytes32 role, address account) external;
+
+    /**
+     * @dev Revokes `role` from `account`.
+     *
+     * If `account` had been granted `role`, emits a &#123;RoleRevoked&#125; event.
+     *
+     * Requirements:
+     *
+     * - the caller must have ``role``&#39;s admin role.
+     */
+    function revokeRole(bytes32 role, address account) external;
+
+    /**
+     * @dev Revokes `role` from the calling account.
+     *
+     * Roles are often managed via &#123;grantRole&#125; and &#123;revokeRole&#125;: this function&#39;s
+     * purpose is to provide a mechanism for accounts to lose their privileges
+     * if they are compromised (such as when a trusted device is misplaced).
+     *
+     * If the calling account had been granted `role`, emits a &#123;RoleRevoked&#125;
+     * event.
+     *
+     * Requirements:
+     *
+     * - the caller must be `account`.
+     */
+    function renounceRole(bytes32 role, address account) external;
+&#125;
+</code></pre>
+<h1 id="代码分析："><a href="#代码分析：" class="headerlink" title="代码分析："></a>代码分析：</h1><p>这段代码定义了一个名为IAccessControl的接口，用于角色控制。</p>
+<p>首先，关键字<code>interface</code>表示这是一个接口的定义。</p>
+<p>接口中声明了一些函数和事件，具体如下：</p>
+<ol>
+<li><p><code>event RoleAdminChanged(bytes32 indexed role, bytes32 indexed previousAdminRole, bytes32 indexed newAdminRole);</code></p>
+<ul>
+<li>事件：<code>RoleAdminChanged</code>，当一个角色的管理员角色发生变化时触发。</li>
+<li>参数：<ul>
+<li><code>role</code>：角色的标识符。</li>
+<li><code>previousAdminRole</code>：先前的管理员角色的标识符。</li>
+<li><code>newAdminRole</code>：新的管理员角色的标识符。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><code>event RoleGranted(bytes32 indexed role, address indexed account, address indexed sender);</code></p>
+<ul>
+<li>事件：<code>RoleGranted</code>，当将某个角色授权给一个帐户时触发。</li>
+<li>参数：<ul>
+<li><code>role</code>：角色的标识符。</li>
+<li><code>account</code>：被授权的帐户地址。</li>
+<li><code>sender</code>：发起合约调用的发送者地址。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><code>event RoleRevoked(bytes32 indexed role, address indexed account, address indexed sender);</code></p>
+<ul>
+<li>事件：<code>RoleRevoked</code>，当从一个帐户中撤销某个角色的授权时触发。</li>
+<li>参数：<ul>
+<li><code>role</code>：角色的标识符。</li>
+<li><code>account</code>：被撤销授权的帐户地址。</li>
+<li><code>sender</code>：发起合约调用的发送者地址。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<p>接下来是一系列函数的声明，用于实现角色控制的具体功能：</p>
+<ol>
+<li><p><code>function hasRole(bytes32 role, address account) external view returns (bool);</code></p>
+<ul>
+<li>函数：<code>hasRole</code>，用于检查某个帐户是否被授予了指定的角色。</li>
+<li>参数：<ul>
+<li><code>role</code>：角色的标识符。</li>
+<li><code>account</code>：待检查的帐户地址。</li>
+</ul>
+</li>
+<li>返回值：如果帐户被授予了指定的角色，则返回<code>true</code>，否则返回<code>false</code>。</li>
+</ul>
+</li>
+<li><p><code>function getRoleAdmin(bytes32 role) external view returns (bytes32);</code></p>
+<ul>
+<li>函数：<code>getRoleAdmin</code>，用于查询控制指定角色的管理员角色。</li>
+<li>参数：<ul>
+<li><code>role</code>：角色的标识符。</li>
+</ul>
+</li>
+<li>返回值：指定角色的管理员角色的标识符。</li>
+</ul>
+</li>
+<li><p><code>function grantRole(bytes32 role, address account) external;</code></p>
+<ul>
+<li>函数：<code>grantRole</code>，用于将指定角色授权给指定的帐户。</li>
+<li>参数：<ul>
+<li><code>role</code>：角色的标识符。</li>
+<li><code>account</code>：被授权的帐户地址。</li>
+</ul>
+</li>
+<li>注意事项：调用该函数的合约调用者必须具有指定角色的管理员角色。</li>
+</ul>
+</li>
+<li><p><code>function revokeRole(bytes32 role, address account) external;</code></p>
+<ul>
+<li><p>函数：<code>revokeRole</code>，用于从指定的帐户中撤销指定角色的授权。</p>
+</li>
+<li><p>参数：<code>role</code>：角色的标识符。</p>
+<ul>
+<li><p><code>account</code>：被撤销授权的帐户地址。</p>
+</li>
+<li><p>注意事项：调用该函数的合约调用者必须具有指定角色的管理员角色。</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><code>function renounceRole(bytes32 role, address account) external;</code></p>
+<ul>
+<li>函数：<code>renounceRole</code>，用于让指定帐户自行放弃某个角色。</li>
+<li>参数：<ul>
+<li><code>role</code>：角色的标识符。</li>
+<li><code>account</code>：希望放弃的帐户地址。</li>
+<li>注意事项：调用该函数的帐户必须是指定角色的持有人（即帐户本身）。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<p>通过这些函数和事件，实现了角色控制的功能。可以使用<code>grantRole</code>函数将角色授权给指定的帐户，使用<code>revokeRole</code>函数从指定的帐户中撤销角色的授权。使用<code>hasRole</code>函数可以查询某个帐户是否被授予了指定的角色。使用<code>getRoleAdmin</code>函数可以查询控制指定角色的管理员角色。而<code>renounceRole</code>函数可以让指定的帐户自行放弃某个角色。这样的角色控制机制可以在智能合约中用于管理角色和权限，例如限制特定操作只能由特定角色的帐户执行，或者检查帐户是否具有特定的角色以进行条件检查等。</p>
+
+    </div>
+    
+    
+    
+    
+    <div id="comment">
+        <div id="giscus-container" class="giscus"></div>
+    </div>
+    
+    
+    
+    
+</div>
+
+                    <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2022 - 2023 w33d&#39;s blog
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;last emo boy
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
+</footer>
+
+                </div>
+            </transition>
+            
+            <transition name="fade">
+                <div id="preview" ref="preview" v-show="previewShow">
+                    <img id="preview-content" ref="previewContent" />
+                </div>
+            </transition>
+            
+            <canvas id="fireworks" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 32767"></canvas>
+            <script src="https://cdn.staticfile.org/animejs/3.2.1/anime.min.js"></script>
+            <script src="/js/fireworks.min.js"></script>
+        </div>
+        <script src="/js/main.js"></script>
+        
+        
+<script
+    src="https://giscus.app/client.js"
+    data-repo="Last-emo-boy/Last-emo-boy.github.io"
+    data-repo-id="R_kgDOJz19bw"
+    data-category="Announcements"
+    data-category-id="DIC_kwDOJz19b84CXd_Q"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="top"
+    data-theme="preferred_color_scheme"
+    data-lang="zh-CN"
+    crossorigin
+    async
+></script>
+
+
+
+
+
+        
+    </body>
+</html>

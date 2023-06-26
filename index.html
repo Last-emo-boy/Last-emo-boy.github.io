@@ -164,6 +164,167 @@
         
 
 <div class="post">
+    <a href="/2023/06/26/Code-review-Openzeppelin-IAccessControlDefaultAdminRules/">
+        <h2 class="post-title">Code-review-Openzeppelin-IAccessControlDefaultAdminRules</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/6/26
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <h1 id="概述："><a href="#概述：" class="headerlink" title="概述："></a>概述：</h1><p>该合约代码定义了一个名为IAccessControlDefaultAdminRules的接口，用于管理访问控制和默认管理员角色的转移。它提供了以下功能：</p>
+<ol>
+<li><p>管理默认管理员角色的转移：</p>
+<ul>
+<li>可以启动默认管理员角色的转移，并设置新的管理员地址和接受计划。</li>
+<li>可以取消尚未接受的管理员转移。</li>
+<li>可以完成管理员转移，将DEFAULT_ADMIN_ROLE授予调用者，并从之前的持有者中撤销该角色。</li>
+</ul>
+</li>
+<li><p>管理默认管理员角色转移的延迟：</p>
+<ul>
+<li>可以设置默认管理员转移的延迟时间。</li>
+<li>可以取消预定的延迟更改。</li>
+<li>可以查询当前的默认管理员转移延迟时间和预定的延迟更改。</li>
+</ul>
+</li>
+<li><p>提供事件以便监控默认管理员角色和延迟更改的状态：</p>
+<ul>
+<li>可以监听默认管理员转移和延迟更改的开始、取消和完成事件。</li>
+</ul>
+</li>
+</ol>
+<p>这个接口为访问控制合约提供了一些附加的管理功能，使得在系统中转移默认管理员角色更加灵活和可控。</p>
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/Solidity/" style="color: #00a596">Solidity</a>
+        </span>
+        
+        <span class="tag">
+            
+            <a href="/tags/Coding/" style="color: #00bcd4">Coding</a>
+        </span>
+        
+    </div>
+    <a href="/2023/06/26/Code-review-Openzeppelin-IAccessControlDefaultAdminRules/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2023/06/26/Code-review-Openzeppelin-IAccessControl/">
+        <h2 class="post-title">Code-review-Openzeppelin-IAccessControl</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/6/26
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <h1 id="概述："><a href="#概述：" class="headerlink" title="概述："></a>概述：</h1><p>这段代码定义了一个名为IAccessControl的接口，提供了角色控制的功能。通过该接口，可以进行以下操作：</p>
+<p>分配角色：可以将某个角色授权给指定的帐户。</p>
+<p>撤销角色：可以从指定的帐户中撤销某个角色的授权。</p>
+<p>查询角色：可以检查某个帐户是否被授予了指定的角色。</p>
+<p>管理角色管理员：可以查询和更改角色的管理员角色。</p>
+<p>此外，该接口定义了一些事件，用于在角色授权和撤销时发出通知。</p>
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/Solidity/" style="color: #00a596">Solidity</a>
+        </span>
+        
+        <span class="tag">
+            
+            <a href="/tags/Coding/" style="color: #00a596">Coding</a>
+        </span>
+        
+    </div>
+    <a href="/2023/06/26/Code-review-Openzeppelin-IAccessControl/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2023/06/26/Code-review-Openzeppelin-AccessControlEnumerable/">
+        <h2 class="post-title">Code-review-Openzeppelin-AccessControlEnumerable</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/6/26
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <h1 id="概述："><a href="#概述：" class="headerlink" title="概述："></a>概述：</h1><p>合约的作用是扩展了 OpenZeppelin Contracts 中的访问控制合约（<code>AccessControl</code>），使其具备了角色成员的枚举功能。具体而言，该合约提供了以下功能：</p>
+<ol>
+<li>支持枚举角色成员：可以根据角色获取具有该角色的账户列表，以及获取角色成员的数量。</li>
+<li>重写了 <code>supportsInterface</code> 函数，使合约能够判断是否支持 <code>IAccessControlEnumerable</code> 接口。</li>
+<li>重写了 <code>_grantRole</code> 和 <code>_revokeRole</code> 函数，用于在授予和撤销角色时更新角色成员的地址集合。</li>
+</ol>
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/Solidity/" style="color: #03a9f4">Solidity</a>
+        </span>
+        
+        <span class="tag">
+            
+            <a href="/tags/Coding/" style="color: #03a9f4">Coding</a>
+        </span>
+        
+    </div>
+    <a href="/2023/06/26/Code-review-Openzeppelin-AccessControlEnumerable/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
     <a href="/2023/06/26/Code-review-Openzeppelin-AccessControlDefaultAdminRules/">
         <h2 class="post-title">Code review: Openzeppelin - AccessControlDefaultAdminRules</h2>
     </a>
@@ -194,12 +355,12 @@
         
         <span class="tag">
             
-            <a href="/tags/Solidity/" style="color: #00bcd4">Solidity</a>
+            <a href="/tags/Solidity/" style="color: #00a596">Solidity</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/Coding/" style="color: #ff7d73">Coding</a>
+            <a href="/tags/Coding/" style="color: #00bcd4">Coding</a>
         </span>
         
     </div>
@@ -237,7 +398,7 @@
         
         <span class="tag">
             
-            <a href="/tags/AIGC/" style="color: #00a596">AIGC</a>
+            <a href="/tags/AIGC/" style="color: #ffa2c4">AIGC</a>
         </span>
         
         <span class="tag">
@@ -280,12 +441,12 @@
         
         <span class="tag">
             
-            <a href="/tags/Solidity/" style="color: #ffa2c4">Solidity</a>
+            <a href="/tags/Solidity/" style="color: #00bcd4">Solidity</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/Coding/" style="color: #00a596">Coding</a>
+            <a href="/tags/Coding/" style="color: #03a9f4">Coding</a>
         </span>
         
     </div>
@@ -323,12 +484,12 @@
         
         <span class="tag">
             
-            <a href="/tags/Solidity/" style="color: #ffa2c4">Solidity</a>
+            <a href="/tags/Solidity/" style="color: #ff7d73">Solidity</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/Coding/" style="color: #ffa2c4">Coding</a>
+            <a href="/tags/Coding/" style="color: #ff7d73">Coding</a>
         </span>
         
     </div>
@@ -366,7 +527,7 @@
         
         <span class="tag">
             
-            <a href="/tags/Miscellanies/" style="color: #00a596">Miscellanies</a>
+            <a href="/tags/Miscellanies/" style="color: #ff7d73">Miscellanies</a>
         </span>
         
     </div>
@@ -404,7 +565,7 @@
         
         <span class="tag">
             
-            <a href="/tags/Miscellanies/" style="color: #00bcd4">Miscellanies</a>
+            <a href="/tags/Miscellanies/" style="color: #03a9f4">Miscellanies</a>
         </span>
         
     </div>
@@ -444,7 +605,7 @@
         
         <span class="tag">
             
-            <a href="/tags/Miscellanies/" style="color: #03a9f4">Miscellanies</a>
+            <a href="/tags/Miscellanies/" style="color: #ff7d73">Miscellanies</a>
         </span>
         
     </div>
