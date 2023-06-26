@@ -1,0 +1,473 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>w33d&#39;s blog</title>
+        <meta name="author" content="last emo boy" />
+        <meta name="description" content="Harbor for the last emo boy" />
+        <meta name="keywords" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+        <link rel="icon" href="/images/favicon.png" />
+        <script src="https://cdn.staticfile.org/vue/3.2.47/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.3.0/css/all.min.css" />
+<link rel="stylesheet" href="/css/fonts.min.css" />
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+
+
+<script src="https://cdn.staticfile.org/highlight.js/11.7.0/highlight.min.js"></script>
+<link
+    rel="stylesheet"
+    href="https://cdn.staticfile.org/highlight.js/11.7.0/styles/github.min.css"
+/>
+<script src="/js/lib/highlight.js"></script>
+
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+<script src="/js/lib/home.js"></script>
+
+<link rel="stylesheet" href="/css/main.css" />
+
+    <meta name="generator" content="Hexo 6.3.0"></head>
+    <body>
+        <div id="layout">
+            <transition name="fade">
+                <div id="loading" v-show="loading">
+                    <div id="loading-circle">
+                        <h2>LOADING</h2>
+                        <p>加载过慢请开启缓存 浏览器默认开启</p>
+                        <img src="/images/loading.gif" />
+                    </div>
+                </div>
+            </transition>
+            <nav id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <div id="desktop-menu">
+        <a class="title" href="/">
+            <span>W33D&#39;S BLOG</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;Home</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;About</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;Archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;Categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;Tags</span>
+        </a>
+        
+    </div>
+    <div id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;W33D&#39;S BLOG</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </div>
+</nav>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+            <transition name="into">
+                <div id="main" v-show="!loading">
+                    <div id="home-head">
+    <div id="home-background" ref="homeBackground" data-images="/images/background.jpg"></div>
+    <div id="home-info" @click="homeClick">
+        <span class="loop"></span>
+        <span class="loop"></span>
+        <span class="loop"></span>
+        <span class="loop"></span>
+        <span class="info">
+            <div class="wrap">
+                <h1>w33d&#39;s blog</h1>
+                <h3></h3>
+                <h5>Harbor for the last emo boy</h5>
+            </div>
+        </span>
+    </div>
+</div>
+<div id="home-posts-wrap" true ref="homePostsWrap">
+    <div id="home-posts">
+        
+
+<div class="post">
+    <a href="/2023/06/26/AIGC-An-Ode-to-Creativity-Meditation-A-Journey-into-the-Abyss/">
+        <h2 class="post-title">AIGC: An Ode to Creativity - Meditation: A Journey into the Abyss</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/6/26
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <p>I am drawn to the dark, the profound. Each glance I cast upon these works evokes an inexplicable sense of familiarity. This sensation does not originate from within me but is the unique allure of these pieces.</p>
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/AIGC/" style="color: #00bcd4">AIGC</a>
+        </span>
+        
+        <span class="tag">
+            
+            <a href="/tags/Art/" style="color: #03a9f4">Art</a>
+        </span>
+        
+    </div>
+    <a href="/2023/06/26/AIGC-An-Ode-to-Creativity-Meditation-A-Journey-into-the-Abyss/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2023/06/26/Code-review-Openzeppelin-AccessControlCrossChain/">
+        <h2 class="post-title">Code review: Openzeppelin - AccessControlCrossChain</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/6/26
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <h1 id="概述："><a href="#概述：" class="headerlink" title="概述："></a>概述：</h1><p>这个名为 <code>AccessControlCrossChain</code> 的 Solidity 合约是一个 OpenZeppelin Contracts 库中 <code>AccessControl</code> 和 <code>CrossChainEnabled</code> 两个合约的扩展，它提供了跨链访问管理的支持。它为每个角色实现了等效的“别名”角色，用于限制来自其他链的调用。该合约的主要目的是保护不同链上由不同实体控制的相同地址的多个合约之间的冲突。</p>
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/Solidity/" style="color: #ff7d73">Solidity</a>
+        </span>
+        
+        <span class="tag">
+            
+            <a href="/tags/Coding/" style="color: #ff7d73">Coding</a>
+        </span>
+        
+    </div>
+    <a href="/2023/06/26/Code-review-Openzeppelin-AccessControlCrossChain/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2023/06/25/Code-review-Openzeppelin-AccessControl/">
+        <h2 class="post-title">Code review: Openzeppelin - AccessControl</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/6/25
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <h1 id="概述："><a href="#概述：" class="headerlink" title="概述："></a>概述：</h1><p>这个合约的作用是实现基于角色的访问控制（RBAC）机制，可以通过定义角色和角色成员之间的关系，来限制合约中特定函数的访问权限。</p>
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/Solidity-Coding/" style="color: #00bcd4">Solidity - Coding</a>
+        </span>
+        
+    </div>
+    <a href="/2023/06/25/Code-review-Openzeppelin-AccessControl/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2023/06/25/%E5%90%8E%E8%AE%B0/">
+        <h2 class="post-title">后记</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/6/25
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <p>命运，这坚定无比的力，展现其设计不曾蹉跎。结果早已我心明如昼，但我抗拒接受，愿留在模糊不定而非确定答案的美妙。唉，自我欺瞒的闹剧多么徒劳无益。</p>
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        
+    </div>
+    <a href="/2023/06/25/%E5%90%8E%E8%AE%B0/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2023/06/25/Epilogue/">
+        <h2 class="post-title">Epilogue</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/6/25
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <p>Fate, an unwavering force, unfurls its design without falter. The outcome that now materializes was known to me from the outset, though I resisted accepting it, preferring the allure of uncertainty over a definitive answer. Alas, the futile charade of self-delusion.</p>
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/Miscellanies/" style="color: #03a9f4">Miscellanies</a>
+        </span>
+        
+    </div>
+    <a href="/2023/06/25/Epilogue/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2023/06/25/Hello-World-0/">
+        <h2 class="post-title">Hello World</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/6/25
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <p>Behold the inaugural dispatch from me, (or as I’m known in other circles, w33d, the last emo boy). As the future unfurls its uncertain scroll, updates shall materialize in synchronicity with destiny. I shall pen down an array of personal minutiae, musings on the art of programming (with a strong likelihood of our conversation being in the dialects of Solidity or Python), and an assortment of discursive thoughts.</p>
+<p>Do remember to cast your subscription, lest you miss our shared journey. XD!</p>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/Miscellanies/" style="color: #ffa2c4">Miscellanies</a>
+        </span>
+        
+    </div>
+    <a href="/2023/06/25/Hello-World-0/" class="go-post">阅读全文</a>
+</div>
+
+
+        <div class="page-current">
+    <div class="prev">
+        
+    </div>
+    <div class="page-index">
+        
+        <span class="current">1</span>
+        
+    </div>
+    <div class="next">
+        
+    </div>
+</div>
+
+    </div>
+    
+    <div id="home-card">
+        <div id="card-div">
+    <div class="card-style">
+        <div class="avatar">
+            <img src="/images/avatar.png" alt="avatar" />
+        </div>
+        <div class="name">last emo boy</div>
+        <div class="description">
+            <p>A Foolishly Obstinate Individual</p>
+
+        </div>
+        
+        
+        <div class="friend-links">
+            
+            <div class="friend-link">
+                <a target="_blank" rel="noopener" href="https://github.com/Last-emo-boy/">My Github</a>
+            </div>
+            
+        </div>
+        
+    </div>
+</div>
+
+    </div>
+    
+</div>
+
+                    <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2022 - 2023 w33d&#39;s blog
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;last emo boy
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
+</footer>
+
+                </div>
+            </transition>
+            
+            <transition name="fade">
+                <div id="preview" ref="preview" v-show="previewShow">
+                    <img id="preview-content" ref="previewContent" />
+                </div>
+            </transition>
+            
+        </div>
+        <script src="/js/main.js"></script>
+        
+    </body>
+</html>
