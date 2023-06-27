@@ -38,7 +38,119 @@
 
 <link rel="stylesheet" href="/css/main.css" />
 
-    <meta name="generator" content="Hexo 6.3.0"></head>
+    <meta name="generator" content="Hexo 6.3.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
     <body>
         <div id="layout">
             <transition name="fade">
@@ -165,12 +277,12 @@
             
             <span class="tag">
                 
-                <a href="/tags/Solidity/" style="color: #00bcd4">Solidity</a>
+                <a href="/tags/Solidity/" style="color: #ffa2c4">Solidity</a>
             </span>
             
             <span class="tag">
                 
-                <a href="/tags/Coding/" style="color: #03a9f4">Coding</a>
+                <a href="/tags/Coding/" style="color: #ff7d73">Coding</a>
             </span>
             
         </span>
@@ -178,240 +290,329 @@
     </div>
     
     <div class="content" v-pre>
-        <h1 id="概述："><a href="#概述：" class="headerlink" title="概述："></a>概述：</h1><p>合约的作用是扩展了 OpenZeppelin Contracts 中的访问控制合约（<code>AccessControl</code>），使其具备了角色成员的枚举功能。具体而言，该合约提供了以下功能：</p>
-<ol>
+        <h1 id="概述">概述：</h1>
+<p>合约的作用是扩展了 OpenZeppelin Contracts
+中的访问控制合约（<code>AccessControl</code>），使其具备了角色成员的枚举功能。具体而言，该合约提供了以下功能：</p>
+<ol type="1">
 <li>支持枚举角色成员：可以根据角色获取具有该角色的账户列表，以及获取角色成员的数量。</li>
-<li>重写了 <code>supportsInterface</code> 函数，使合约能够判断是否支持 <code>IAccessControlEnumerable</code> 接口。</li>
-<li>重写了 <code>_grantRole</code> 和 <code>_revokeRole</code> 函数，用于在授予和撤销角色时更新角色成员的地址集合。</li>
+<li>重写了 <code>supportsInterface</code> 函数，使合约能够判断是否支持
+<code>IAccessControlEnumerable</code> 接口。</li>
+<li>重写了 <code>_grantRole</code> 和 <code>_revokeRole</code>
+函数，用于在授予和撤销角色时更新角色成员的地址集合。</li>
 </ol>
 <span id="more"></span>
-
 <p>合约的内容如下：</p>
 <ul>
-<li>导入了 <code>IAccessControlEnumerable.sol</code>、<code>AccessControl.sol</code> 和 <code>EnumerableSet.sol</code> 这三个合约。</li>
-<li>声明了一个抽象合约 <code>AccessControlEnumerable</code>，继承自 <code>IAccessControlEnumerable</code> 和 <code>AccessControl</code> 合约。</li>
-<li>使用 <code>using</code> 语句导入了 <code>EnumerableSet</code> 库，以方便在合约中使用地址集合的操作。</li>
-<li>声明了一个私有映射 <code>_roleMembers</code>，用于将角色映射到对应的地址集合。</li>
-<li>重写了 <code>supportsInterface</code> 函数，用于判断是否支持特定接口。</li>
-<li>实现了 <code>getRoleMember</code> 函数，用于返回具有指定角色的账户中的一个成员。</li>
-<li>实现了 <code>getRoleMemberCount</code> 函数，用于返回具有指定角色的账户数量。</li>
-<li>重写了 <code>_grantRole</code> 函数，在授予角色时同时更新了地址集合。</li>
-<li>重写了 <code>_revokeRole</code> 函数，在撤销角色时同时更新了地址集合。</li>
+<li>导入了
+<code>IAccessControlEnumerable.sol</code>、<code>AccessControl.sol</code>
+和 <code>EnumerableSet.sol</code> 这三个合约。</li>
+<li>声明了一个抽象合约 <code>AccessControlEnumerable</code>，继承自
+<code>IAccessControlEnumerable</code> 和 <code>AccessControl</code>
+合约。</li>
+<li>使用 <code>using</code> 语句导入了 <code>EnumerableSet</code>
+库，以方便在合约中使用地址集合的操作。</li>
+<li>声明了一个私有映射
+<code>_roleMembers</code>，用于将角色映射到对应的地址集合。</li>
+<li>重写了 <code>supportsInterface</code>
+函数，用于判断是否支持特定接口。</li>
+<li>实现了 <code>getRoleMember</code>
+函数，用于返回具有指定角色的账户中的一个成员。</li>
+<li>实现了 <code>getRoleMemberCount</code>
+函数，用于返回具有指定角色的账户数量。</li>
+<li>重写了 <code>_grantRole</code>
+函数，在授予角色时同时更新了地址集合。</li>
+<li>重写了 <code>_revokeRole</code>
+函数，在撤销角色时同时更新了地址集合。</li>
 </ul>
 <p>总体而言，该合约提供了一种方便的方式来管理和枚举角色成员，对于需要在智能合约中实现访问控制的场景非常有用。</p>
-<h2 id="完整代码："><a href="#完整代码：" class="headerlink" title="完整代码："></a>完整代码：</h2><pre><code class="solidity">// SPDX-License-Identifier: MIT
+<h2 id="完整代码">完整代码：</h2>
+<pre class="solidity"><code>// SPDX-License-Identifier: MIT
 // OpenZeppelin Contracts (last updated v4.5.0) (access/AccessControlEnumerable.sol)
 
 pragma solidity ^0.8.0;
 
-import &quot;./IAccessControlEnumerable.sol&quot;;
-import &quot;./AccessControl.sol&quot;;
-import &quot;../utils/structs/EnumerableSet.sol&quot;;
+import "./IAccessControlEnumerable.sol";
+import "./AccessControl.sol";
+import "../utils/structs/EnumerableSet.sol";
 
 /**
- * @dev Extension of &#123;AccessControl&#125; that allows enumerating the members of each role.
+ * @dev Extension of {AccessControl} that allows enumerating the members of each role.
  */
-abstract contract AccessControlEnumerable is IAccessControlEnumerable, AccessControl &#123;
+abstract contract AccessControlEnumerable is IAccessControlEnumerable, AccessControl {
     using EnumerableSet for EnumerableSet.AddressSet;
 
     mapping(bytes32 =&gt; EnumerableSet.AddressSet) private _roleMembers;
 
     /**
-     * @dev See &#123;IERC165-supportsInterface&#125;.
+     * @dev See {IERC165-supportsInterface}.
      */
-    function supportsInterface(bytes4 interfaceId) public view virtual override returns (bool) &#123;
+    function supportsInterface(bytes4 interfaceId) public view virtual override returns (bool) {
         return interfaceId == type(IAccessControlEnumerable).interfaceId || super.supportsInterface(interfaceId);
-    &#125;
+    }
 
     /**
      * @dev Returns one of the accounts that have `role`. `index` must be a
-     * value between 0 and &#123;getRoleMemberCount&#125;, non-inclusive.
+     * value between 0 and {getRoleMemberCount}, non-inclusive.
      *
      * Role bearers are not sorted in any particular way, and their ordering may
      * change at any point.
      *
-     * WARNING: When using &#123;getRoleMember&#125; and &#123;getRoleMemberCount&#125;, make sure
+     * WARNING: When using {getRoleMember} and {getRoleMemberCount}, make sure
      * you perform all queries on the same block. See the following
      * https://forum.openzeppelin.com/t/iterating-over-elements-on-enumerableset-in-openzeppelin-contracts/2296[forum post]
      * for more information.
      */
-    function getRoleMember(bytes32 role, uint256 index) public view virtual override returns (address) &#123;
+    function getRoleMember(bytes32 role, uint256 index) public view virtual override returns (address) {
         return _roleMembers[role].at(index);
-    &#125;
+    }
 
     /**
      * @dev Returns the number of accounts that have `role`. Can be used
-     * together with &#123;getRoleMember&#125; to enumerate all bearers of a role.
+     * together with {getRoleMember} to enumerate all bearers of a role.
      */
-    function getRoleMemberCount(bytes32 role) public view virtual override returns (uint256) &#123;
+    function getRoleMemberCount(bytes32 role) public view virtual override returns (uint256) {
         return _roleMembers[role].length();
-    &#125;
+    }
 
     /**
-     * @dev Overload &#123;_grantRole&#125; to track enumerable memberships
+     * @dev Overload {_grantRole} to track enumerable memberships
      */
-    function _grantRole(bytes32 role, address account) internal virtual override &#123;
+    function _grantRole(bytes32 role, address account) internal virtual override {
         super._grantRole(role, account);
         _roleMembers[role].add(account);
-    &#125;
+    }
 
     /**
-     * @dev Overload &#123;_revokeRole&#125; to track enumerable memberships
+     * @dev Overload {_revokeRole} to track enumerable memberships
      */
-    function _revokeRole(bytes32 role, address account) internal virtual override &#123;
+    function _revokeRole(bytes32 role, address account) internal virtual override {
         super._revokeRole(role, account);
         _roleMembers[role].remove(account);
-    &#125;
-&#125;
-</code></pre>
-<h1 id="代码分析："><a href="#代码分析：" class="headerlink" title="代码分析："></a>代码分析：</h1><pre><code class="solidity">pragma solidity ^0.8.0;
-</code></pre>
-<p>这段代码是 Solidity 合约的声明部分，它指定了 Solidity 的版本要求。具体来说，<code>pragma solidity ^0.8.0;</code> 表示该合约需要使用 Solidity 0.8.0 或更高版本进行编译。</p>
-<p><code>pragma</code> 是 Solidity 的编译指示符，用于指定编译器的行为和版本要求。在这里，<code>^0.8.0</code> 中的 <code>^</code> 符号表示向后兼容性。它告诉编译器可以使用 0.8.0 及更高版本的 Solidity，但不包括 0.9.0 或更高版本的主要升级。这是为了确保合约能够在 0.8.0 或更新的版本中正常编译和运行，但不允许在具有不同主要版本的编译器中编译。</p>
-<p>在 Solidity 中，<code>pragma</code> 语句通常用于指定编译器版本、优化选项和代码验证等指令。该指示符对于确保合约在特定 Solidity 版本下具有正确的行为非常重要。</p>
-<pre><code class="solidity">import &quot;./IAccessControlEnumerable.sol&quot;;
-import &quot;./AccessControl.sol&quot;;
-import &quot;../utils/structs/EnumerableSet.sol&quot;;
-</code></pre>
-<p>这段代码主要是导入了三个合约，分别是 <code>IAccessControlEnumerable.sol</code>、<code>AccessControl.sol</code> 和 <code>EnumerableSet.sol</code>:</p>
-<ol>
-<li><p><code>IAccessControlEnumerable.sol</code>：这是一个接口合约，定义了访问控制中的角色枚举功能。它可能包含了枚举角色成员的函数声明，例如 <code>getRoleMember</code> 和 <code>getRoleMemberCount</code>。</p>
-</li>
-<li><p><code>AccessControl.sol</code>：这是一个访问控制合约，实现了基本的角色授权和访问控制功能。它包含了授予角色、撤销角色、检查角色授权等功能。<code>AccessControl</code> 合约可能是 <code>IAccessControlEnumerable</code> 接口的实现合约。</p>
-</li>
-<li><p><code>EnumerableSet.sol</code>：这是一个通用的集合库合约，用于存储和操作元素的集合。它提供了添加、删除、查询元素等操作，并支持对集合中的元素进行迭代和枚举。在本代码中，<code>EnumerableSet</code> 库可能被用于管理角色成员的地址集合。</p>
-</li>
+    }
+}</code></pre>
+<h1 id="代码分析">代码分析：</h1>
+<pre class="solidity"><code>pragma solidity ^0.8.0;</code></pre>
+<p>这段代码是 Solidity 合约的声明部分，它指定了 Solidity
+的版本要求。具体来说，<code>pragma solidity ^0.8.0;</code>
+表示该合约需要使用 Solidity 0.8.0 或更高版本进行编译。</p>
+<p><code>pragma</code> 是 Solidity
+的编译指示符，用于指定编译器的行为和版本要求。在这里，<code>^0.8.0</code>
+中的 <code>^</code> 符号表示向后兼容性。它告诉编译器可以使用 0.8.0
+及更高版本的 Solidity，但不包括 0.9.0
+或更高版本的主要升级。这是为了确保合约能够在 0.8.0
+或更新的版本中正常编译和运行，但不允许在具有不同主要版本的编译器中编译。</p>
+<p>在 Solidity 中，<code>pragma</code>
+语句通常用于指定编译器版本、优化选项和代码验证等指令。该指示符对于确保合约在特定
+Solidity 版本下具有正确的行为非常重要。</p>
+<pre class="solidity"><code>import "./IAccessControlEnumerable.sol";
+import "./AccessControl.sol";
+import "../utils/structs/EnumerableSet.sol";</code></pre>
+<p>这段代码主要是导入了三个合约，分别是
+<code>IAccessControlEnumerable.sol</code>、<code>AccessControl.sol</code>
+和 <code>EnumerableSet.sol</code>:</p>
+<ol type="1">
+<li><p><code>IAccessControlEnumerable.sol</code>：这是一个接口合约，定义了访问控制中的角色枚举功能。它可能包含了枚举角色成员的函数声明，例如
+<code>getRoleMember</code> 和 <code>getRoleMemberCount</code>。</p></li>
+<li><p><code>AccessControl.sol</code>：这是一个访问控制合约，实现了基本的角色授权和访问控制功能。它包含了授予角色、撤销角色、检查角色授权等功能。<code>AccessControl</code>
+合约可能是 <code>IAccessControlEnumerable</code>
+接口的实现合约。</p></li>
+<li><p><code>EnumerableSet.sol</code>：这是一个通用的集合库合约，用于存储和操作元素的集合。它提供了添加、删除、查询元素等操作，并支持对集合中的元素进行迭代和枚举。在本代码中，<code>EnumerableSet</code>
+库可能被用于管理角色成员的地址集合。</p></li>
 </ol>
-<p>综合来看，这段代码的作用是导入了一些必要的合约，为后续的智能合约开发提供了所需的功能和工具。通过导入 <code>IAccessControlEnumerable.sol</code> 和 <code>AccessControl.sol</code>，可以使用访问控制的角色授权功能，并通过导入 <code>EnumerableSet.sol</code>，可以方便地处理地址集合相关的操作。</p>
-<pre><code class="solidity">abstract contract AccessControlEnumerable is IAccessControlEnumerable, AccessControl &#123;
+<p>综合来看，这段代码的作用是导入了一些必要的合约，为后续的智能合约开发提供了所需的功能和工具。通过导入
+<code>IAccessControlEnumerable.sol</code> 和
+<code>AccessControl.sol</code>，可以使用访问控制的角色授权功能，并通过导入
+<code>EnumerableSet.sol</code>，可以方便地处理地址集合相关的操作。</p>
+<pre class="solidity"><code>abstract contract AccessControlEnumerable is IAccessControlEnumerable, AccessControl {
     using EnumerableSet for EnumerableSet.AddressSet;
 
-    mapping(bytes32 =&gt; EnumerableSet.AddressSet) private _roleMembers;
-</code></pre>
-<p>这段代码定义了一个抽象合约 <code>AccessControlEnumerable</code>，该合约是 <code>IAccessControlEnumerable</code> 和 <code>AccessControl</code> 合约的子合约。它引入了 <code>EnumerableSet</code> 库，并声明了一个名为 <code>_roleMembers</code> 的私有映射。</p>
+    mapping(bytes32 =&gt; EnumerableSet.AddressSet) private _roleMembers;</code></pre>
+<p>这段代码定义了一个抽象合约
+<code>AccessControlEnumerable</code>，该合约是
+<code>IAccessControlEnumerable</code> 和 <code>AccessControl</code>
+合约的子合约。它引入了 <code>EnumerableSet</code> 库，并声明了一个名为
+<code>_roleMembers</code> 的私有映射。</p>
 <p>作用意义：</p>
 <ul>
-<li>扩展了 <code>AccessControl</code> 合约，为其添加了角色成员的枚举功能。</li>
-<li>通过 <code>_roleMembers</code> 映射，记录了每个角色对应的地址集合。</li>
+<li>扩展了 <code>AccessControl</code>
+合约，为其添加了角色成员的枚举功能。</li>
+<li>通过 <code>_roleMembers</code>
+映射，记录了每个角色对应的地址集合。</li>
 </ul>
 <p>算法实现：</p>
 <ul>
-<li>使用 <code>using</code> 语句导入了 <code>EnumerableSet</code> 库，使得在合约中可以直接使用地址集合的操作函数。</li>
-<li><code>_roleMembers</code> 是一个私有映射，使用 <code>bytes32</code> 类型的角色哈希值作为键，将其映射到对应的地址集合 <code>EnumerableSet.AddressSet</code>。</li>
-<li><code>_roleMembers</code> 的访问权限是私有的，意味着只有合约内部可以访问和修改该映射。</li>
+<li>使用 <code>using</code> 语句导入了 <code>EnumerableSet</code>
+库，使得在合约中可以直接使用地址集合的操作函数。</li>
+<li><code>_roleMembers</code> 是一个私有映射，使用 <code>bytes32</code>
+类型的角色哈希值作为键，将其映射到对应的地址集合
+<code>EnumerableSet.AddressSet</code>。</li>
+<li><code>_roleMembers</code>
+的访问权限是私有的，意味着只有合约内部可以访问和修改该映射。</li>
 <li>这个映射的作用是存储每个角色对应的地址集合，用于记录具有特定角色的账户列表。</li>
 </ul>
-<p>该代码段的作用是在访问控制合约的基础上扩展了角色成员的枚举功能。通过使用 <code>_roleMembers</code> 映射来记录每个角色的成员，合约可以方便地获取具有特定角色的账户列表，并进行相关操作。这种实现方式使用了映射和地址集合的组合，提供了高效和灵活的角色管理机制。</p>
-<pre><code class="solidity">function supportsInterface(bytes4 interfaceId) public view virtual override returns (bool) &#123;
+<p>该代码段的作用是在访问控制合约的基础上扩展了角色成员的枚举功能。通过使用
+<code>_roleMembers</code>
+映射来记录每个角色的成员，合约可以方便地获取具有特定角色的账户列表，并进行相关操作。这种实现方式使用了映射和地址集合的组合，提供了高效和灵活的角色管理机制。</p>
+<pre class="solidity"><code>function supportsInterface(bytes4 interfaceId) public view virtual override returns (bool) {
         return interfaceId == type(IAccessControlEnumerable).interfaceId || super.supportsInterface(interfaceId);
-    &#125;
-</code></pre>
-<p>这段代码是一个函数 <code>supportsInterface</code> 的实现，它是一个公共视图函数（public view），用于判断合约是否支持特定的接口。</p>
+    }</code></pre>
+<p>这段代码是一个函数 <code>supportsInterface</code>
+的实现，它是一个公共视图函数（public
+view），用于判断合约是否支持特定的接口。</p>
 <p>函数的作用和意义如下：</p>
-<ol>
-<li><p>参数 <code>interfaceId</code>：接受一个 <code>bytes4</code> 类型的参数 <code>interfaceId</code>，表示待检查的接口ID。</p>
-</li>
-<li><p>返回值：返回一个布尔值，表示合约是否支持给定的接口。</p>
-</li>
-<li><p><code>type(IAccessControlEnumerable).interfaceId</code>：使用 <code>type</code> 关键字获取 <code>IAccessControlEnumerable</code> 接口的标识符（ID）。</p>
-</li>
-<li><p><code>super.supportsInterface(interfaceId)</code>：调用基础合约的 <code>supportsInterface</code> 函数，检查合约是否支持给定的接口。</p>
-</li>
-<li><p><code>interfaceId == type(IAccessControlEnumerable).interfaceId</code>：将 <code>interfaceId</code> 与 <code>IAccessControlEnumerable</code> 接口的标识符进行比较。</p>
-</li>
-<li><p>返回值计算：如果 <code>interfaceId</code> 等于 <code>IAccessControlEnumerable</code> 接口的标识符，或者基础合约的 <code>supportsInterface</code> 函数返回 <code>true</code>，则返回 <code>true</code>；否则，返回 <code>false</code>。</p>
-</li>
+<ol type="1">
+<li><p>参数 <code>interfaceId</code>：接受一个 <code>bytes4</code>
+类型的参数 <code>interfaceId</code>，表示待检查的接口ID。</p></li>
+<li><p>返回值：返回一个布尔值，表示合约是否支持给定的接口。</p></li>
+<li><p><code>type(IAccessControlEnumerable).interfaceId</code>：使用
+<code>type</code> 关键字获取 <code>IAccessControlEnumerable</code>
+接口的标识符（ID）。</p></li>
+<li><p><code>super.supportsInterface(interfaceId)</code>：调用基础合约的
+<code>supportsInterface</code>
+函数，检查合约是否支持给定的接口。</p></li>
+<li><p><code>interfaceId == type(IAccessControlEnumerable).interfaceId</code>：将
+<code>interfaceId</code> 与 <code>IAccessControlEnumerable</code>
+接口的标识符进行比较。</p></li>
+<li><p>返回值计算：如果 <code>interfaceId</code> 等于
+<code>IAccessControlEnumerable</code> 接口的标识符，或者基础合约的
+<code>supportsInterface</code> 函数返回 <code>true</code>，则返回
+<code>true</code>；否则，返回 <code>false</code>。</p></li>
 </ol>
 <p>这段代码实现了以下算法：</p>
-<ol>
-<li><p>首先，将给定的接口ID <code>interfaceId</code> 与 <code>IAccessControlEnumerable</code> 接口的标识符进行比较。如果它们相等，表示当前合约支持 <code>IAccessControlEnumerable</code> 接口。</p>
-</li>
-<li><p>如果比较结果为 <code>true</code>，则直接返回 <code>true</code>，表示合约支持该接口。</p>
-</li>
-<li><p>如果比较结果为 <code>false</code>，则调用基础合约的 <code>supportsInterface</code> 函数，检查基础合约是否支持给定的接口。</p>
-</li>
-<li><p>如果基础合约的 <code>supportsInterface</code> 函数返回 <code>true</code>，则说明基础合约支持该接口，因此当前合约也支持该接口，返回 <code>true</code>。</p>
-</li>
-<li><p>如果以上两个条件都不满足，则表示当前合约不支持该接口，返回 <code>false</code>。</p>
-</li>
+<ol type="1">
+<li><p>首先，将给定的接口ID <code>interfaceId</code> 与
+<code>IAccessControlEnumerable</code>
+接口的标识符进行比较。如果它们相等，表示当前合约支持
+<code>IAccessControlEnumerable</code> 接口。</p></li>
+<li><p>如果比较结果为 <code>true</code>，则直接返回
+<code>true</code>，表示合约支持该接口。</p></li>
+<li><p>如果比较结果为 <code>false</code>，则调用基础合约的
+<code>supportsInterface</code>
+函数，检查基础合约是否支持给定的接口。</p></li>
+<li><p>如果基础合约的 <code>supportsInterface</code> 函数返回
+<code>true</code>，则说明基础合约支持该接口，因此当前合约也支持该接口，返回
+<code>true</code>。</p></li>
+<li><p>如果以上两个条件都不满足，则表示当前合约不支持该接口，返回
+<code>false</code>。</p></li>
 </ol>
-<p>总结起来，该函数的作用是检查合约是否支持特定的接口，它首先检查当前合约是否支持 <code>IAccessControlEnumerable</code> 接口，如果不支持，则通过调用基础合约的 <code>supportsInterface</code> 函数来判断是否支持。这样可以实现接口的递归检查，确保正确判断合约的接口支持情况。</p>
-<pre><code class="solidity">function getRoleMember(bytes32 role, uint256 index) public view virtual override returns (address) &#123;
+<p>总结起来，该函数的作用是检查合约是否支持特定的接口，它首先检查当前合约是否支持
+<code>IAccessControlEnumerable</code>
+接口，如果不支持，则通过调用基础合约的 <code>supportsInterface</code>
+函数来判断是否支持。这样可以实现接口的递归检查，确保正确判断合约的接口支持情况。</p>
+<pre class="solidity"><code>function getRoleMember(bytes32 role, uint256 index) public view virtual override returns (address) {
         return _roleMembers[role].at(index);
-    &#125;
-</code></pre>
-<p>这段代码是合约中的一个函数，函数名为 <code>getRoleMember</code>，用于获取具有指定角色的成员列表中的一个成员。以下是对代码作用和实现算法的详细分析：</p>
-<p>作用意义：<br>该函数的作用是返回指定角色的成员列表中的一个成员。开发人员可以通过传入角色和索引参数来访问角色成员列表中的具体成员。</p>
+    }</code></pre>
+<p>这段代码是合约中的一个函数，函数名为
+<code>getRoleMember</code>，用于获取具有指定角色的成员列表中的一个成员。以下是对代码作用和实现算法的详细分析：</p>
+<p>作用意义：<br>
+该函数的作用是返回指定角色的成员列表中的一个成员。开发人员可以通过传入角色和索引参数来访问角色成员列表中的具体成员。</p>
 <p>算法实现：</p>
-<ol>
-<li>函数接收两个参数：<code>role</code>（角色）和 <code>index</code>（索引）。</li>
+<ol type="1">
+<li>函数接收两个参数：<code>role</code>（角色）和
+<code>index</code>（索引）。</li>
 <li>函数声明为 <code>public</code>，表示任何人都可以调用该函数。</li>
 <li>函数声明为 <code>view</code>，表示它不会修改合约状态。</li>
-<li>函数使用 <code>virtual</code> 关键字进行声明，表示它可以被派生合约重写。</li>
-<li>函数覆盖了父合约中的同名函数 <code>getRoleMember</code>，使用 <code>override</code> 关键字标识。</li>
-<li>函数内部通过访问私有映射 <code>_roleMembers</code> 来获取指定角色的成员列表。</li>
-<li>使用角色作为键，从 <code>_roleMembers</code> 映射中取出对应的地址集合。</li>
-<li>调用地址集合的 <code>at</code> 函数，并传入索引参数 <code>index</code>，以获取具体的成员地址。</li>
+<li>函数使用 <code>virtual</code>
+关键字进行声明，表示它可以被派生合约重写。</li>
+<li>函数覆盖了父合约中的同名函数 <code>getRoleMember</code>，使用
+<code>override</code> 关键字标识。</li>
+<li>函数内部通过访问私有映射 <code>_roleMembers</code>
+来获取指定角色的成员列表。</li>
+<li>使用角色作为键，从 <code>_roleMembers</code>
+映射中取出对应的地址集合。</li>
+<li>调用地址集合的 <code>at</code> 函数，并传入索引参数
+<code>index</code>，以获取具体的成员地址。</li>
 <li>函数返回获取到的成员地址。</li>
 </ol>
-<p>算法的具体实现依赖于 <code>_roleMembers</code> 映射和 <code>EnumerableSet</code> 库中的 <code>at</code> 函数。通过使用角色作为键访问 <code>_roleMembers</code> 映射，可以获取到与该角色对应的地址集合。然后，使用 <code>at</code> 函数和传入的索引参数，从地址集合中获取到具体的成员地址。最后，将该地址作为函数的返回值返回。</p>
-<p>总结：<br>这段代码实现了一个函数，用于获取具有指定角色的成员列表中的一个成员。函数通过访问 <code>_roleMembers</code> 映射和地址集合的 <code>at</code> 函数，提供了一种便捷的方式来获取角色成员列表中的具体成员。这对于需要对角色成员进行访问和操作的场景非常有用。</p>
-<pre><code class="solidity">function getRoleMemberCount(bytes32 role) public view virtual override returns (uint256) &#123;
+<p>算法的具体实现依赖于 <code>_roleMembers</code> 映射和
+<code>EnumerableSet</code> 库中的 <code>at</code>
+函数。通过使用角色作为键访问 <code>_roleMembers</code>
+映射，可以获取到与该角色对应的地址集合。然后，使用 <code>at</code>
+函数和传入的索引参数，从地址集合中获取到具体的成员地址。最后，将该地址作为函数的返回值返回。</p>
+<p>总结：<br>
+这段代码实现了一个函数，用于获取具有指定角色的成员列表中的一个成员。函数通过访问
+<code>_roleMembers</code> 映射和地址集合的 <code>at</code>
+函数，提供了一种便捷的方式来获取角色成员列表中的具体成员。这对于需要对角色成员进行访问和操作的场景非常有用。</p>
+<pre class="solidity"><code>function getRoleMemberCount(bytes32 role) public view virtual override returns (uint256) {
         return _roleMembers[role].length();
-    &#125;
-</code></pre>
+    }</code></pre>
 <p>这段代码实现了一个名为<code>getRoleMemberCount</code>的函数，用于返回具有指定角色的账户数量。</p>
 <p>函数的作用意义是帮助用户获取指定角色的账户数量，以便于在访问控制或权限管理的场景中进行统计或判断。它可以与其他函数结合使用，例如<code>getRoleMember</code>函数，用于枚举指定角色的所有成员。</p>
 <p>算法实现：</p>
-<ol>
-<li>函数使用 <code>public</code> 和 <code>view</code> 关键字修饰，表示它是一个公开的只读函数，不会修改合约状态，仅用于查询。</li>
-<li>函数接受一个 <code>bytes32</code> 类型的参数 <code>role</code>，用于指定要查询的角色。</li>
-<li>函数返回一个 <code>uint256</code> 类型的值，表示具有指定角色的账户数量。</li>
-<li>在函数体内，通过访问私有映射 <code>_roleMembers</code>，使用指定的 <code>role</code> 作为键来获取对应的地址集合。</li>
-<li>使用地址集合的 <code>length</code> 函数，返回地址集合的长度，即具有指定角色的账户数量。</li>
+<ol type="1">
+<li>函数使用 <code>public</code> 和 <code>view</code>
+关键字修饰，表示它是一个公开的只读函数，不会修改合约状态，仅用于查询。</li>
+<li>函数接受一个 <code>bytes32</code> 类型的参数
+<code>role</code>，用于指定要查询的角色。</li>
+<li>函数返回一个 <code>uint256</code>
+类型的值，表示具有指定角色的账户数量。</li>
+<li>在函数体内，通过访问私有映射 <code>_roleMembers</code>，使用指定的
+<code>role</code> 作为键来获取对应的地址集合。</li>
+<li>使用地址集合的 <code>length</code>
+函数，返回地址集合的长度，即具有指定角色的账户数量。</li>
 <li>最后，函数将具有指定角色的账户数量作为结果返回。</li>
 </ol>
-<p>该函数的实现非常简单，它利用了私有映射 <code>_roleMembers</code> 中存储的地址集合，通过调用集合的 <code>length</code> 函数来获取账户数量。通过这个函数，用户可以方便地获取指定角色的账户数量，以便于后续的访问控制或权限管理操作。</p>
-<pre><code class="solidity">function _grantRole(bytes32 role, address account) internal virtual override &#123;
+<p>该函数的实现非常简单，它利用了私有映射 <code>_roleMembers</code>
+中存储的地址集合，通过调用集合的 <code>length</code>
+函数来获取账户数量。通过这个函数，用户可以方便地获取指定角色的账户数量，以便于后续的访问控制或权限管理操作。</p>
+<pre class="solidity"><code>function _grantRole(bytes32 role, address account) internal virtual override {
         super._grantRole(role, account);
         _roleMembers[role].add(account);
-    &#125;
-</code></pre>
-<p>这段代码是一个内部函数 <code>_grantRole</code>，它被定义为 <code>internal</code>（内部可见性）和 <code>virtual</code>（可以被派生合约重写）。以下是代码的作用和实现的详细分析：</p>
+    }</code></pre>
+<p>这段代码是一个内部函数 <code>_grantRole</code>，它被定义为
+<code>internal</code>（内部可见性）和
+<code>virtual</code>（可以被派生合约重写）。以下是代码的作用和实现的详细分析：</p>
 <p>作用：</p>
 <ul>
 <li><code>_grantRole</code> 函数用于授予角色给指定的账户。</li>
-<li>它在授予角色的同时更新了角色成员的地址集合 <code>_roleMembers</code>。</li>
+<li>它在授予角色的同时更新了角色成员的地址集合
+<code>_roleMembers</code>。</li>
 </ul>
 <p>实现：</p>
-<ol>
-<li><p><code>super._grantRole(role, account)</code>：调用基础合约（即 <code>AccessControl</code> 合约）中的 <code>_grantRole</code> 函数，授予角色给指定的账户。这个调用确保了在子合约中重写的 <code>_grantRole</code> 函数能够保留基础合约中的行为。</p>
-</li>
-<li><p><code>_roleMembers[role].add(account)</code>：将指定账户 <code>account</code> 添加到对应角色 <code>role</code> 的地址集合 <code>_roleMembers[role]</code> 中。这里使用了 <code>EnumerableSet</code> 库中的 <code>add</code> 函数来实现。</p>
-</li>
+<ol type="1">
+<li><p><code>super._grantRole(role, account)</code>：调用基础合约（即
+<code>AccessControl</code> 合约）中的 <code>_grantRole</code>
+函数，授予角色给指定的账户。这个调用确保了在子合约中重写的
+<code>_grantRole</code> 函数能够保留基础合约中的行为。</p></li>
+<li><p><code>_roleMembers[role].add(account)</code>：将指定账户
+<code>account</code> 添加到对应角色 <code>role</code> 的地址集合
+<code>_roleMembers[role]</code> 中。这里使用了
+<code>EnumerableSet</code> 库中的 <code>add</code> 函数来实现。</p></li>
 </ol>
-<p>整体而言，该函数的目的是在授予角色给指定账户时，更新 <code>_roleMembers</code> 中对应角色的地址集合，以便能够方便地查询和管理角色成员。通过调用基础合约的 <code>_grantRole</code> 函数，确保了基础合约中定义的行为也会被执行。</p>
-<pre><code class="solidity">function _revokeRole(bytes32 role, address account) internal virtual override &#123;
+<p>整体而言，该函数的目的是在授予角色给指定账户时，更新
+<code>_roleMembers</code>
+中对应角色的地址集合，以便能够方便地查询和管理角色成员。通过调用基础合约的
+<code>_grantRole</code> 函数，确保了基础合约中定义的行为也会被执行。</p>
+<pre class="solidity"><code>function _revokeRole(bytes32 role, address account) internal virtual override {
         super._revokeRole(role, account);
         _roleMembers[role].remove(account);
-    &#125;
-</code></pre>
-<p>这段代码是 <code>_revokeRole</code> 函数的实现，它是在 <code>AccessControlEnumerable</code> 合约中重写的一个内部函数。</p>
-<p>作用意义： <code>_revokeRole</code> 函数的作用是撤销给定角色（<code>role</code>）的特定账户（<code>account</code>）的角色授权。具体而言，该函数执行以下两个操作：</p>
-<ol>
-<li>调用父合约的 <code>_revokeRole</code> 函数，撤销账户的角色授权。</li>
-<li>从 <code>_roleMembers</code> 映射中将账户从相应角色的地址集合中移除。</li>
+    }</code></pre>
+<p>这段代码是 <code>_revokeRole</code> 函数的实现，它是在
+<code>AccessControlEnumerable</code> 合约中重写的一个内部函数。</p>
+<p>作用意义： <code>_revokeRole</code>
+函数的作用是撤销给定角色（<code>role</code>）的特定账户（<code>account</code>）的角色授权。具体而言，该函数执行以下两个操作：</p>
+<ol type="1">
+<li>调用父合约的 <code>_revokeRole</code>
+函数，撤销账户的角色授权。</li>
+<li>从 <code>_roleMembers</code>
+映射中将账户从相应角色的地址集合中移除。</li>
 </ol>
 <p>算法实现：</p>
-<ol>
-<li>首先，使用 <code>super</code> 关键字调用父合约的 <code>_revokeRole</code> 函数，将角色授权撤销。</li>
-<li>接下来，使用 <code>_roleMembers[role].remove(account)</code> 语句从 <code>_roleMembers</code> 映射中移除指定账户。<ul>
+<ol type="1">
+<li>首先，使用 <code>super</code> 关键字调用父合约的
+<code>_revokeRole</code> 函数，将角色授权撤销。</li>
+<li>接下来，使用 <code>_roleMembers[role].remove(account)</code> 语句从
+<code>_roleMembers</code> 映射中移除指定账户。
+<ul>
 <li><code>_roleMembers[role]</code> 表达式获取指定角色的地址集合。</li>
-<li><code>remove(account)</code> 调用 <code>EnumerableSet</code> 库的 <code>remove</code> 函数，从地址集合中移除指定账户。</li>
-</ul>
-</li>
+<li><code>remove(account)</code> 调用 <code>EnumerableSet</code> 库的
+<code>remove</code> 函数，从地址集合中移除指定账户。</li>
+</ul></li>
 </ol>
-<p>这段代码的目的是在撤销角色授权时，同时更新 <code>_roleMembers</code> 映射中的地址集合，确保角色成员的数据一致性。通过调用父合约的 <code>_revokeRole</code> 函数和移除地址集合中的账户，该函数实现了撤销角色授权的完整逻辑。</p>
+<p>这段代码的目的是在撤销角色授权时，同时更新 <code>_roleMembers</code>
+映射中的地址集合，确保角色成员的数据一致性。通过调用父合约的
+<code>_revokeRole</code>
+函数和移除地址集合中的账户，该函数实现了撤销角色授权的完整逻辑。</p>
 
     </div>
     

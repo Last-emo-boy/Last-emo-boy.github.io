@@ -38,7 +38,119 @@
 
 <link rel="stylesheet" href="/css/main.css" />
 
-    <meta name="generator" content="Hexo 6.3.0"></head>
+    <meta name="generator" content="Hexo 6.3.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
     <body>
         <div id="layout">
             <transition name="fade">
@@ -165,12 +277,12 @@
             
             <span class="tag">
                 
-                <a href="/tags/Solidity/" style="color: #03a9f4">Solidity</a>
+                <a href="/tags/Solidity/" style="color: #00a596">Solidity</a>
             </span>
             
             <span class="tag">
                 
-                <a href="/tags/Coding/" style="color: #00bcd4">Coding</a>
+                <a href="/tags/Coding/" style="color: #03a9f4">Coding</a>
             </span>
             
         </span>
@@ -178,74 +290,85 @@
     </div>
     
     <div class="content" v-pre>
-        <h1 id="概述："><a href="#概述：" class="headerlink" title="概述："></a>概述：</h1><p>这个合约的作用是实现基于角色的访问控制（RBAC）机制，可以通过定义角色和角色成员之间的关系，来限制合约中特定函数的访问权限。</p>
+        <h1 id="概述">概述：</h1>
+<p>这个合约的作用是实现基于角色的访问控制（RBAC）机制，可以通过定义角色和角色成员之间的关系，来限制合约中特定函数的访问权限。</p>
 <span id="more"></span>
-
-<p>合约中提供了一系列函数用于检查和修改角色和角色成员之间的关系，以实现对合约中特定函数的访问控制。通过使用 AccessControl 合约，可以让合约更加安全地运行，并限制非授权用户对合约的访问和操作。</p>
-<p>该合约模块，允许子合约实现基于角色的访问控制机制。这是一个轻量级版本，不允许枚举角色成员，除非通过访问合约事件日志的离线手段进行。某些应用程序可能会从链上可枚举性中受益，对于这些情况，请参见 {AccessControlEnumerable}。</p>
-<p>角色由它们的 <code>bytes32</code> 标识符表示。这些标识符应该在外部 API 中公开，并且应该是唯一的。最好的方法是使用 <code>public constant</code> 的哈希摘要：</p>
-<pre><code class="sol">bytes32 public constant MY_ROLE = keccak256(&quot;MY_ROLE&quot;);
-</code></pre>
-<p>角色可用于表示一组权限。为了限制对函数调用的访问，请使用 {hasRole}：</p>
-<pre><code class="sol">function foo() public &#123;
+<p>合约中提供了一系列函数用于检查和修改角色和角色成员之间的关系，以实现对合约中特定函数的访问控制。通过使用
+AccessControl
+合约，可以让合约更加安全地运行，并限制非授权用户对合约的访问和操作。</p>
+<p>该合约模块，允许子合约实现基于角色的访问控制机制。这是一个轻量级版本，不允许枚举角色成员，除非通过访问合约事件日志的离线手段进行。某些应用程序可能会从链上可枚举性中受益，对于这些情况，请参见
+{AccessControlEnumerable}。</p>
+<p>角色由它们的 <code>bytes32</code> 标识符表示。这些标识符应该在外部
+API 中公开，并且应该是唯一的。最好的方法是使用
+<code>public constant</code> 的哈希摘要：</p>
+<pre class="sol"><code>bytes32 public constant MY_ROLE = keccak256("MY_ROLE");</code></pre>
+<p>角色可用于表示一组权限。为了限制对函数调用的访问，请使用
+{hasRole}：</p>
+<pre class="sol"><code>function foo() public {
     require(hasRole(MY_ROLE, msg.sender));
     ...
-&#125;
-</code></pre>
-<p>角色可以通过 {grantRole} 和 {revokeRole} 函数进行动态授予和撤销。每个角色都有一个关联的管理员角色，只有拥有角色的管理员角色的帐户才能调用 {grantRole} 和 {revokeRole}。</p>
-<p>默认情况下，所有角色的管理员角色都是 <code>DEFAULT_ADMIN_ROLE</code>，这意味着只有拥有该角色的帐户才能授予或撤销其他角色。可以使用 {_setRoleAdmin} 创建更复杂的角色关系。</p>
-<p>警告：<code>DEFAULT_ADMIN_ROLE</code> 也是自己的管理员角色：它有权限授予和撤销此角色。应采取额外的预防措施来保护已授予该角色的帐户。我们建议使用 {AccessControlDefaultAdminRules} 为该角色实施额外的安全措施。</p>
-<h1 id="完整代码："><a href="#完整代码：" class="headerlink" title="完整代码："></a>完整代码：</h1><pre><code class="sol">pragma solidity ^0.8.0;
+}</code></pre>
+<p>角色可以通过 {grantRole} 和 {revokeRole}
+函数进行动态授予和撤销。每个角色都有一个关联的管理员角色，只有拥有角色的管理员角色的帐户才能调用
+{grantRole} 和 {revokeRole}。</p>
+<p>默认情况下，所有角色的管理员角色都是
+<code>DEFAULT_ADMIN_ROLE</code>，这意味着只有拥有该角色的帐户才能授予或撤销其他角色。可以使用
+{_setRoleAdmin} 创建更复杂的角色关系。</p>
+<p>警告：<code>DEFAULT_ADMIN_ROLE</code>
+也是自己的管理员角色：它有权限授予和撤销此角色。应采取额外的预防措施来保护已授予该角色的帐户。我们建议使用
+{AccessControlDefaultAdminRules} 为该角色实施额外的安全措施。</p>
+<h1 id="完整代码">完整代码：</h1>
+<pre class="sol"><code>pragma solidity ^0.8.0;
 
-import &quot;./IAccessControl.sol&quot;;
-import &quot;../utils/Context.sol&quot;;
-import &quot;../utils/Strings.sol&quot;;
-import &quot;../utils/introspection/ERC165.sol&quot;;
+import "./IAccessControl.sol";
+import "../utils/Context.sol";
+import "../utils/Strings.sol";
+import "../utils/introspection/ERC165.sol";
 
 /**
  * @dev Contract module that allows children to implement role-based access
- * control mechanisms. This is a lightweight version that doesn&#39;t allow enumerating role
+ * control mechanisms. This is a lightweight version that doesn't allow enumerating role
  * members except through off-chain means by accessing the contract event logs. Some
  * applications may benefit from on-chain enumerability, for those cases see
- * &#123;AccessControlEnumerable&#125;.
+ * {AccessControlEnumerable}.
  *
  * Roles are referred to by their `bytes32` identifier. These should be exposed
  * in the external API and be unique. The best way to achieve this is by
  * using `public constant` hash digests:
  *
  * ```solidity
- * bytes32 public constant MY_ROLE = keccak256(&quot;MY_ROLE&quot;);
+ * bytes32 public constant MY_ROLE = keccak256("MY_ROLE");
  * ```
  *
  * Roles can be used to represent a set of permissions. To restrict access to a
- * function call, use &#123;hasRole&#125;:
+ * function call, use {hasRole}:
  *
  * ```solidity
- * function foo() public &#123;
+ * function foo() public {
  *     require(hasRole(MY_ROLE, msg.sender));
  *     ...
- * &#125;
+ * }
  * ```
  *
- * Roles can be granted and revoked dynamically via the &#123;grantRole&#125; and
- * &#123;revokeRole&#125; functions. Each role has an associated admin role, and only
- * accounts that have a role&#39;s admin role can call &#123;grantRole&#125; and &#123;revokeRole&#125;.
+ * Roles can be granted and revoked dynamically via the {grantRole} and
+ * {revokeRole} functions. Each role has an associated admin role, and only
+ * accounts that have a role's admin role can call {grantRole} and {revokeRole}.
  *
  * By default, the admin role for all roles is `DEFAULT_ADMIN_ROLE`, which means
  * that only accounts with this role will be able to grant or revoke other
  * roles. More complex role relationships can be created by using
- * &#123;_setRoleAdmin&#125;.
+ * {_setRoleAdmin}.
  *
  * WARNING: The `DEFAULT_ADMIN_ROLE` is also its own admin: it has permission to
  * grant and revoke this role. Extra precautions should be taken to secure
- * accounts that have been granted it. We recommend using &#123;AccessControlDefaultAdminRules&#125;
+ * accounts that have been granted it. We recommend using {AccessControlDefaultAdminRules}
  * to enforce additional security measures for this role.
  */
-abstract contract AccessControl is Context, IAccessControl, ERC165 &#123;
-    struct RoleData &#123;
+abstract contract AccessControl is Context, IAccessControl, ERC165 {
+    struct RoleData {
         mapping(address =&gt; bool) members;
         bytes32 adminRole;
-    &#125;
+    }
 
     mapping(bytes32 =&gt; RoleData) private _roles;
 
@@ -257,134 +380,134 @@ abstract contract AccessControl is Context, IAccessControl, ERC165 &#123;
      *
      * The format of the revert reason is given by the following regular expression:
      *
-     *  /^AccessControl: account (0x[0-9a-f]&#123;40&#125;) is missing role (0x[0-9a-f]&#123;64&#125;)$/
+     *  /^AccessControl: account (0x[0-9a-f]{40}) is missing role (0x[0-9a-f]{64})$/
      *
      * _Available since v4.1._
      */
-    modifier onlyRole(bytes32 role) &#123;
+    modifier onlyRole(bytes32 role) {
         _checkRole(role);
         _;
-    &#125;
+    }
 
     /**
-     * @dev See &#123;IERC165-supportsInterface&#125;.
+     * @dev See {IERC165-supportsInterface}.
      */
-    function supportsInterface(bytes4 interfaceId) public view virtual override returns (bool) &#123;
+    function supportsInterface(bytes4 interfaceId) public view virtual override returns (bool) {
         return interfaceId == type(IAccessControl).interfaceId || super.supportsInterface(interfaceId);
-    &#125;
+    }
 
     /**
      * @dev Returns `true` if `account` has been granted `role`.
      */
-    function hasRole(bytes32 role, address account) public view virtual override returns (bool) &#123;
+    function hasRole(bytes32 role, address account) public view virtual override returns (bool) {
         return _roles[role].members[account];
-    &#125;
+    }
 
     /**
      * @dev Revert with a standard message if `_msgSender()` is missing `role`.
-     * Overriding this function changes the behavior of the &#123;onlyRole&#125; modifier.
+     * Overriding this function changes the behavior of the {onlyRole} modifier.
      *
-     * Format of the revert message is described in &#123;_checkRole&#125;.
+     * Format of the revert message is described in {_checkRole}.
      *
      * _Available since v4.6._
      */
-    function _checkRole(bytes32 role) internal view virtual &#123;
+    function _checkRole(bytes32 role) internal view virtual {
         _checkRole(role, _msgSender());
-    &#125;
+    }
 
     /**
      * @dev Revert with a standard message if `account` is missing `role`.
      *
      * The format of the revert reason is given by the following regular expression:
      *
-     *  /^AccessControl: account (0x[0-9a-f]&#123;40&#125;) is missing role (0x[0-9a-f]&#123;64&#125;)$/
+     *  /^AccessControl: account (0x[0-9a-f]{40}) is missing role (0x[0-9a-f]{64})$/
      */
-    function _checkRole(bytes32 role, address account) internal view virtual &#123;
-        if (!hasRole(role, account)) &#123;
+    function _checkRole(bytes32 role, address account) internal view virtual {
+        if (!hasRole(role, account)) {
             revert(
                 string(
                     abi.encodePacked(
-                        &quot;AccessControl: account &quot;,
+                        "AccessControl: account ",
                         Strings.toHexString(account),
-                        &quot; is missing role &quot;,
+                        " is missing role ",
                         Strings.toHexString(uint256(role), 32)
                     )
                 )
             );
-        &#125;
-    &#125;
+        }
+    }
 
     /**
-     * @dev Returns the admin role that controls `role`. See &#123;grantRole&#125; and
-     * &#123;revokeRole&#125;.
+     * @dev Returns the admin role that controls `role`. See {grantRole} and
+     * {revokeRole}.
      *
-     * To change a role&#39;s admin, use &#123;_setRoleAdmin&#125;.
+     * To change a role's admin, use {_setRoleAdmin}.
      */
-    function getRoleAdmin(bytes32 role) public view virtual override returns (bytes32) &#123;
+    function getRoleAdmin(bytes32 role) public view virtual override returns (bytes32) {
         return _roles[role].adminRole;
-    &#125;
+    }
 
     /**
      * @dev Grants `role` to `account`.
      *
-     * If `account` had not been already granted `role`, emits a &#123;RoleGranted&#125;
+     * If `account` had not been already granted `role`, emits a {RoleGranted}
      * event.
      *
      * Requirements:
      *
-     * - the caller must have ``role``&#39;s admin role.
+     * - the caller must have ``role``'s admin role.
      *
-     * May emit a &#123;RoleGranted&#125; event.
+     * May emit a {RoleGranted} event.
      */
-    function grantRole(bytes32 role, address account) public virtual override onlyRole(getRoleAdmin(role)) &#123;
+    function grantRole(bytes32 role, address account) public virtual override onlyRole(getRoleAdmin(role)) {
         _grantRole(role, account);
-    &#125;
+    }
 
     /**
      * @dev Revokes `role` from `account`.
      *
-     * If `account` had been granted `role`, emits a &#123;RoleRevoked&#125; event.
+     * If `account` had been granted `role`, emits a {RoleRevoked} event.
      *
      * Requirements:
      *
-     * - the caller must have ``role``&#39;s admin role.
+     * - the caller must have ``role``'s admin role.
      *
-     * May emit a &#123;RoleRevoked&#125; event.
+     * May emit a {RoleRevoked} event.
      */
-    function revokeRole(bytes32 role, address account) public virtual override onlyRole(getRoleAdmin(role)) &#123;
+    function revokeRole(bytes32 role, address account) public virtual override onlyRole(getRoleAdmin(role)) {
         _revokeRole(role, account);
-    &#125;
+    }
 
     /**
      * @dev Revokes `role` from the calling account.
      *
-     * Roles are often managed via &#123;grantRole&#125; and &#123;revokeRole&#125;: this function&#39;s
+     * Roles are often managed via {grantRole} and {revokeRole}: this function's
      * purpose is to provide a mechanism for accounts to lose their privileges
      * if they are compromised (such as when a trusted device is misplaced).
      *
-     * If the calling account had been revoked `role`, emits a &#123;RoleRevoked&#125;
+     * If the calling account had been revoked `role`, emits a {RoleRevoked}
      * event.
      *
      * Requirements:
      *
      * - the caller must be `account`.
      *
-     * May emit a &#123;RoleRevoked&#125; event.
+     * May emit a {RoleRevoked} event.
      */
-    function renounceRole(bytes32 role, address account) public virtual override &#123;
-        require(account == _msgSender(), &quot;AccessControl: can only renounce roles for self&quot;);
+    function renounceRole(bytes32 role, address account) public virtual override {
+        require(account == _msgSender(), "AccessControl: can only renounce roles for self");
 
         _revokeRole(role, account);
-    &#125;
+    }
 
     /**
      * @dev Grants `role` to `account`.
      *
-     * If `account` had not been already granted `role`, emits a &#123;RoleGranted&#125;
-     * event. Note that unlike &#123;grantRole&#125;, this function doesn&#39;t perform any
+     * If `account` had not been already granted `role`, emits a {RoleGranted}
+     * event. Note that unlike {grantRole}, this function doesn't perform any
      * checks on the calling account.
      *
-     * May emit a &#123;RoleGranted&#125; event.
+     * May emit a {RoleGranted} event.
      *
      * [WARNING]
      * ====
@@ -392,222 +515,315 @@ abstract contract AccessControl is Context, IAccessControl, ERC165 &#123;
      * up the initial roles for the system.
      *
      * Using this function in any other way is effectively circumventing the admin
-     * system imposed by &#123;AccessControl&#125;.
+     * system imposed by {AccessControl}.
      * ====
      *
-     * NOTE: This function is deprecated in favor of &#123;_grantRole&#125;.
+     * NOTE: This function is deprecated in favor of {_grantRole}.
      */
-    function _setupRole(bytes32 role, address account) internal virtual &#123;
+    function _setupRole(bytes32 role, address account) internal virtual {
         _grantRole(role, account);
-    &#125;
+    }
 
     /**
-     * @dev Sets `adminRole` as ``role``&#39;s admin role.
+     * @dev Sets `adminRole` as ``role``'s admin role.
      *
-     * Emits a &#123;RoleAdminChanged&#125; event.
+     * Emits a {RoleAdminChanged} event.
      */
-    function _setRoleAdmin(bytes32 role, bytes32 adminRole) internal virtual &#123;
+    function _setRoleAdmin(bytes32 role, bytes32 adminRole) internal virtual {
         bytes32 previousAdminRole = getRoleAdmin(role);
         _roles[role].adminRole = adminRole;
         emit RoleAdminChanged(role, previousAdminRole, adminRole);
-    &#125;
+    }
 
     /**
      * @dev Grants `role` to `account`.
      *
      * Internal function without access restriction.
      *
-     * May emit a &#123;RoleGranted&#125; event.
+     * May emit a {RoleGranted} event.
      */
-    function _grantRole(bytes32 role, address account) internal virtual &#123;
-        if (!hasRole(role, account)) &#123;
+    function _grantRole(bytes32 role, address account) internal virtual {
+        if (!hasRole(role, account)) {
             _roles[role].members[account] = true;
             emit RoleGranted(role, account, _msgSender());
-        &#125;
-    &#125;
+        }
+    }
 
     /**
      * @dev Revokes `role` from `account`.
      *
      * Internal function without access restriction.
      *
-     * May emit a &#123;RoleRevoked&#125; event.
+     * May emit a {RoleRevoked} event.
      */
-    function _revokeRole(bytes32 role, address account) internal virtual &#123;
-        if (hasRole(role, account)) &#123;
+    function _revokeRole(bytes32 role, address account) internal virtual {
+        if (hasRole(role, account)) {
             _roles[role].members[account] = false;
             emit RoleRevoked(role, account, _msgSender());
-        &#125;
-    &#125;
-&#125;
-</code></pre>
-<h1 id="代码分析："><a href="#代码分析：" class="headerlink" title="代码分析："></a>代码分析：</h1><pre><code class="solidity">pragma solidity ^0.8.0;
-</code></pre>
-<p>首先，这个代码的作用是指定 Solidity 编译器的版本，以便编译器可以正确解析和编译合约代码。在这个例子中，指定的版本是 0.8.0，表示合约使用 Solidity 0.8.0 或更高版本进行编译。</p>
-<p><strong>此外，还可以在 pragma 中设置一些选项，例如启用实验性功能，指定优化器的版本等。该 pragma 语句通常应该作为合约代码文件的第一行。</strong></p>
-<pre><code class="solidity">import &quot;./IAccessControl.sol&quot;;
-import &quot;../utils/Context.sol&quot;;
-import &quot;../utils/Strings.sol&quot;;
-import &quot;../utils/introspection/ERC165.sol&quot;;
-</code></pre>
-<p>这段代码是 Solidity 合约的导入语句，用于导入其他合约中定义的接口和库，以便在当前合约中使用它们。</p>
+        }
+    }
+}</code></pre>
+<h1 id="代码分析">代码分析：</h1>
+<pre class="solidity"><code>pragma solidity ^0.8.0;</code></pre>
+<p>首先，这个代码的作用是指定 Solidity
+编译器的版本，以便编译器可以正确解析和编译合约代码。在这个例子中，指定的版本是
+0.8.0，表示合约使用 Solidity 0.8.0 或更高版本进行编译。</p>
+<p><strong>此外，还可以在 pragma
+中设置一些选项，例如启用实验性功能，指定优化器的版本等。该 pragma
+语句通常应该作为合约代码文件的第一行。</strong></p>
+<pre class="solidity"><code>import "./IAccessControl.sol";
+import "../utils/Context.sol";
+import "../utils/Strings.sol";
+import "../utils/introspection/ERC165.sol";</code></pre>
+<p>这段代码是 Solidity
+合约的导入语句，用于导入其他合约中定义的接口和库，以便在当前合约中使用它们。</p>
 <ul>
-<li><code>import &quot;./IAccessControl.sol&quot;;</code> 导入 IAccessControl.sol 合约接口，用于实现访问控制机制。</li>
-<li><code>import &quot;../utils/Context.sol&quot;;</code> 导入 Context.sol 库，包含与 Solidity 消息和交易相关的函数和变量，例如 <code>_msgSender()</code>， <code>_msgData()</code> 和 <code>_gasleft()</code>。</li>
-<li><code>import &quot;../utils/Strings.sol&quot;;</code> 导入 Strings.sol 库，包含 Solidity 中处理字符串的实用函数，例如 <code>uint2str()</code> 和 <code>strConcat()</code>。</li>
-<li><code>import &quot;../utils/introspection/ERC165.sol&quot;;</code> 导入 ERC165.sol 库，包含用于 Solidity 智能合约接口支持的函数。其中包括 <code>supportsInterface()</code> 函数，用于在 Solidity 合约中检查是否实现了指定的接口标识符。</li>
+<li><code>import "./IAccessControl.sol";</code> 导入 IAccessControl.sol
+合约接口，用于实现访问控制机制。</li>
+<li><code>import "../utils/Context.sol";</code> 导入 Context.sol
+库，包含与 Solidity 消息和交易相关的函数和变量，例如
+<code>_msgSender()</code>， <code>_msgData()</code> 和
+<code>_gasleft()</code>。</li>
+<li><code>import "../utils/Strings.sol";</code> 导入 Strings.sol
+库，包含 Solidity 中处理字符串的实用函数，例如 <code>uint2str()</code>
+和 <code>strConcat()</code>。</li>
+<li><code>import "../utils/introspection/ERC165.sol";</code> 导入
+ERC165.sol 库，包含用于 Solidity 智能合约接口支持的函数。其中包括
+<code>supportsInterface()</code> 函数，用于在 Solidity
+合约中检查是否实现了指定的接口标识符。</li>
 </ul>
 <p>这些导入语句的作用是使当前合约能够使用这些接口和库中定义的函数和变量，从而更方便地实现所需的功能。</p>
-<pre><code class="solidity">abstract contract AccessControl is Context, IAccessControl, ERC165 &#123;
-    struct RoleData &#123;
+<pre class="solidity"><code>abstract contract AccessControl is Context, IAccessControl, ERC165 {
+    struct RoleData {
         mapping(address =&gt; bool) members;
         bytes32 adminRole;
-    &#125;
-</code></pre>
-<p>这段代码定义了一个名为 <code>AccessControl</code> 的抽象合约，并声明了它实现了三个接口：<code>Context</code>、<code>IAccessControl</code> 和 <code>ERC165</code>。同时定义了一个名为 <code>RoleData</code> 的结构体，它具有两个成员：<code>members</code> 和 <code>adminRole</code>，分别表示角色的成员和角色的管理员角色。</p>
+    }</code></pre>
+<p>这段代码定义了一个名为 <code>AccessControl</code>
+的抽象合约，并声明了它实现了三个接口：<code>Context</code>、<code>IAccessControl</code>
+和 <code>ERC165</code>。同时定义了一个名为 <code>RoleData</code>
+的结构体，它具有两个成员：<code>members</code> 和
+<code>adminRole</code>，分别表示角色的成员和角色的管理员角色。</p>
 <p>这个合约是一个抽象合约，它提供了一些函数的声明和定义，以实现基于角色的访问控制（RBAC）机制。由于它是一个抽象合约，因此不能直接部署，需要被其他合约继承和实现其抽象函数，从而实现访问控制的功能。</p>
-<p>在结构体 <code>RoleData</code> 中，<code>members</code> 是一个映射，用于存储特定角色的所有成员地址及其是否是该角色的成员的状态。<code>adminRole</code> 是一个 bytes32 类型的变量，用于存储角色的管理员角色。</p>
-<pre><code class="solidity">mapping(bytes32 =&gt; RoleData) private _roles;
+<p>在结构体 <code>RoleData</code> 中，<code>members</code>
+是一个映射，用于存储特定角色的所有成员地址及其是否是该角色的成员的状态。<code>adminRole</code>
+是一个 bytes32 类型的变量，用于存储角色的管理员角色。</p>
+<pre class="solidity"><code>mapping(bytes32 =&gt; RoleData) private _roles;
 
-bytes32 public constant DEFAULT_ADMIN_ROLE = 0x00;
-</code></pre>
+bytes32 public constant DEFAULT_ADMIN_ROLE = 0x00;</code></pre>
 <p>这段代码定义了两个状态变量：</p>
-<ol>
-<li><p><code>_roles</code>：这是一个映射（mapping）类型的变量，它将 bytes32 类型的标识符映射到一个名为 <code>RoleData</code> 的结构体。每个 <code>RoleData</code> 结构体包含了角色成员的映射，以及角色的管理员角色。</p>
-</li>
-<li><p><code>DEFAULT_ADMIN_ROLE</code>：这是一个公共的、不可变的 bytes32 常量，表示默认管理员角色的标识符。默认情况下，所有角色都具有该管理员角色，它只能由拥有此角色的帐户授予或撤销其他角色。</p>
-</li>
+<ol type="1">
+<li><p><code>_roles</code>：这是一个映射（mapping）类型的变量，它将
+bytes32 类型的标识符映射到一个名为 <code>RoleData</code> 的结构体。每个
+<code>RoleData</code>
+结构体包含了角色成员的映射，以及角色的管理员角色。</p></li>
+<li><p><code>DEFAULT_ADMIN_ROLE</code>：这是一个公共的、不可变的 bytes32
+常量，表示默认管理员角色的标识符。默认情况下，所有角色都具有该管理员角色，它只能由拥有此角色的帐户授予或撤销其他角色。</p></li>
 </ol>
-<p>这些变量与 AccessControl 合约的基于角色的访问控制机制相关联。<code>_roles</code> 映射存储了每个角色及其对应的角色成员，而 <code>DEFAULT_ADMIN_ROLE</code> 常量表示默认的管理员角色。这些变量将在实现访问控制相关的函数中被使用。</p>
-<pre><code class="solidity">modifier onlyRole(bytes32 role) &#123;
+<p>这些变量与 AccessControl
+合约的基于角色的访问控制机制相关联。<code>_roles</code>
+映射存储了每个角色及其对应的角色成员，而 <code>DEFAULT_ADMIN_ROLE</code>
+常量表示默认的管理员角色。这些变量将在实现访问控制相关的函数中被使用。</p>
+<pre class="solidity"><code>modifier onlyRole(bytes32 role) {
     _checkRole(role);
     _;
-&#125;
-</code></pre>
-<p>这段代码定义了一个名为 <code>onlyRole</code> 的修饰器，它接受一个 <code>bytes32</code> 类型的参数 <code>role</code>。当该修饰器被添加到一个函数之前时，它将首先调用内部函数 <code>_checkRole(role)</code> 来检查当前调用者是否具有指定的 <code>role</code> 权限，如果检查失败则会抛出异常，否则将执行被修饰的函数。</p>
+}</code></pre>
+<p>这段代码定义了一个名为 <code>onlyRole</code> 的修饰器，它接受一个
+<code>bytes32</code> 类型的参数
+<code>role</code>。当该修饰器被添加到一个函数之前时，它将首先调用内部函数
+<code>_checkRole(role)</code> 来检查当前调用者是否具有指定的
+<code>role</code>
+权限，如果检查失败则会抛出异常，否则将执行被修饰的函数。</p>
 <p>这个修饰器的作用是限制访问某些敏感函数的权限，只有具有指定角色的账户才能调用这些函数。如果调用者没有指定的角色，那么调用会立即失败并抛出异常，保证了函数的安全性和可靠性。</p>
-<pre><code class="solidity">function supportsInterface(bytes4 interfaceId) public view virtual override returns (bool) &#123;
+<pre class="solidity"><code>function supportsInterface(bytes4 interfaceId) public view virtual override returns (bool) {
     return interfaceId == type(IAccessControl).interfaceId || super.supportsInterface(interfaceId);
-&#125;
-</code></pre>
-<p>这个函数是用于检查合约是否实现了指定的接口。它接受一个 <code>bytes4</code> 类型的参数 <code>interfaceId</code>，表示待检查的接口标识符。</p>
-<p>函数首先检查传入的 <code>interfaceId</code> 是否与 <code>IAccessControl</code> 接口的标识符匹配。如果匹配，则返回 <code>true</code>，表示合约实现了该接口。</p>
-<p>如果传入的 <code>interfaceId</code> 与 <code>IAccessControl</code> 接口的标识符不匹配，则调用 <code>super.supportsInterface(interfaceId)</code> 函数，检查合约是否实现了其父类合约（也就是 <code>ERC165</code> 合约）中的指定接口。如果实现了该接口，则返回 <code>true</code>，否则返回 <code>false</code>。</p>
-<p>这个函数是 Solidity 合约标准 <code>ERC165</code> 中定义的函数，用于检查合约是否支持某些特定的接口。如果一个合约实现了 <code>supportsInterface</code> 函数，就意味着它支持了 ERC165 标准。</p>
-<pre><code class="solidity">function hasRole(bytes32 role, address account) public view virtual override returns (bool) &#123;
+}</code></pre>
+<p>这个函数是用于检查合约是否实现了指定的接口。它接受一个
+<code>bytes4</code> 类型的参数
+<code>interfaceId</code>，表示待检查的接口标识符。</p>
+<p>函数首先检查传入的 <code>interfaceId</code> 是否与
+<code>IAccessControl</code> 接口的标识符匹配。如果匹配，则返回
+<code>true</code>，表示合约实现了该接口。</p>
+<p>如果传入的 <code>interfaceId</code> 与 <code>IAccessControl</code>
+接口的标识符不匹配，则调用
+<code>super.supportsInterface(interfaceId)</code>
+函数，检查合约是否实现了其父类合约（也就是 <code>ERC165</code>
+合约）中的指定接口。如果实现了该接口，则返回 <code>true</code>，否则返回
+<code>false</code>。</p>
+<p>这个函数是 Solidity 合约标准 <code>ERC165</code>
+中定义的函数，用于检查合约是否支持某些特定的接口。如果一个合约实现了
+<code>supportsInterface</code> 函数，就意味着它支持了 ERC165 标准。</p>
+<pre class="solidity"><code>function hasRole(bytes32 role, address account) public view virtual override returns (bool) {
     return _roles[role].members[account];
-&#125;
-</code></pre>
-<p>这个函数的作用是检查指定帐户是否具有指定角色。函数参数为角色标识符 <code>role</code> 和帐户地址 <code>account</code>，返回一个布尔值表示帐户是否具有指定角色。</p>
-<p>函数通过访问 <code>_roles</code> 映射中存储的角色数据来判断帐户是否属于指定角色。具体地，它通过访问 <code>_roles[role].members[account]</code> 来获取帐户是否属于指定角色。如果该值为 true，则表示该帐户具有指定角色，函数返回 true；否则，表示该帐户不具有指定角色，函数返回 false。</p>
+}</code></pre>
+<p>这个函数的作用是检查指定帐户是否具有指定角色。函数参数为角色标识符
+<code>role</code> 和帐户地址
+<code>account</code>，返回一个布尔值表示帐户是否具有指定角色。</p>
+<p>函数通过访问 <code>_roles</code>
+映射中存储的角色数据来判断帐户是否属于指定角色。具体地，它通过访问
+<code>_roles[role].members[account]</code>
+来获取帐户是否属于指定角色。如果该值为
+true，则表示该帐户具有指定角色，函数返回
+true；否则，表示该帐户不具有指定角色，函数返回 false。</p>
 <p>通过使用这个函数，可以在合约中的某些函数中实现对帐户访问权限的控制。例如，在一个需要授权才能执行的函数中，可以使用这个函数来检查调用者是否具有指定的角色，以限制只有具有指定角色的帐户才能调用该函数。</p>
-<pre><code class="solidity">function _checkRole(bytes32 role) internal view virtual &#123;
+<pre class="solidity"><code>function _checkRole(bytes32 role) internal view virtual {
     _checkRole(role, _msgSender());
-&#125;
-</code></pre>
-<p>这个代码定义了一个名为 <code>_checkRole</code> 的内部函数，它接受一个 <code>bytes32</code> 类型的参数 <code>role</code>，并且在内部调用另一个名为 <code>_checkRole</code> 的函数，传递了 <code>role</code> 和 <code>_msgSender()</code> 作为参数。这个函数的作用是用于在执行需要特定角色权限的函数时，检查当前调用方是否具有该角色权限。</p>
-<p>在默认情况下，<code>_checkRole</code> 函数将检查当前调用方是否具有指定角色的权限，并且如果没有，则会抛出一个异常。如果要修改此默认行为，可以重写此函数。</p>
+}</code></pre>
+<p>这个代码定义了一个名为 <code>_checkRole</code> 的内部函数，它接受一个
+<code>bytes32</code> 类型的参数
+<code>role</code>，并且在内部调用另一个名为 <code>_checkRole</code>
+的函数，传递了 <code>role</code> 和 <code>_msgSender()</code>
+作为参数。这个函数的作用是用于在执行需要特定角色权限的函数时，检查当前调用方是否具有该角色权限。</p>
+<p>在默认情况下，<code>_checkRole</code>
+函数将检查当前调用方是否具有指定角色的权限，并且如果没有，则会抛出一个异常。如果要修改此默认行为，可以重写此函数。</p>
 <p>注意，这个函数是虚函数，这意味着它可以被子合约重写以改变其行为。</p>
-<pre><code class="solidity">function _checkRole(bytes32 role, address account) internal view virtual &#123;
-    if (!hasRole(role, account)) &#123;
+<pre class="solidity"><code>function _checkRole(bytes32 role, address account) internal view virtual {
+    if (!hasRole(role, account)) {
         revert(
             string(
                 abi.encodePacked(
-                    &quot;AccessControl: account &quot;,
+                    "AccessControl: account ",
                     Strings.toHexString(account),
-                    &quot; is missing role &quot;,
+                    " is missing role ",
                     Strings.toHexString(uint256(role), 32)
                 )
             )
         );
-    &#125;
-&#125;
-</code></pre>
+    }
+}</code></pre>
 <p>这个函数的作用是检查给定地址是否具有特定角色的权限，如果没有权限则抛出异常，提示该地址缺少相应的角色。</p>
-<p>函数首先调用 hasRole 函数来检查指定地址是否具有特定角色的权限，如果没有，则使用 revert 函数抛出异常，其中异常信息包含以下内容：</p>
+<p>函数首先调用 hasRole
+函数来检查指定地址是否具有特定角色的权限，如果没有，则使用 revert
+函数抛出异常，其中异常信息包含以下内容：</p>
 <ul>
-<li>“AccessControl: account “：固定前缀，表示缺少角色的帐户</li>
+<li>"AccessControl: account "：固定前缀，表示缺少角色的帐户</li>
 <li>Strings.toHexString(account)：将缺少角色的地址转换为十六进制字符串表示</li>
-<li>“ is missing role “：缺少角色的提示</li>
-<li>Strings.toHexString(uint256(role), 32)：将角色哈希值转换为十六进制字符串表示</li>
+<li>" is missing role "：缺少角色的提示</li>
+<li>Strings.toHexString(uint256(role),
+32)：将角色哈希值转换为十六进制字符串表示</li>
 </ul>
-<p>可以看出，这个函数的实现是通过使用 Solidity 中的字符串拼接功能和哈希值转换函数来生成异常信息，并使用 revert 函数抛出异常。</p>
-<pre><code class="solidity">function getRoleAdmin(bytes32 role) public view virtual override returns (bytes32) &#123;
+<p>可以看出，这个函数的实现是通过使用 Solidity
+中的字符串拼接功能和哈希值转换函数来生成异常信息，并使用 revert
+函数抛出异常。</p>
+<pre class="solidity"><code>function getRoleAdmin(bytes32 role) public view virtual override returns (bytes32) {
     return _roles[role].adminRole;
-&#125;
-</code></pre>
-<p>这个函数的作用是返回一个角色的管理员角色。该函数接受一个 <code>bytes32</code> 类型的角色标识符作为参数，返回该角色对应的管理员角色的标识符。</p>
-<p>代码实现中，首先访问了 <code>_roles</code> 存储变量中以 <code>role</code> 作为键值的角色的数据结构，其中包含了这个角色的管理员角色。然后返回了这个管理员角色的标识符。如果该角色不存在，则返回 0。这个函数是公开的（public），允许外部调用并且不能修改存储状态（view），因此不会消耗 gas。此外，这个函数是虚函数（virtual），可以被子类重写。</p>
-<p>需要注意的是，通过 {_setRoleAdmin} 函数可以更改角色的管理员角色，因此这个函数返回的管理员角色可能会随着时间的推移而变化。</p>
-<pre><code class="solidity">function grantRole(bytes32 role, address account) public virtual override onlyRole(getRoleAdmin(role)) &#123;
+}</code></pre>
+<p>这个函数的作用是返回一个角色的管理员角色。该函数接受一个
+<code>bytes32</code>
+类型的角色标识符作为参数，返回该角色对应的管理员角色的标识符。</p>
+<p>代码实现中，首先访问了 <code>_roles</code> 存储变量中以
+<code>role</code>
+作为键值的角色的数据结构，其中包含了这个角色的管理员角色。然后返回了这个管理员角色的标识符。如果该角色不存在，则返回
+0。这个函数是公开的（public），允许外部调用并且不能修改存储状态（view），因此不会消耗
+gas。此外，这个函数是虚函数（virtual），可以被子类重写。</p>
+<p>需要注意的是，通过 {_setRoleAdmin}
+函数可以更改角色的管理员角色，因此这个函数返回的管理员角色可能会随着时间的推移而变化。</p>
+<pre class="solidity"><code>function grantRole(bytes32 role, address account) public virtual override onlyRole(getRoleAdmin(role)) {
     _grantRole(role, account);
-&#125;
-</code></pre>
+}</code></pre>
 <p>这个函数的作用是将指定角色授予给指定地址的帐户。调用此函数需要满足以下条件：</p>
 <ul>
 <li>调用者必须拥有此角色的管理员角色。</li>
 <li>此函数是虚函数，可被子合约重写。</li>
 </ul>
-<p>如果满足条件，该函数将调用内部函数 <code>_grantRole</code> 来执行实际的角色授予操作。具体而言，该函数将检查指定地址的帐户是否已经拥有该角色，如果没有，则将其添加到角色成员中，并发出一个 RoleGranted 事件。如果帐户已经拥有该角色，则不执行任何操作。</p>
-<p>代码实现上，该函数采用了 Solidity 的函数修饰符 <code>onlyRole(getRoleAdmin(role))</code>，表示只有拥有指定角色的管理员才能调用该函数。如果调用者不满足该条件，函数将会抛出异常并中止执行。</p>
-<pre><code class="solidity">function revokeRole(bytes32 role, address account) public virtual override onlyRole(getRoleAdmin(role)) &#123;
+<p>如果满足条件，该函数将调用内部函数 <code>_grantRole</code>
+来执行实际的角色授予操作。具体而言，该函数将检查指定地址的帐户是否已经拥有该角色，如果没有，则将其添加到角色成员中，并发出一个
+RoleGranted 事件。如果帐户已经拥有该角色，则不执行任何操作。</p>
+<p>代码实现上，该函数采用了 Solidity 的函数修饰符
+<code>onlyRole(getRoleAdmin(role))</code>，表示只有拥有指定角色的管理员才能调用该函数。如果调用者不满足该条件，函数将会抛出异常并中止执行。</p>
+<pre class="solidity"><code>function revokeRole(bytes32 role, address account) public virtual override onlyRole(getRoleAdmin(role)) {
     _revokeRole(role, account);
-&#125;
-</code></pre>
-<p>这段代码实现了一个名为 <code>revokeRole</code> 的函数，用于撤销某个角色中的指定成员的权限。函数接受两个参数：<code>role</code> 表示要撤销的角色的标识符，<code>account</code> 表示要撤销权限的成员地址。</p>
-<p>该函数包含了一个名为 <code>onlyRole</code> 的修饰符，它要求调用者必须拥有指定角色的管理员角色才能执行该函数。这样可以确保只有有权管理该角色的管理员才能执行撤销操作。</p>
-<p>函数内部调用了 <code>_revokeRole</code> 函数来实际执行撤销操作。<code>_revokeRole</code> 函数会检查成员是否已经拥有该角色的权限，如果有权限则撤销它，并在事件日志中记录该操作。</p>
-<p>这样通过调用 <code>revokeRole</code> 函数，合约的管理员可以撤销指定成员的权限，从而限制其访问合约中特定的函数。这种机制可以帮助保护合约中重要的数据和操作，提高合约的安全性。</p>
-<pre><code class="solidity">function renounceRole(bytes32 role, address account) public virtual override &#123;
-    require(account == _msgSender(), &quot;AccessControl: can only renounce roles for self&quot;);
+}</code></pre>
+<p>这段代码实现了一个名为 <code>revokeRole</code>
+的函数，用于撤销某个角色中的指定成员的权限。函数接受两个参数：<code>role</code>
+表示要撤销的角色的标识符，<code>account</code>
+表示要撤销权限的成员地址。</p>
+<p>该函数包含了一个名为 <code>onlyRole</code>
+的修饰符，它要求调用者必须拥有指定角色的管理员角色才能执行该函数。这样可以确保只有有权管理该角色的管理员才能执行撤销操作。</p>
+<p>函数内部调用了 <code>_revokeRole</code>
+函数来实际执行撤销操作。<code>_revokeRole</code>
+函数会检查成员是否已经拥有该角色的权限，如果有权限则撤销它，并在事件日志中记录该操作。</p>
+<p>这样通过调用 <code>revokeRole</code>
+函数，合约的管理员可以撤销指定成员的权限，从而限制其访问合约中特定的函数。这种机制可以帮助保护合约中重要的数据和操作，提高合约的安全性。</p>
+<pre class="solidity"><code>function renounceRole(bytes32 role, address account) public virtual override {
+    require(account == _msgSender(), "AccessControl: can only renounce roles for self");
 
     _revokeRole(role, account);
-&#125;
-</code></pre>
-<p>这段代码实现了一个名为 <code>renounceRole</code> 的公共函数，用于让角色成员主动放弃（即撤销）一个角色。</p>
-<p>函数接受两个参数：<code>role</code> 表示要撤销的角色，<code>account</code> 表示要撤销角色的成员。</p>
-<p>函数首先通过 <code>require</code> 语句判断调用该函数的帐户是否等于 <code>msg.sender</code>，即只有角色成员自己才能主动撤销自己的角色。如果条件不成立，函数会中止执行，并抛出 “AccessControl: can only renounce roles for self” 的错误消息。</p>
-<p>如果条件成立，函数会调用 <code>_revokeRole</code> 内部函数撤销该成员的角色。</p>
+}</code></pre>
+<p>这段代码实现了一个名为 <code>renounceRole</code>
+的公共函数，用于让角色成员主动放弃（即撤销）一个角色。</p>
+<p>函数接受两个参数：<code>role</code>
+表示要撤销的角色，<code>account</code> 表示要撤销角色的成员。</p>
+<p>函数首先通过 <code>require</code> 语句判断调用该函数的帐户是否等于
+<code>msg.sender</code>，即只有角色成员自己才能主动撤销自己的角色。如果条件不成立，函数会中止执行，并抛出
+"AccessControl: can only renounce roles for self" 的错误消息。</p>
+<p>如果条件成立，函数会调用 <code>_revokeRole</code>
+内部函数撤销该成员的角色。</p>
 <p>需要注意的是，这个函数只允许成员主动放弃自己的角色，而不允许管理员或其他成员撤销别人的角色。</p>
-<pre><code class="solidity">function _setupRole(bytes32 role, address account) internal virtual &#123;
+<pre class="solidity"><code>function _setupRole(bytes32 role, address account) internal virtual {
     _grantRole(role, account);
-&#125;
-</code></pre>
-<p>这个函数名为 <code>_setupRole</code>，是一个内部函数，只能被合约内部调用。该函数用于将角色授予给指定账户，但与 <code>grantRole</code> 函数不同，它不会检查调用者是否拥有相应角色的管理员权限。因此，它只应该在合约的构造函数中使用，以设置系统的初始角色和权限。</p>
-<p>该函数使用 <code>_grantRole</code> 函数实现角色授权，将指定账户添加到对应角色的成员列表中，如果账户之前没有被授予该角色，则会触发 <code>RoleGranted</code> 事件。</p>
-<p>代码实现非常简单，只需要调用 <code>_grantRole</code> 函数，并传入要授权的角色和账户地址即可。</p>
-<pre><code class="solidity">function _setRoleAdmin(bytes32 role, bytes32 adminRole) internal virtual &#123;
+}</code></pre>
+<p>这个函数名为
+<code>_setupRole</code>，是一个内部函数，只能被合约内部调用。该函数用于将角色授予给指定账户，但与
+<code>grantRole</code>
+函数不同，它不会检查调用者是否拥有相应角色的管理员权限。因此，它只应该在合约的构造函数中使用，以设置系统的初始角色和权限。</p>
+<p>该函数使用 <code>_grantRole</code>
+函数实现角色授权，将指定账户添加到对应角色的成员列表中，如果账户之前没有被授予该角色，则会触发
+<code>RoleGranted</code> 事件。</p>
+<p>代码实现非常简单，只需要调用 <code>_grantRole</code>
+函数，并传入要授权的角色和账户地址即可。</p>
+<pre class="solidity"><code>function _setRoleAdmin(bytes32 role, bytes32 adminRole) internal virtual {
     bytes32 previousAdminRole = getRoleAdmin(role);
     _roles[role].adminRole = adminRole;
     emit RoleAdminChanged(role, previousAdminRole, adminRole);
-&#125;
-</code></pre>
-<p>该函数用于设置角色的管理员角色。输入参数为要设置管理员角色的角色标识符 <code>role</code>，以及要分配给该角色的新管理员角色标识符 <code>adminRole</code>。</p>
-<p>函数会先通过 <code>getRoleAdmin(role)</code> 函数获取当前 <code>role</code> 对应的管理员角色标识符，保存到 <code>previousAdminRole</code> 变量中。</p>
-<p>然后，该函数将更新 <code>_roles[role].adminRole</code>，将其设置为新的管理员角色标识符 <code>adminRole</code>。最后，函数会触发 <code>RoleAdminChanged</code> 事件，将 <code>role</code>、<code>previousAdminRole</code> 和 <code>adminRole</code> 的值作为参数进行传递。</p>
-<p>在实现上，该函数使用了 Solidity 的结构体，通过 <code>_roles</code> 映射存储角色数据。该映射的键为 <code>bytes32</code> 类型的角色标识符，值为 <code>RoleData</code> 结构体，包含 <code>members</code> 映射（用于存储该角色的成员）和 <code>adminRole</code> 变量（用于存储该角色的管理员角色）。</p>
-<pre><code class="solidity">function _grantRole(bytes32 role, address account) internal virtual &#123;
-    if (!hasRole(role, account)) &#123;
+}</code></pre>
+<p>该函数用于设置角色的管理员角色。输入参数为要设置管理员角色的角色标识符
+<code>role</code>，以及要分配给该角色的新管理员角色标识符
+<code>adminRole</code>。</p>
+<p>函数会先通过 <code>getRoleAdmin(role)</code> 函数获取当前
+<code>role</code> 对应的管理员角色标识符，保存到
+<code>previousAdminRole</code> 变量中。</p>
+<p>然后，该函数将更新
+<code>_roles[role].adminRole</code>，将其设置为新的管理员角色标识符
+<code>adminRole</code>。最后，函数会触发 <code>RoleAdminChanged</code>
+事件，将 <code>role</code>、<code>previousAdminRole</code> 和
+<code>adminRole</code> 的值作为参数进行传递。</p>
+<p>在实现上，该函数使用了 Solidity 的结构体，通过 <code>_roles</code>
+映射存储角色数据。该映射的键为 <code>bytes32</code>
+类型的角色标识符，值为 <code>RoleData</code> 结构体，包含
+<code>members</code> 映射（用于存储该角色的成员）和
+<code>adminRole</code> 变量（用于存储该角色的管理员角色）。</p>
+<pre class="solidity"><code>function _grantRole(bytes32 role, address account) internal virtual {
+    if (!hasRole(role, account)) {
         _roles[role].members[account] = true;
         emit RoleGranted(role, account, _msgSender());
-    &#125;
-&#125;
-</code></pre>
-<p>这个函数名为 <code>_grantRole</code>，是一个内部的虚函数，用于将特定角色授予给一个指定的地址。</p>
-<p>函数首先检查目标地址是否已经拥有该角色，如果已经拥有该角色，则不执行任何操作。如果目标地址没有该角色，则在角色成员映射表 <code>_roles[role].members</code> 中设置该地址为角色成员，并发出 <code>RoleGranted</code> 事件，以通知其它合约该角色已经被授予给了该地址。</p>
+    }
+}</code></pre>
+<p>这个函数名为
+<code>_grantRole</code>，是一个内部的虚函数，用于将特定角色授予给一个指定的地址。</p>
+<p>函数首先检查目标地址是否已经拥有该角色，如果已经拥有该角色，则不执行任何操作。如果目标地址没有该角色，则在角色成员映射表
+<code>_roles[role].members</code> 中设置该地址为角色成员，并发出
+<code>RoleGranted</code>
+事件，以通知其它合约该角色已经被授予给了该地址。</p>
 <p>该函数的实现方式使用了条件判断，判断该地址是否已经拥有该角色，如果没有，才执行授予角色和发出事件的操作。</p>
-<pre><code>function _revokeRole(bytes32 role, address account) internal virtual &#123;
-    if (hasRole(role, account)) &#123;
+<pre><code>function _revokeRole(bytes32 role, address account) internal virtual {
+    if (hasRole(role, account)) {
         _roles[role].members[account] = false;
         emit RoleRevoked(role, account, _msgSender());
-    &#125;
-&#125;
-</code></pre>
+    }
+}</code></pre>
 <p>这段代码实现了撤销指定角色中某个账户的成员资格，其作用是限制该账户对被该角色保护的合约函数的访问权限。</p>
-<p>函数的参数为 <code>role</code> 和 <code>account</code>，其中 <code>role</code> 为要撤销成员资格的角色，<code>account</code> 为要撤销成员资格的账户地址。</p>
-<p>该函数首先调用 <code>hasRole</code> 函数检查账户是否是该角色的成员，如果是，就将该账户从该角色中删除。删除操作是通过在 <code>_roles</code> 映射中设置对应角色的成员映射的指定账户的值为 <code>false</code> 来实现的。</p>
-<p>最后，该函数通过调用 <code>RoleRevoked</code> 事件来通知其他合约和外部观察者该账户已被从该角色中删除。事件包括角色标识符、被删除的账户地址和调用函数的地址（通常是合约的地址）。</p>
-<p>该函数被标记为 <code>internal</code>，表示它只能被当前合约或继承它的合约内部的函数调用。同时，它被标记为 <code>virtual</code>，表示它可以被子合约覆盖实现。</p>
+<p>函数的参数为 <code>role</code> 和 <code>account</code>，其中
+<code>role</code> 为要撤销成员资格的角色，<code>account</code>
+为要撤销成员资格的账户地址。</p>
+<p>该函数首先调用 <code>hasRole</code>
+函数检查账户是否是该角色的成员，如果是，就将该账户从该角色中删除。删除操作是通过在
+<code>_roles</code> 映射中设置对应角色的成员映射的指定账户的值为
+<code>false</code> 来实现的。</p>
+<p>最后，该函数通过调用 <code>RoleRevoked</code>
+事件来通知其他合约和外部观察者该账户已被从该角色中删除。事件包括角色标识符、被删除的账户地址和调用函数的地址（通常是合约的地址）。</p>
+<p>该函数被标记为
+<code>internal</code>，表示它只能被当前合约或继承它的合约内部的函数调用。同时，它被标记为
+<code>virtual</code>，表示它可以被子合约覆盖实现。</p>
 
     </div>
     

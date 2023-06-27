@@ -38,7 +38,119 @@
 
 <link rel="stylesheet" href="/css/main.css" />
 
-    <meta name="generator" content="Hexo 6.3.0"></head>
+    <meta name="generator" content="Hexo 6.3.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
     <body>
         <div id="layout">
             <transition name="fade">
@@ -165,12 +277,12 @@
             
             <span class="tag">
                 
-                <a href="/tags/Solidity/" style="color: #00a596">Solidity</a>
+                <a href="/tags/Solidity/" style="color: #ff7d73">Solidity</a>
             </span>
             
             <span class="tag">
                 
-                <a href="/tags/Coding/" style="color: #ffa2c4">Coding</a>
+                <a href="/tags/Coding/" style="color: #00a596">Coding</a>
             </span>
             
         </span>
@@ -178,28 +290,29 @@
     </div>
     
     <div class="content" v-pre>
-        <h1 id="从零开始构建去中心化交易所（DEX）：全面指南"><a href="#从零开始构建去中心化交易所（DEX）：全面指南" class="headerlink" title="从零开始构建去中心化交易所（DEX）：全面指南"></a><strong><strong>从零开始构建去中心化交易所（DEX）：全面指南</strong></strong></h1><h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a><strong>引言</strong></h2><p>在充满活力的加密货币和区块链技术世界中，去中心化交易所（DEX）已经崭露头角，成为一股颠覆性的力量。它们代表了从传统的中心化平台向全新模式的重大转变，正在快速重塑数字资产交易的格局。据估计，所有的加密货币交易量中有15%发生在DEX上，这足以证明其影响力的重大。</p>
+        <h1 id="从零开始构建去中心化交易所dex全面指南">从零开始构建去中心化交易所（DEX）：全面指南</h1>
+<h2 id="引言"><strong>引言</strong></h2>
+<p>在充满活力的加密货币和区块链技术世界中，去中心化交易所（DEX）已经崭露头角，成为一股颠覆性的力量。它们代表了从传统的中心化平台向全新模式的重大转变，正在快速重塑数字资产交易的格局。据估计，所有的加密货币交易量中有15%发生在DEX上，这足以证明其影响力的重大。</p>
 <span id="more"></span>
-
 <p>在2022年，包括DEX在内的全球去中心化金融（DeFi）市场的价值已经达到了惊人的136.1亿美元。而且，预测显示从2023年到2030年，DeFi的复合年增长率将达到46.0%，这充分证明了DeFi的广泛接受度以及其对金融领域的革命性影响。</p>
 <p>那么，DEX到底是什么，为什么它如此重要？简单来说，DEX是一个平台，使用户能够在去中心化的环境中直接进行加密货币的交易，无需通过中介。得益于自动做市商（AMM）等创新机制，DEX成功取代了中心化交易所使用的传统订单簿系统，大大提高了交易的效率。</p>
 <p>与中心化交易所不同，DEX不保管用户资金，这使它们具有非托管的特性。这一特性使DEX能够在无需进行KYC（了解你的客户）验证的情况下提供交易服务，使新用户的上手过程变得轻松——只需连接你的加密钱包，就可以开始交易。</p>
 <p>尽管DEX在较短的时间内就得到了广泛的应用，从2020年开始得到更广泛的采用，但DEX在未来有着巨大的扩展潜力，提供低成本的非托管交易。</p>
-<p>考虑到这些令人兴奋的前景，你可能会想：”我如何建立自己的DEX？”本博客文章将引导你从零开始开发DEX，为你提供深度的见解和实用的步骤。</p>
-<p>DEX的主要特性之一是自动做市商（Automated Market Maker，简称AMM）模型，该模型利用智能合约驱动的流动性池为每一个交易对提供服务。在这种模型中，流动性提供者将他们的代币锁定在池中，以换取交易费用的奖励。交易对的价格由一个基于相关池的供需动态的算法决定。</p>
+<p>考虑到这些令人兴奋的前景，你可能会想："我如何建立自己的DEX？"本博客文章将引导你从零开始开发DEX，为你提供深度的见解和实用的步骤。</p>
+<p>DEX的主要特性之一是自动做市商（Automated Market
+Maker，简称AMM）模型，该模型利用智能合约驱动的流动性池为每一个交易对提供服务。在这种模型中，流动性提供者将他们的代币锁定在池中，以换取交易费用的奖励。交易对的价格由一个基于相关池的供需动态的算法决定。</p>
 <p>DEX主要有三种类型，它们的运行原理各不相同：</p>
-<ol>
-<li><p><strong>链上订单簿</strong>：在这类DEX中，所有操作都在链上进行，包括修改和取消订单。尽管链上订单簿被视为最去中心化和透明的版本，但执行上却并不实用。链上交易所需要经过一个漫长的过程，从每个网络节点获取权限，永久地将订单记录在区块链上，并为此付费。作为用户，你也需要等待矿工将你的请求添加到区块链上，这可能也会比较麻烦。</p>
-</li>
-<li><p><strong>链下订单簿</strong>：与链上订单簿相比，链下订单簿中的交易记录是由中心化实体保管的。这种类型的DEX只是部分去中心化，由于订单不是存储在链上，因此可能会遇到一些中心化交易所常见的安全问题，同时也可能将数据置于风险之中。</p>
-</li>
-<li><p><strong>自动做市商（AMM）</strong>：自动做市商有能力通过定价算法颠覆订单簿，能够自动在线定价任何资产配对。AMM完全去中心化整个过程，使用户能够在区块链上建立市场，而无需引入任何对手方进行交易。</p>
-</li>
+<ol type="1">
+<li><p><strong>链上订单簿</strong>：在这类DEX中，所有操作都在链上进行，包括修改和取消订单。尽管链上订单簿被视为最去中心化和透明的版本，但执行上却并不实用。链上交易所需要经过一个漫长的过程，从每个网络节点获取权限，永久地将订单记录在区块链上，并为此付费。作为用户，你也需要等待矿工将你的请求添加到区块链上，这可能也会比较麻烦。</p></li>
+<li><p><strong>链下订单簿</strong>：与链上订单簿相比，链下订单簿中的交易记录是由中心化实体保管的。这种类型的DEX只是部分去中心化，由于订单不是存储在链上，因此可能会遇到一些中心化交易所常见的安全问题，同时也可能将数据置于风险之中。</p></li>
+<li><p><strong>自动做市商（AMM）</strong>：自动做市商有能力通过定价算法颠覆订单簿，能够自动在线定价任何资产配对。AMM完全去中心化整个过程，使用户能够在区块链上建立市场，而无需引入任何对手方进行交易。</p></li>
 </ol>
-<h3 id="链上订单簿"><a href="#链上订单簿" class="headerlink" title="链上订单簿"></a>链上订单簿</h3><p>链上订单簿是一种去中心化交易所的模式，它的特点是所有的买卖挂单都存储在区块链中的订单簿（Order Book）上，订单簿中的订单会根据设定的买卖盘条件进行订单撮合和交易结算</p>
+<h3 id="链上订单簿">链上订单簿</h3>
+<p>链上订单簿是一种去中心化交易所的模式，它的特点是所有的买卖挂单都存储在区块链中的订单簿（Order
+Book）上，订单簿中的订单会根据设定的买卖盘条件进行订单撮合和交易结算</p>
 <p>链上订单簿的原理可以用数学公式和代码来解释。假设有一个基于以太坊的链上订单簿智能合约，它可以处理ERC20代币的交易。我们可以用以下的伪代码来表示它的主要逻辑：</p>
-<pre><code class="solidity">// 定义一个结构体来存储订单信息
-struct Order &#123;
+<pre class="solidity"><code>// 定义一个结构体来存储订单信息
+struct Order {
     address maker; // 挂单方地址
     address taker; // 接单方地址
     address tokenA; // 交易代币A的合约地址
@@ -209,7 +322,7 @@ struct Order &#123;
     uint256 expiration; // 订单过期时间
     bytes32 hash; // 订单哈希值
     bytes signature; // 挂单方签名
-&#125;
+}
 
 // 定义一个映射来存储订单簿，以代币对为键，以订单数组为值
 mapping (bytes32 =&gt; Order[]) public orderBook;
@@ -245,11 +358,11 @@ function createOrder(
     uint256 _amountB,
     uint256 _expiration,
     bytes memory _signature
-) public &#123;
+) public {
     // 检查参数有效性
-    require(_tokenA != _tokenB, &quot;Invalid token pair&quot;);
-    require(_amountA &gt; 0 &amp;&amp; _amountB &gt; 0, &quot;Invalid amounts&quot;);
-    require(_expiration &gt; block.timestamp, &quot;Expired order&quot;);
+    require(_tokenA != _tokenB, "Invalid token pair");
+    require(_amountA &gt; 0 &amp;&amp; _amountB &gt; 0, "Invalid amounts");
+    require(_expiration &gt; block.timestamp, "Expired order");
 
     // 计算订单哈希值
     bytes32 _hash = keccak256(
@@ -265,7 +378,7 @@ function createOrder(
     );
 
     // 验证挂单方签名
-    require(msg.sender == recoverSigner(_hash, _signature), &quot;Invalid signature&quot;);
+    require(msg.sender == recoverSigner(_hash, _signature), "Invalid signature");
 
     // 创建订单对象
     Order memory _order = Order(
@@ -295,7 +408,7 @@ function createOrder(
         _expiration, // 订单过期时间
         _hash // 订单哈希值
     );
-&#125;
+}
 
 // 定义一个函数来填充订单，并在链上进行结算
 function fillOrder(
@@ -307,11 +420,11 @@ function fillOrder(
     uint256 _expiration,
     bytes32 _hash,
     bytes memory _signature
-) public &#123;
+) public {
     // 检查参数有效性
-    require(_tokenA != _tokenB, &quot;Invalid token pair&quot;);
-    require(_amountA &gt; 0 &amp;&amp; _amountB &gt; 0, &quot;Invalid amounts&quot;);
-    require(_expiration &gt; block.timestamp, &quot;Expired order&quot;);
+    require(_tokenA != _tokenB, "Invalid token pair");
+    require(_amountA &gt; 0 &amp;&amp; _amountB &gt; 0, "Invalid amounts");
+    require(_expiration &gt; block.timestamp, "Expired order");
 
     // 验证订单哈希值
     require(
@@ -326,11 +439,11 @@ function fillOrder(
                 _expiration // 订单过期时间
             )
         ),
-        &quot;Invalid hash&quot;
+        "Invalid hash"
     );
 
     // 验证挂单方签名
-    require(_maker == recoverSigner(_hash, _signature), &quot;Invalid signature&quot;);
+    require(_maker == recoverSigner(_hash, _signature), "Invalid signature");
 
     // 获取订单簿中对应的订单数组，以代币对为键
     bytes32 _key = keccak256(abi.encodePacked(_tokenA, _tokenB));
@@ -338,7 +451,7 @@ function fillOrder(
 
     // 遍历订单数组，寻找匹配的订单
     bool found = false;
-    for (uint256 i = 0; i &lt; orders.length; i++) &#123;
+    for (uint256 i = 0; i &lt; orders.length; i++) {
         Order storage order = orders[i];
         if (
             order.maker == _maker &amp;&amp;
@@ -350,14 +463,14 @@ function fillOrder(
             order.expiration == _expiration &amp;&amp;
             order.hash == _hash &amp;&amp;
             keccak256(order.signature) == keccak256(_signature)
-        ) &#123;
+        ) {
             found = true;
             break;
-        &#125;
-    &#125;
+        }
+    }
 
     // 如果找到匹配的订单，更新接单方地址，并进行结算
-    if (found) &#123;
+    if (found) {
         order.taker = msg.sender; // 更新接单方地址
 
         // 调用ERC20合约的transferFrom函数，将代币从双方账户转移，并扣除手续费（假设为0.1%）
@@ -380,45 +493,46 @@ function fillOrder(
             order.amountB, // 交易代币B的数量
             order.hash // 订单哈希值
         );
-    &#125; else &#123;
+    } else {
         // 如果没有找到匹配的订单，抛出异常
-        revert(&quot;Order not found&quot;);
-    &#125;
-&#125;
+        revert("Order not found");
+    }
+}
 
 // 定义一个辅助函数来恢复签名者的地址
-function recoverSigner(bytes32 _hash, bytes memory _signature) internal pure returns (address) &#123;
+function recoverSigner(bytes32 _hash, bytes memory _signature) internal pure returns (address) {
     bytes32 r;
     bytes32 s;
     uint8 v;
 
     // 检查签名长度
-    if (_signature.length != 65) &#123;
+    if (_signature.length != 65) {
         return address(0);
-    &#125;
+    }
 
     // 分离r,s,v值
-    assembly &#123;
+    assembly {
         r := mload(add(_signature, 32))
         s := mload(add(_signature, 64))
         v := byte(0, mload(add(_signature, 96)))
-    &#125;
+    }
 
     // 如果v值不在有效范围内，返回空地址
-    if (v &lt; 27) &#123;
+    if (v &lt; 27) {
         return address(0);
-    &#125;
+    }
 
     // 使用ecrecover函数恢复签名者的地址，并返回
-    return ecrecover(keccak256(abi.encodePacked(&quot;\x19Ethereum Signed Message:\n32&quot;, _hash)), v, r, s);
-&#125;
-</code></pre>
-<h4 id="链上订单簿的优点是："><a href="#链上订单簿的优点是：" class="headerlink" title="链上订单簿的优点是："></a><strong>链上订单簿的优点是</strong>：</h4><ul>
+    return ecrecover(keccak256(abi.encodePacked("\x19Ethereum Signed Message:\n32", _hash)), v, r, s);
+}</code></pre>
+<h4 id="链上订单簿的优点是"><strong>链上订单簿的优点是</strong>：</h4>
+<ul>
 <li><strong>直接通过钱包交易</strong>，不需要将资产存入中心化的交易平台，降低了对手方风险和被盗风险。</li>
 <li><strong>透明度和安全性较高</strong>，所有的订单和交易都记录在区块链上，可以随时查看和验证，不会受到中介的操纵或干预</li>
 <li><strong>可以利用智能合约的灵活性</strong>，实现更多的交易逻辑和功能，比如限价单、止损单、条件单等。</li>
 </ul>
-<h4 id="链上订单簿的缺点是："><a href="#链上订单簿的缺点是：" class="headerlink" title="链上订单簿的缺点是："></a><strong>链上订单簿的缺点是</strong>：</h4><ul>
+<h4 id="链上订单簿的缺点是"><strong>链上订单簿的缺点是</strong>：</h4>
+<ul>
 <li><strong>交易速度较慢，确认时间较长</strong>，因为每笔订单和交易都需要在区块链上执行和确认，受到区块链的吞吐量和拥堵情况的影响。</li>
 <li><strong>交易费用较高</strong>，因为每笔订单和交易都需要支付区块链的网络费用（gas费），而且可能因为区块链的价格波动而变化。</li>
 <li><strong>流动性较差</strong>，因为每个订单簿都是独立的，没有跨平台或跨链的流动性共享机制，导致市场深度不足，滑点较大。</li>

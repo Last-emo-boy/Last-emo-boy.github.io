@@ -36,7 +36,119 @@
 
 <link rel="stylesheet" href="/css/main.css" />
 
-    <meta name="generator" content="Hexo 6.3.0"></head>
+    <meta name="generator" content="Hexo 6.3.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
     <body>
         <div id="layout">
             <transition name="fade">
@@ -181,7 +293,9 @@
     <div class="description">
         <div class="content" v-pre>
             
-            <h1 id="从零开始构建去中心化交易所（DEX）：全面指南"><a href="#从零开始构建去中心化交易所（DEX）：全面指南" class="headerlink" title="从零开始构建去中心化交易所（DEX）：全面指南"></a><strong><strong>从零开始构建去中心化交易所（DEX）：全面指南</strong></strong></h1><h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a><strong>引言</strong></h2><p>在充满活力的加密货币和区块链技术世界中，去中心化交易所（DEX）已经崭露头角，成为一股颠覆性的力量。它们代表了从传统的中心化平台向全新模式的重大转变，正在快速重塑数字资产交易的格局。据估计，所有的加密货币交易量中有15%发生在DEX上，这足以证明其影响力的重大。</p>
+            <h1 id="从零开始构建去中心化交易所dex全面指南">从零开始构建去中心化交易所（DEX）：全面指南</h1>
+<h2 id="引言"><strong>引言</strong></h2>
+<p>在充满活力的加密货币和区块链技术世界中，去中心化交易所（DEX）已经崭露头角，成为一股颠覆性的力量。它们代表了从传统的中心化平台向全新模式的重大转变，正在快速重塑数字资产交易的格局。据估计，所有的加密货币交易量中有15%发生在DEX上，这足以证明其影响力的重大。</p>
             
         </div>
     </div>
@@ -194,7 +308,51 @@
         
         <span class="tag">
             
-            <a href="/tags/Solidity/" style="color: #03a9f4">Solidity</a>
+            <a href="/tags/Solidity/" style="color: #ffa2c4">Solidity</a>
+        </span>
+        
+        <span class="tag">
+            
+            <a href="/tags/Coding/" style="color: #03a9f4">Coding</a>
+        </span>
+        
+    </div>
+    <a href="/2023/06/27/Decentralized-Exchange-Development-101-From-Zero-to-One-(1)/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2023/06/27/Decentralized-Exchange-Development-101-From-Zero-to-One-(2)/">
+        <h2 class="post-title">Decentralized Exchange Development 101: From Zero to One (2)</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/6/27
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <h3 id="链下订单簿">链下订单簿</h3>
+<p>链下订单簿是一种混合型的去中心化交易平台（DEX）模式，它将订单簿管理和撮合流程在链下进行，而交易结算在链上进行。</p>
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/Solidity/" style="color: #00bcd4">Solidity</a>
         </span>
         
         <span class="tag">
@@ -203,7 +361,95 @@
         </span>
         
     </div>
-    <a href="/2023/06/27/Decentralized-Exchange-Development-101-From-Zero-to-One-(1)/" class="go-post">阅读全文</a>
+    <a href="/2023/06/27/Decentralized-Exchange-Development-101-From-Zero-to-One-(2)/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2023/06/27/Decentralized-Exchange-Development-101-From-Zero-to-One-(3)/">
+        <h2 class="post-title">Decentralized Exchange Development 101: From Zero to One (3)</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/6/27
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <h3 id="amm">AMM</h3>
+<p>AMM是自动做市商的缩写，它是一种通过自动算法交易提供流动性的协议。AMM可以在去中心化交易所（DEX）上为不同的代币创建和运行可公开获取的链上流动性。</p>
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/Solidity/" style="color: #00a596">Solidity</a>
+        </span>
+        
+        <span class="tag">
+            
+            <a href="/tags/Coding/" style="color: #ffa2c4">Coding</a>
+        </span>
+        
+    </div>
+    <a href="/2023/06/27/Decentralized-Exchange-Development-101-From-Zero-to-One-(3)/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2023/06/27/Decentralized-Exchange-Development-101-From-Zero-to-One-(4)/">
+        <h2 class="post-title">Decentralized Exchange Development 101: From Zero to One (4)</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/6/27
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <h3 id="dex聚合器">DEX聚合器</h3>
+<p>DEX聚合器是一种工具，可以让用户在一个平台上获取来自不同去中心化交易所（DEX）的流动性和兑换率信息。这样，用户可以从这些不同的来源中获得有竞争力的价格，只需点击几下就可以选择最佳的交易方案。</p>
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/Solidity/" style="color: #ff7d73">Solidity</a>
+        </span>
+        
+        <span class="tag">
+            
+            <a href="/tags/Coding/" style="color: #00bcd4">Coding</a>
+        </span>
+        
+    </div>
+    <a href="/2023/06/27/Decentralized-Exchange-Development-101-From-Zero-to-One-(4)/" class="go-post">阅读全文</a>
 </div>
 
 <div class="post">
@@ -224,27 +470,25 @@
     <div class="description">
         <div class="content" v-pre>
             
-            <h1 id="概述："><a href="#概述：" class="headerlink" title="概述："></a>概述：</h1><p>该合约代码定义了一个名为IAccessControlDefaultAdminRules的接口，用于管理访问控制和默认管理员角色的转移。它提供了以下功能：</p>
-<ol>
+            <h1 id="概述">概述：</h1>
+<p>该合约代码定义了一个名为IAccessControlDefaultAdminRules的接口，用于管理访问控制和默认管理员角色的转移。它提供了以下功能：</p>
+<ol type="1">
 <li><p>管理默认管理员角色的转移：</p>
 <ul>
 <li>可以启动默认管理员角色的转移，并设置新的管理员地址和接受计划。</li>
 <li>可以取消尚未接受的管理员转移。</li>
 <li>可以完成管理员转移，将DEFAULT_ADMIN_ROLE授予调用者，并从之前的持有者中撤销该角色。</li>
-</ul>
-</li>
+</ul></li>
 <li><p>管理默认管理员角色转移的延迟：</p>
 <ul>
 <li>可以设置默认管理员转移的延迟时间。</li>
 <li>可以取消预定的延迟更改。</li>
 <li>可以查询当前的默认管理员转移延迟时间和预定的延迟更改。</li>
-</ul>
-</li>
+</ul></li>
 <li><p>提供事件以便监控默认管理员角色和延迟更改的状态：</p>
 <ul>
 <li>可以监听默认管理员转移和延迟更改的开始、取消和完成事件。</li>
-</ul>
-</li>
+</ul></li>
 </ol>
 <p>这个接口为访问控制合约提供了一些附加的管理功能，使得在系统中转移默认管理员角色更加灵活和可控。</p>
             
@@ -264,7 +508,7 @@
         
         <span class="tag">
             
-            <a href="/tags/Coding/" style="color: #ff7d73">Coding</a>
+            <a href="/tags/Coding/" style="color: #ffa2c4">Coding</a>
         </span>
         
     </div>
@@ -289,7 +533,8 @@
     <div class="description">
         <div class="content" v-pre>
             
-            <h1 id="概述："><a href="#概述：" class="headerlink" title="概述："></a>概述：</h1><p>这段代码定义了一个名为IAccessControl的接口，提供了角色控制的功能。通过该接口，可以进行以下操作：</p>
+            <h1 id="概述">概述：</h1>
+<p>这段代码定义了一个名为IAccessControl的接口，提供了角色控制的功能。通过该接口，可以进行以下操作：</p>
 <p>分配角色：可以将某个角色授权给指定的帐户。</p>
 <p>撤销角色：可以从指定的帐户中撤销某个角色的授权。</p>
 <p>查询角色：可以检查某个帐户是否被授予了指定的角色。</p>
@@ -307,7 +552,7 @@
         
         <span class="tag">
             
-            <a href="/tags/Solidity/" style="color: #ffa2c4">Solidity</a>
+            <a href="/tags/Solidity/" style="color: #00a596">Solidity</a>
         </span>
         
         <span class="tag">
@@ -337,11 +582,15 @@
     <div class="description">
         <div class="content" v-pre>
             
-            <h1 id="概述："><a href="#概述：" class="headerlink" title="概述："></a>概述：</h1><p>合约的作用是扩展了 OpenZeppelin Contracts 中的访问控制合约（<code>AccessControl</code>），使其具备了角色成员的枚举功能。具体而言，该合约提供了以下功能：</p>
-<ol>
+            <h1 id="概述">概述：</h1>
+<p>合约的作用是扩展了 OpenZeppelin Contracts
+中的访问控制合约（<code>AccessControl</code>），使其具备了角色成员的枚举功能。具体而言，该合约提供了以下功能：</p>
+<ol type="1">
 <li>支持枚举角色成员：可以根据角色获取具有该角色的账户列表，以及获取角色成员的数量。</li>
-<li>重写了 <code>supportsInterface</code> 函数，使合约能够判断是否支持 <code>IAccessControlEnumerable</code> 接口。</li>
-<li>重写了 <code>_grantRole</code> 和 <code>_revokeRole</code> 函数，用于在授予和撤销角色时更新角色成员的地址集合。</li>
+<li>重写了 <code>supportsInterface</code> 函数，使合约能够判断是否支持
+<code>IAccessControlEnumerable</code> 接口。</li>
+<li>重写了 <code>_grantRole</code> 和 <code>_revokeRole</code>
+函数，用于在授予和撤销角色时更新角色成员的地址集合。</li>
 </ol>
             
         </div>
@@ -355,7 +604,7 @@
         
         <span class="tag">
             
-            <a href="/tags/Solidity/" style="color: #ff7d73">Solidity</a>
+            <a href="/tags/Solidity/" style="color: #00bcd4">Solidity</a>
         </span>
         
         <span class="tag">
@@ -385,7 +634,8 @@
     <div class="description">
         <div class="content" v-pre>
             
-            <h1 id="概述："><a href="#概述：" class="headerlink" title="概述："></a>概述：</h1><p>这是一个扩展自OpenZeppelin的AccessControl合约，实现了特殊规则来管理DEFAULT_ADMIN_ROLE角色的持有者。该角色是系统中具有特权权限的其他角色的管理者。</p>
+            <h1 id="概述">概述：</h1>
+<p>这是一个扩展自OpenZeppelin的AccessControl合约，实现了特殊规则来管理DEFAULT_ADMIN_ROLE角色的持有者。该角色是系统中具有特权权限的其他角色的管理者。</p>
             
         </div>
     </div>
@@ -398,12 +648,12 @@
         
         <span class="tag">
             
-            <a href="/tags/Solidity/" style="color: #ffa2c4">Solidity</a>
+            <a href="/tags/Solidity/" style="color: #00bcd4">Solidity</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/Coding/" style="color: #03a9f4">Coding</a>
+            <a href="/tags/Coding/" style="color: #00a596">Coding</a>
         </span>
         
     </div>
@@ -428,7 +678,10 @@
     <div class="description">
         <div class="content" v-pre>
             
-            <p>I am drawn to the dark, the profound. Each glance I cast upon these works evokes an inexplicable sense of familiarity. This sensation does not originate from within me but is the unique allure of these pieces.</p>
+            <p>I am drawn to the dark, the profound. Each glance I cast upon these
+works evokes an inexplicable sense of familiarity. This sensation does
+not originate from within me but is the unique allure of these
+pieces.<br>
             
         </div>
     </div>
@@ -441,12 +694,12 @@
         
         <span class="tag">
             
-            <a href="/tags/AIGC/" style="color: #00a596">AIGC</a>
+            <a href="/tags/AIGC/" style="color: #03a9f4">AIGC</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/Art/" style="color: #03a9f4">Art</a>
+            <a href="/tags/Art/" style="color: #00a596">Art</a>
         </span>
         
     </div>
@@ -471,7 +724,11 @@
     <div class="description">
         <div class="content" v-pre>
             
-            <h1 id="概述："><a href="#概述：" class="headerlink" title="概述："></a>概述：</h1><p>这个名为 <code>AccessControlCrossChain</code> 的 Solidity 合约是一个 OpenZeppelin Contracts 库中 <code>AccessControl</code> 和 <code>CrossChainEnabled</code> 两个合约的扩展，它提供了跨链访问管理的支持。它为每个角色实现了等效的“别名”角色，用于限制来自其他链的调用。该合约的主要目的是保护不同链上由不同实体控制的相同地址的多个合约之间的冲突。</p>
+            <h1 id="概述">概述：</h1>
+<p>这个名为 <code>AccessControlCrossChain</code> 的 Solidity 合约是一个
+OpenZeppelin Contracts 库中 <code>AccessControl</code> 和
+<code>CrossChainEnabled</code>
+两个合约的扩展，它提供了跨链访问管理的支持。它为每个角色实现了等效的“别名”角色，用于限制来自其他链的调用。该合约的主要目的是保护不同链上由不同实体控制的相同地址的多个合约之间的冲突。</p>
             
         </div>
     </div>
@@ -484,135 +741,16 @@
         
         <span class="tag">
             
-            <a href="/tags/Solidity/" style="color: #ffa2c4">Solidity</a>
+            <a href="/tags/Solidity/" style="color: #00a596">Solidity</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/Coding/" style="color: #ff7d73">Coding</a>
+            <a href="/tags/Coding/" style="color: #ffa2c4">Coding</a>
         </span>
         
     </div>
     <a href="/2023/06/26/Code-review-Openzeppelin-AccessControlCrossChain/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2023/06/25/Code-review-Openzeppelin-AccessControl/">
-        <h2 class="post-title">Code review: Openzeppelin - AccessControl</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2023/6/25
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <h1 id="概述："><a href="#概述：" class="headerlink" title="概述："></a>概述：</h1><p>这个合约的作用是实现基于角色的访问控制（RBAC）机制，可以通过定义角色和角色成员之间的关系，来限制合约中特定函数的访问权限。</p>
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        <span class="icon">
-            <i class="fa-solid fa-tags fa-fw"></i>
-        </span>
-        
-        
-        <span class="tag">
-            
-            <a href="/tags/Solidity/" style="color: #00bcd4">Solidity</a>
-        </span>
-        
-        <span class="tag">
-            
-            <a href="/tags/Coding/" style="color: #ff7d73">Coding</a>
-        </span>
-        
-    </div>
-    <a href="/2023/06/25/Code-review-Openzeppelin-AccessControl/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2023/06/25/%E5%90%8E%E8%AE%B0/">
-        <h2 class="post-title">后记</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2023/6/25
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <p>命运，这坚定无比的力，展现其设计不曾蹉跎。结果早已我心明如昼，但我抗拒接受，愿留在模糊不定而非确定答案的美妙。唉，自我欺瞒的闹剧多么徒劳无益。</p>
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        <span class="icon">
-            <i class="fa-solid fa-tags fa-fw"></i>
-        </span>
-        
-        
-        <span class="tag">
-            
-            <a href="/tags/Miscellanies/" style="color: #00a596">Miscellanies</a>
-        </span>
-        
-    </div>
-    <a href="/2023/06/25/%E5%90%8E%E8%AE%B0/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2023/06/25/Epilogue/">
-        <h2 class="post-title">Epilogue</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2023/6/25
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <p>Fate, an unwavering force, unfurls its design without falter. The outcome that now materializes was known to me from the outset, though I resisted accepting it, preferring the allure of uncertainty over a definitive answer. Alas, the futile charade of self-delusion.</p>
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        <span class="icon">
-            <i class="fa-solid fa-tags fa-fw"></i>
-        </span>
-        
-        
-        <span class="tag">
-            
-            <a href="/tags/Miscellanies/" style="color: #ffa2c4">Miscellanies</a>
-        </span>
-        
-    </div>
-    <a href="/2023/06/25/Epilogue/" class="go-post">阅读全文</a>
 </div>
 
 
