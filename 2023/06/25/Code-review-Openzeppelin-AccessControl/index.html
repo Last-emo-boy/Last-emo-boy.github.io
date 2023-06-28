@@ -277,12 +277,12 @@ mjx-container[display="true"] + br {
             
             <span class="tag">
                 
-                <a href="/tags/Solidity/" style="color: #00a596">Solidity</a>
+                <a href="/tags/Solidity/" style="color: #ffa2c4">Solidity</a>
             </span>
             
             <span class="tag">
                 
-                <a href="/tags/Coding/" style="color: #03a9f4">Coding</a>
+                <a href="/tags/Coding/" style="color: #ff7d73">Coding</a>
             </span>
             
         </span>
@@ -297,7 +297,7 @@ mjx-container[display="true"] + br {
 AccessControl
 合约，可以让合约更加安全地运行，并限制非授权用户对合约的访问和操作。</p>
 <p>该合约模块，允许子合约实现基于角色的访问控制机制。这是一个轻量级版本，不允许枚举角色成员，除非通过访问合约事件日志的离线手段进行。某些应用程序可能会从链上可枚举性中受益，对于这些情况，请参见
-{AccessControlEnumerable}。</p>
+<a href="./Code-review-Openzeppelin-AccessControlEnumerable.md">AccessControlEnumerable</a>。</p>
 <p>角色由它们的 <code>bytes32</code> 标识符表示。这些标识符应该在外部
 API 中公开，并且应该是唯一的。最好的方法是使用
 <code>public constant</code> 的哈希摘要：</p>
@@ -315,8 +315,9 @@ API 中公开，并且应该是唯一的。最好的方法是使用
 <code>DEFAULT_ADMIN_ROLE</code>，这意味着只有拥有该角色的帐户才能授予或撤销其他角色。可以使用
 {_setRoleAdmin} 创建更复杂的角色关系。</p>
 <p>警告：<code>DEFAULT_ADMIN_ROLE</code>
-也是自己的管理员角色：它有权限授予和撤销此角色。应采取额外的预防措施来保护已授予该角色的帐户。我们建议使用
-{AccessControlDefaultAdminRules} 为该角色实施额外的安全措施。</p>
+也是自己的管理员角色：它有权限授予和撤销此角色。应采取额外的预防措施来保护已授予该角色的帐户。建议使用
+<a href="./Code-review-Openzeppelin-AccessControlDefaultAdminRules.md">AccessControlDefaultAdminRules</a>
+为该角色实施额外的安全措施。</p>
 <h1 id="完整代码">完整代码：</h1>
 <pre class="sol"><code>pragma solidity ^0.8.0;
 

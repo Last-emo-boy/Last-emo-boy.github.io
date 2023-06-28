@@ -1,0 +1,698 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Code review: Openzeppelin - Ownable | w33d&#39;s blog</title>
+        <meta name="author" content="last emo boy" />
+        <meta name="description" content="Harbor for the last emo boy" />
+        <meta name="keywords" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+        <link rel="icon" href="/images/avatar.png" />
+        <script src="https://cdn.staticfile.org/vue/3.2.47/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.3.0/css/all.min.css" />
+<link rel="stylesheet" href="/css/fonts.min.css" />
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+
+
+<script src="https://cdn.staticfile.org/highlight.js/11.7.0/highlight.min.js"></script>
+<link
+    rel="stylesheet"
+    href="https://cdn.staticfile.org/highlight.js/11.7.0/styles/obsidian.min.css"
+/>
+<script src="/js/lib/highlight.js"></script>
+
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+    <meta name="generator" content="Hexo 6.3.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
+    <body>
+        <div id="layout">
+            <transition name="fade">
+                <div id="loading" v-show="loading">
+                    <div id="loading-circle">
+                        <h2>LOADING</h2>
+                        <p>加载过慢请开启缓存 浏览器默认开启</p>
+                        <img src="/images/loading.gif" />
+                    </div>
+                </div>
+            </transition>
+            <nav id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <div id="desktop-menu">
+        <a class="title" href="/">
+            <span>W33D&#39;S BLOG</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;Home</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;About</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;Archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;Categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;Tags</span>
+        </a>
+        
+    </div>
+    <div id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;W33D&#39;S BLOG</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </div>
+</nav>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+            <transition name="into">
+                <div id="main" v-show="!loading">
+                    <div class="article">
+    <div>
+        <h1>Code review: Openzeppelin - Ownable</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/6/25
+        </span>
+        
+        
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/Solidity/" style="color: #ff7d73">Solidity</a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/Coding/" style="color: #ff7d73">Coding</a>
+            </span>
+            
+        </span>
+        
+    </div>
+    
+    <div class="content" v-pre>
+        <h1 id="概述">概述：</h1>
+<p>该合约名为
+"Ownable"，它提供了一种基本的访问控制机制，有一个账户（所有者）可以被赋予对特定功能的独家访问权。这个机制是通过继承来使用的，它会使得修饰符
+<code>onlyOwner</code>
+可用，该修饰符可以应用到你的函数上以限制他们的使用只能是所有者。</p>
+<p>初始的所有者设置为部署者提供的地址，后期可以通过
+<code>transferOwnership</code> 方法更改。</p>
+<span id="more"></span>
+<p>具体来看，该合约主要包括以下几个功能：</p>
+<ul>
+<li><p><code>constructor</code>：构造函数，在合约初始化时设置初始的所有者。</p></li>
+<li><p><code>onlyOwner</code>：只有所有者可以执行的修饰符。</p></li>
+<li><p><code>owner</code>：获取当前的所有者。</p></li>
+<li><p><code>_checkOwner</code>：检查发送者是否为所有者。</p></li>
+<li><p><code>renounceOwnership</code>：放弃所有权，只有当前所有者才能调用。放弃所有权后，合约将没有所有者，只有所有者才能使用的功能将被禁用。</p></li>
+<li><p><code>transferOwnership</code>：转让所有权，只有当前所有者才能调用。新所有者不能为0地址。</p></li>
+<li><p><code>_transferOwnership</code>：内部函数，用于将合约的所有权转移给新账户。</p></li>
+</ul>
+<p>此外，还包括两个错误处理机制 <code>OwnableUnauthorizedAccount</code>
+和
+<code>OwnableInvalidOwner</code>，用于处理未授权账户和无效所有者的问题。并且有一个事件
+<code>OwnershipTransferred</code>，在所有权转移时触发。</p>
+<h1 id="完整代码">完整代码：</h1>
+<pre class="solidity"><code>// SPDX-License-Identifier: MIT
+// OpenZeppelin Contracts (last updated v4.9.0) (access/Ownable.sol)
+
+pragma solidity ^0.8.19;
+
+import "../utils/Context.sol";
+
+/**
+ * @dev Contract module which provides a basic access control mechanism, where
+ * there is an account (an owner) that can be granted exclusive access to
+ * specific functions.
+ *
+ * The initial owner is set to the address provided by the deployer. This can
+ * later be changed with {transferOwnership}.
+ *
+ * This module is used through inheritance. It will make available the modifier
+ * `onlyOwner`, which can be applied to your functions to restrict their use to
+ * the owner.
+ */
+abstract contract Ownable is Context {
+    address private _owner;
+
+    /**
+     * @dev The caller account is not authorized to perform an operation.
+     */
+    error OwnableUnauthorizedAccount(address account);
+
+    /**
+     * @dev The owner is not a valid owner account. (eg. `address(0)`)
+     */
+    error OwnableInvalidOwner(address owner);
+
+    event OwnershipTransferred(address indexed previousOwner, address indexed newOwner);
+
+    /**
+     * @dev Initializes the contract setting the address provided by the deployer as the initial owner.
+     */
+    constructor(address initialOwner) {
+        _transferOwnership(initialOwner);
+    }
+
+    /**
+     * @dev Throws if called by any account other than the owner.
+     */
+    modifier onlyOwner() {
+        _checkOwner();
+        _;
+    }
+
+    /**
+     * @dev Returns the address of the current owner.
+     */
+    function owner() public view virtual returns (address) {
+        return _owner;
+    }
+
+    /**
+     * @dev Throws if the sender is not the owner.
+     */
+    function _checkOwner() internal view virtual {
+        if (owner() != _msgSender()) {
+            revert OwnableUnauthorizedAccount(_msgSender());
+        }
+    }
+
+    /**
+     * @dev Leaves the contract without owner. It will not be possible to call
+     * `onlyOwner` functions. Can only be called by the current owner.
+     *
+     * NOTE: Renouncing ownership will leave the contract without an owner,
+     * thereby disabling any functionality that is only available to the owner.
+     */
+    function renounceOwnership() public virtual onlyOwner {
+        _transferOwnership(address(0));
+    }
+
+    /**
+     * @dev Transfers ownership of the contract to a new account (`newOwner`).
+     * Can only be called by the current owner.
+     */
+    function transferOwnership(address newOwner) public virtual onlyOwner {
+        if (newOwner == address(0)) {
+            revert OwnableInvalidOwner(address(0));
+        }
+        _transferOwnership(newOwner);
+    }
+
+    /**
+     * @dev Transfers ownership of the contract to a new account (`newOwner`).
+     * Internal function without access restriction.
+     */
+    function _transferOwnership(address newOwner) internal virtual {
+        address oldOwner = _owner;
+        _owner = newOwner;
+        emit OwnershipTransferred(oldOwner, newOwner);
+    }
+}</code></pre>
+<h1 id="代码分析">代码分析：</h1>
+<pre><code>import "../utils/Context.sol";</code></pre>
+<p>这段代码是一个 Solidity 的导入语句，它的作用是导入了位于
+<code>../utils/</code> 路径下的 <code>Context.sol</code> 文件。在
+Solidity
+中，导入语句允许你在一个文件中使用另一个文件定义的合约、库、接口等。</p>
+<p><code>Context.sol</code> 通常是一个在 OpenZeppelin
+合约库中定义的工具合约，它为合约提供了 <code>_msgSender()</code> 和
+<code>_msgData()</code>
+方法，这两个方法返回交易的发送者（<code>msg.sender</code>）和数据载荷（<code>msg.data</code>），并且在某些上下文（例如当合约作为
+<code>delegatecall</code> 的目标）中，这些方法比直接使用
+<code>msg.sender</code> 和 <code>msg.data</code> 更加安全。</p>
+<p>在<code>Ownable</code> 合约中通过导入和继承 <code>Context</code>
+合约，获得了使用 <code>_msgSender()</code> 方法的能力，这在
+<code>_checkOwner()</code>
+函数中使用到，用于判断当前交易的发送者是否为合约的所有者。</p>
+<pre class="sol"><code>abstract contract Ownable is Context {
+    address private _owner;
+
+    /**
+     * @dev The caller account is not authorized to perform an operation.
+     */
+    error OwnableUnauthorizedAccount(address account);</code></pre>
+<p>这段代码定义了一个名为 <code>Ownable</code> 的抽象合约，该合约继承了
+<code>Context</code>
+合约。抽象合约是一种包含了至少一个未实现（只有声明没有定义）函数的合约，它不能被直接部署，只能被继承。</p>
+<p>在 <code>Ownable</code> 合约中，声明了一个私有的地址类型变量
+<code>_owner</code>，用来存储该合约的所有者地址。</p>
+<p><code>Ownable</code> 合约也定义了一个名为
+<code>OwnableUnauthorizedAccount</code> 的自定义错误。在 Solidity 0.8.4
+及以后的版本中，允许定义自定义错误，以便在合约代码中通过
+<code>revert</code> 语句抛出。这个
+<code>OwnableUnauthorizedAccount</code> 错误在合约中的任何地方都可以使用
+<code>revert OwnableUnauthorizedAccount(account);</code> 来抛出，其中
+<code>account</code>
+参数会被传递给错误。在代码中，当一个未授权的账户尝试执行某些只能由所有者执行的操作时，可以抛出这个错误。</p>
+<pre class="sol"><code>/**
+     * @dev The owner is not a valid owner account. (eg. `address(0)`)
+     */
+    error OwnableInvalidOwner(address owner);
+
+    event OwnershipTransferred(address indexed previousOwner, address indexed newOwner);</code></pre>
+<p>这段代码继续定义了 <code>Ownable</code>
+合约的两个要素：一个自定义错误 <code>OwnableInvalidOwner</code>
+和一个事件 <code>OwnershipTransferred</code>。</p>
+<ul>
+<li><p><code>OwnableInvalidOwner</code>
+是一个自定义错误，用于处理所有者账户无效的情况，例如所有者账户地址为
+<code>address(0)</code>。在 Solidity 中，<code>address(0)</code>
+通常被视为无效地址，因为它是地址空间的默认值。这个错误在合约的
+<code>transferOwnership</code> 函数中会被用到，如果尝试将所有权转移给
+<code>address(0)</code>，则会抛出这个错误。</p></li>
+<li><p><code>OwnershipTransferred</code>
+是一个事件，它在所有权从一个账户转移给另一个账户时被触发。在 Solidity
+中，事件主要用于在区块链上记录特定的状态改变，这些记录在以太坊区块链上是永久存储的。<code>OwnershipTransferred</code>
+事件接受两个参数：<code>previousOwner</code> 和
+<code>newOwner</code>，表示所有权的转移关系。这两个参数都使用了
+<code>indexed</code>
+关键字，这意味着这些参数在记录事件时被索引，以便在搜索和过滤事件时使用。</p></li>
+</ul>
+<pre class="sol"><code> /**
+     * @dev Initializes the contract setting the address provided by the deployer as the initial owner.
+     */
+    constructor(address initialOwner) {
+        _transferOwnership(initialOwner);
+    }</code></pre>
+<p>这段代码定义了 <code>Ownable</code> 合约的构造函数。在 Solidity
+中，构造函数是一个特殊的函数，它在合约被部署（创建）时被执行，且只执行一次。</p>
+<p><code>constructor</code> 函数接收一个 <code>address</code> 类型的参数
+<code>initialOwner</code>，该参数预期是合约的初始所有者的地址。函数体中调用了
+<code>_transferOwnership</code> 函数，将合约的所有权转移给
+<code>initialOwner</code>。</p>
+<p>这意味着，当 <code>Ownable</code>
+合约被部署时，部署者需要提供一个地址作为初始所有者。这个地址就会成为合约的所有者，能够调用合约中被
+<code>onlyOwner</code> 修饰符修饰的函数。在此后，所有权可以通过
+<code>transferOwnership</code> 函数进行更改。</p>
+<pre class="sol"><code>/**
+     * @dev Throws if called by any account other than the owner.
+     */
+    modifier onlyOwner() {
+        _checkOwner();
+        _;
+    }</code></pre>
+<p>这段代码定义了一个名为 <code>onlyOwner</code> 的修饰符。在 Solidity
+中，修饰符是一种特殊的函数，它可以被用于修改其他函数的行为。当一个函数被一个修饰符修饰时，修饰符的代码将在函数的代码之前（有时也可能是之后）执行。</p>
+<p>在这个 <code>onlyOwner</code> 修饰符中，首先调用了
+<code>_checkOwner</code> 函数。<code>_checkOwner</code>
+函数的预期行为应该是检查当前的交易发送者是否为合约的所有者，如果不是，则抛出错误。这样，当一个函数被
+<code>onlyOwner</code>
+修饰符修饰时，如果这个函数被非所有者调用，则会因为
+<code>_checkOwner</code> 函数的错误抛出而终止执行。</p>
+<p>符号 <code>_</code> 在修饰符中代表被修饰的函数的代码。在执行到
+<code>_</code>
+时，控制权会转到被修饰的函数的代码，然后在被修饰的函数代码执行完毕后返回修饰符。在这个
+<code>onlyOwner</code> 修饰符中，<code>_</code>
+后面没有其他代码，因此被修饰的函数执行完毕后，<code>onlyOwner</code>
+修饰符也就执行完毕。</p>
+<p>这个 <code>onlyOwner</code>
+修饰符可以被用于限制只有合约的所有者才能调用的函数。例如，<code>transferOwnership</code>
+和 <code>renounceOwnership</code> 函数可能会被 <code>onlyOwner</code>
+修饰，以保证只有当前所有者才能转移或放弃所有权。</p>
+<pre class="sol"><code> /**
+     * @dev Returns the address of the current owner.
+     */
+    function owner() public view virtual returns (address) {
+        return _owner;
+    }</code></pre>
+<p>这段代码定义了一个名为 <code>owner</code>
+的公开函数，它返回当前合约的所有者地址。</p>
+<p>在 Solidity 中，函数的可见性可以是
+<code>public</code>、<code>private</code>、<code>internal</code> 或
+<code>external</code>。<code>public</code>
+表示该函数可以在合约内部或外部被调用。</p>
+<p><code>view</code>
+是一个关键字，表示该函数不会修改合约的状态，只会读取状态。这意味着，调用这个
+<code>owner</code> 函数不会消耗任何
+Gas，因为它不会改变区块链上的任何数据。</p>
+<p><code>virtual</code>
+关键字表明该函数可以在派生合约中被重写。也就是说，任何继承了
+<code>Ownable</code> 合约的合约都可以提供自己的 <code>owner</code>
+函数实现。</p>
+<p>该函数返回的是
+<code>_owner</code>，这是一个在合约中定义的私有变量，存储的是当前合约的所有者地址。当你调用这个
+<code>owner</code> 函数时，就可以获取到当前合约的所有者是谁。</p>
+<pre class="sol"><code>function _checkOwner() internal view virtual {
+        if (owner() != _msgSender()) {
+            revert OwnableUnauthorizedAccount(_msgSender());
+        }
+    }
+</code></pre>
+<p>这段代码定义了一个名为 <code>_checkOwner</code>
+的内部函数，它的作用是检查当前交易的发送者是否为合约的所有者。</p>
+<p>该函数首先调用 <code>owner</code> 函数获取当前的所有者，然后调用
+<code>_msgSender</code>
+函数获取当前交易的发送者，然后比较这两个地址是否相等。如果不相等，表示当前的交易发送者不是所有者，然后函数通过
+<code>revert</code> 语句抛出一个 <code>OwnableUnauthorizedAccount</code>
+错误，并将当前交易的发送者地址传递给错误。</p>
+<p>通常来说，这个函数以 <code>_</code> 开头，按照 Solidity
+的命名习惯，这通常表示这个函数是一个内部函数，不应该在合约外部被直接调用。</p>
+<pre class="sol"><code> /**
+     * @dev Leaves the contract without owner. It will not be possible to call
+     * `onlyOwner` functions. Can only be called by the current owner.
+     *
+     * NOTE: Renouncing ownership will leave the contract without an owner,
+     * thereby disabling any functionality that is only available to the owner.
+     */
+    function renounceOwnership() public virtual onlyOwner {
+        _transferOwnership(address(0));
+    }</code></pre>
+<p>这段代码定义了一个名为 <code>renounceOwnership</code>
+的公开函数，这个函数允许当前的合约所有者放弃所有权。</p>
+<p>函数被 <code>onlyOwner</code>
+修饰符修饰，表示只有合约的所有者才能调用这个函数。如果非所有者尝试调用这个函数，<code>onlyOwner</code>
+修饰符将抛出一个错误。</p>
+<p>函数体中调用了 <code>_transferOwnership</code> 函数，并向其传递了
+<code>address(0)</code> 作为参数。<code>_transferOwnership</code>
+函数预期会实现所有权的实际转移，并触发一个
+<code>OwnershipTransferred</code> 事件。通过将所有权转移给
+<code>address(0)</code>，实际上就是使合约无主，也就是放弃所有权。</p>
+<p>需要注意的是，一旦所有权被放弃，就无法再调用被 <code>onlyOwner</code>
+修饰符修饰的函数，因为没有账户会满足这个修饰符的所有者条件。因此，使用这个
+<code>renounceOwnership</code>
+函数需要谨慎，因为它可能会禁用合约的部分功能。</p>
+<pre class="sol"><code>/**
+     * @dev Transfers ownership of the contract to a new account (`newOwner`).
+     * Can only be called by the current owner.
+     */
+    function transferOwnership(address newOwner) public virtual onlyOwner {
+        if (newOwner == address(0)) {
+            revert OwnableInvalidOwner(address(0));
+        }
+        _transferOwnership(newOwner);
+    }</code></pre>
+<p>这段代码定义了一个名为 <code>transferOwnership</code>
+的公开函数，这个函数用于将合约的所有权转移给新的所有者。</p>
+<p><code>transferOwnership</code> 函数接收一个 <code>address</code>
+类型的参数 <code>newOwner</code>，表示新的所有者的地址。</p>
+<p>这个函数被 <code>onlyOwner</code>
+修饰符修饰，表示只有合约的当前所有者才能调用这个函数。</p>
+<p>在函数体中，首先检查 <code>newOwner</code> 是否为
+<code>address(0)</code>，如果是，则通过 <code>revert</code> 语句抛出一个
+<code>OwnableInvalidOwner</code> 错误，并传递 <code>address(0)</code>
+给错误。这是因为在 Solidity 中，<code>address(0)</code>
+通常被视为无效地址，因为它是地址空间的默认值。</p>
+<p>然后，函数调用 <code>_transferOwnership</code> 函数，将所有权转移给
+<code>newOwner</code>。<code>_transferOwnership</code>
+函数预期会实现所有权的实际转移，并触发一个
+<code>OwnershipTransferred</code> 事件。</p>
+<p>这个 <code>transferOwnership</code>
+函数可以用于在必要时更改合约的所有者。例如，如果原所有者失去了私钥，或者由于某种原因需要将所有权交给其他人，就可以通过这个函数完成。</p>
+<pre class="sol"><code>/**
+     * @dev Transfers ownership of the contract to a new account (`newOwner`).
+     * Internal function without access restriction.
+     */
+    function _transferOwnership(address newOwner) internal virtual {
+        address oldOwner = _owner;
+        _owner = newOwner;
+        emit OwnershipTransferred(oldOwner, newOwner);
+    }</code></pre>
+<p>这段代码定义了一个名为 <code>_transferOwnership</code>
+的内部函数，这个函数用于将合约的所有权转移给新的所有者。</p>
+<p><code>_transferOwnership</code> 函数接收一个 <code>address</code>
+类型的参数 <code>newOwner</code>，表示新的所有者的地址。</p>
+<p>在函数体中，首先将 <code>_owner</code>（当前的所有者地址）保存到
+<code>oldOwner</code> 中，然后将 <code>_owner</code> 设置为
+<code>newOwner</code>，从而完成所有权的实际转移。</p>
+<p>然后，函数触发一个 <code>OwnershipTransferred</code> 事件，并传递
+<code>oldOwner</code> 和 <code>newOwner</code>
+给事件。这个事件可以被外部监听器用于监视所有权的变更。</p>
+<p>这个函数是一个内部函数，按照 Solidity 的命名习惯，它以 <code>_</code>
+开头，表示这个函数不应该在合约外部被直接调用。而是应该通过其他函数（例如
+<code>transferOwnership</code> 和
+<code>renounceOwnership</code>）间接调用。</p>
+
+    </div>
+    
+    
+    
+    
+    <div id="comment">
+        <div id="giscus-container" class="giscus"></div>
+    </div>
+    
+    
+    
+    
+</div>
+
+                    <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2022 - 2023 w33d&#39;s blog
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;last emo boy
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
+</footer>
+
+                </div>
+            </transition>
+            
+            <transition name="fade">
+                <div id="preview" ref="preview" v-show="previewShow">
+                    <img id="preview-content" ref="previewContent" />
+                </div>
+            </transition>
+            
+            <canvas id="fireworks" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 32767"></canvas>
+            <script src="https://cdn.staticfile.org/animejs/3.2.1/anime.min.js"></script>
+            <script src="/js/fireworks.min.js"></script>
+        </div>
+        <script src="/js/main.js"></script>
+        
+        
+<script
+    src="https://giscus.app/client.js"
+    data-repo="Last-emo-boy/Last-emo-boy.github.io"
+    data-repo-id="R_kgDOJz19bw"
+    data-category="Announcements"
+    data-category-id="DIC_kwDOJz19b84CXd_Q"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="top"
+    data-theme="preferred_color_scheme"
+    data-lang="zh-CN"
+    crossorigin
+    async
+></script>
+
+
+
+
+
+        
+    </body>
+</html>
