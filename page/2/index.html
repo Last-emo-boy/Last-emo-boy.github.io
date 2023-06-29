@@ -276,6 +276,58 @@ mjx-container[display="true"] + br {
         
 
 <div class="post">
+    <a href="/2023/06/26/Code-review-Openzeppelin-AccessControlEnumerable/">
+        <h2 class="post-title">Code review: Openzeppelin-AccessControlEnumerable</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/6/26
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <h1 id="概述">概述：</h1>
+<p>合约的作用是扩展了 OpenZeppelin Contracts
+中的访问控制合约（<code>AccessControl</code>），使其具备了角色成员的枚举功能。具体而言，该合约提供了以下功能：</p>
+<ol type="1">
+<li>支持枚举角色成员：可以根据角色获取具有该角色的账户列表，以及获取角色成员的数量。</li>
+<li>重写了 <code>supportsInterface</code> 函数，使合约能够判断是否支持
+<code>IAccessControlEnumerable</code> 接口。</li>
+<li>重写了 <code>_grantRole</code> 和 <code>_revokeRole</code>
+函数，用于在授予和撤销角色时更新角色成员的地址集合。</li>
+</ol>
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/Solidity/" style="color: #ff7d73">Solidity</a>
+        </span>
+        
+        <span class="tag">
+            
+            <a href="/tags/Coding/" style="color: #03a9f4">Coding</a>
+        </span>
+        
+    </div>
+    <a href="/2023/06/26/Code-review-Openzeppelin-AccessControlEnumerable/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
     <a href="/2023/06/26/Code-review-Openzeppelin-AccessControlDefaultAdminRules/">
         <h2 class="post-title">Code review: Openzeppelin - AccessControlDefaultAdminRules</h2>
     </a>
@@ -312,7 +364,7 @@ mjx-container[display="true"] + br {
         
         <span class="tag">
             
-            <a href="/tags/Coding/" style="color: #ff7d73">Coding</a>
+            <a href="/tags/Coding/" style="color: #00bcd4">Coding</a>
         </span>
         
     </div>
@@ -353,12 +405,12 @@ pieces.<br>
         
         <span class="tag">
             
-            <a href="/tags/AIGC/" style="color: #00bcd4">AIGC</a>
+            <a href="/tags/AIGC/" style="color: #ff7d73">AIGC</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/Art/" style="color: #ffa2c4">Art</a>
+            <a href="/tags/Art/" style="color: #ff7d73">Art</a>
         </span>
         
     </div>
@@ -400,12 +452,12 @@ OpenZeppelin Contracts 库中 <code>AccessControl</code> 和
         
         <span class="tag">
             
-            <a href="/tags/Solidity/" style="color: #03a9f4">Solidity</a>
+            <a href="/tags/Solidity/" style="color: #ff7d73">Solidity</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/Coding/" style="color: #00bcd4">Coding</a>
+            <a href="/tags/Coding/" style="color: #00a596">Coding</a>
         </span>
         
     </div>
@@ -449,7 +501,7 @@ OpenZeppelin Contracts 库中 <code>AccessControl</code> 和
         
         <span class="tag">
             
-            <a href="/tags/Coding/" style="color: #ff7d73">Coding</a>
+            <a href="/tags/Coding/" style="color: #00a596">Coding</a>
         </span>
         
     </div>
@@ -487,7 +539,7 @@ OpenZeppelin Contracts 库中 <code>AccessControl</code> 和
         
         <span class="tag">
             
-            <a href="/tags/Miscellanies/" style="color: #00bcd4">Miscellanies</a>
+            <a href="/tags/Miscellanies/" style="color: #ffa2c4">Miscellanies</a>
         </span>
         
     </div>
@@ -575,7 +627,7 @@ journey. XD!</p>
         
         <span class="tag">
             
-            <a href="/tags/Miscellanies/" style="color: #00a596">Miscellanies</a>
+            <a href="/tags/Miscellanies/" style="color: #03a9f4">Miscellanies</a>
         </span>
         
     </div>
