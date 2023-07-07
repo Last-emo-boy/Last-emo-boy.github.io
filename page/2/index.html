@@ -276,6 +276,69 @@ mjx-container[display="true"] + br {
         
 
 <div class="post">
+    <a href="/2023/06/26/Code-review-Openzeppelin-IAccessControlDefaultAdminRules/">
+        <h2 class="post-title">Code review: Openzeppelin-IAccessControlDefaultAdminRules</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/6/26
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <h1 id="概述">概述：</h1>
+<p>该合约代码定义了一个名为IAccessControlDefaultAdminRules的接口，用于管理访问控制和默认管理员角色的转移。它提供了以下功能：</p>
+<ol type="1">
+<li><p>管理默认管理员角色的转移：</p>
+<ul>
+<li>可以启动默认管理员角色的转移，并设置新的管理员地址和接受计划。</li>
+<li>可以取消尚未接受的管理员转移。</li>
+<li>可以完成管理员转移，将DEFAULT_ADMIN_ROLE授予调用者，并从之前的持有者中撤销该角色。</li>
+</ul></li>
+<li><p>管理默认管理员角色转移的延迟：</p>
+<ul>
+<li>可以设置默认管理员转移的延迟时间。</li>
+<li>可以取消预定的延迟更改。</li>
+<li>可以查询当前的默认管理员转移延迟时间和预定的延迟更改。</li>
+</ul></li>
+<li><p>提供事件以便监控默认管理员角色和延迟更改的状态：</p>
+<ul>
+<li>可以监听默认管理员转移和延迟更改的开始、取消和完成事件。</li>
+</ul></li>
+</ol>
+<p>这个接口为访问控制合约提供了一些附加的管理功能，使得在系统中转移默认管理员角色更加灵活和可控。</p>
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/Solidity/" style="color: #ff7d73">Solidity</a>
+        </span>
+        
+        <span class="tag">
+            
+            <a href="/tags/Coding/" style="color: #00bcd4">Coding</a>
+        </span>
+        
+    </div>
+    <a href="/2023/06/26/Code-review-Openzeppelin-IAccessControlDefaultAdminRules/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
     <a href="/2023/06/26/Code-review-Openzeppelin-IAccessControl/">
         <h2 class="post-title">Code review: Openzeppelin-IAccessControl</h2>
     </a>
@@ -312,12 +375,12 @@ mjx-container[display="true"] + br {
         
         <span class="tag">
             
-            <a href="/tags/Solidity/" style="color: #ff7d73">Solidity</a>
+            <a href="/tags/Solidity/" style="color: #00bcd4">Solidity</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/Coding/" style="color: #00bcd4">Coding</a>
+            <a href="/tags/Coding/" style="color: #ff7d73">Coding</a>
         </span>
         
     </div>
@@ -364,7 +427,7 @@ mjx-container[display="true"] + br {
         
         <span class="tag">
             
-            <a href="/tags/Solidity/" style="color: #03a9f4">Solidity</a>
+            <a href="/tags/Solidity/" style="color: #00a596">Solidity</a>
         </span>
         
         <span class="tag">
@@ -454,7 +517,7 @@ pieces.<br>
         
         <span class="tag">
             
-            <a href="/tags/AIGC/" style="color: #00bcd4">AIGC</a>
+            <a href="/tags/AIGC/" style="color: #03a9f4">AIGC</a>
         </span>
         
         <span class="tag">
@@ -506,7 +569,7 @@ OpenZeppelin Contracts 库中 <code>AccessControl</code> 和
         
         <span class="tag">
             
-            <a href="/tags/Coding/" style="color: #03a9f4">Coding</a>
+            <a href="/tags/Coding/" style="color: #ffa2c4">Coding</a>
         </span>
         
     </div>
@@ -550,7 +613,7 @@ OpenZeppelin Contracts 库中 <code>AccessControl</code> 和
         
         <span class="tag">
             
-            <a href="/tags/Coding/" style="color: #ffa2c4">Coding</a>
+            <a href="/tags/Coding/" style="color: #00a596">Coding</a>
         </span>
         
     </div>
@@ -588,7 +651,7 @@ OpenZeppelin Contracts 库中 <code>AccessControl</code> 和
         
         <span class="tag">
             
-            <a href="/tags/Miscellanies/" style="color: #00bcd4">Miscellanies</a>
+            <a href="/tags/Miscellanies/" style="color: #03a9f4">Miscellanies</a>
         </span>
         
     </div>
@@ -629,7 +692,7 @@ definitive answer. Alas, the futile charade of self-delusion.</p>
         
         <span class="tag">
             
-            <a href="/tags/Miscellanies/" style="color: #ff7d73">Miscellanies</a>
+            <a href="/tags/Miscellanies/" style="color: #00bcd4">Miscellanies</a>
         </span>
         
     </div>
@@ -676,7 +739,7 @@ journey. XD!</p>
         
         <span class="tag">
             
-            <a href="/tags/Miscellanies/" style="color: #03a9f4">Miscellanies</a>
+            <a href="/tags/Miscellanies/" style="color: #ffa2c4">Miscellanies</a>
         </span>
         
     </div>
