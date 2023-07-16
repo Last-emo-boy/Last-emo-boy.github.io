@@ -3,7 +3,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8" />
-        <title>Hello World | w33d&#39;s blog</title>
+        <title>w33d&#39;s blog</title>
         <meta name="author" content="last emo boy" />
         <meta name="description" content="Harbor for the last emo boy" />
         <meta name="keywords" content="" />
@@ -32,9 +32,7 @@
 
 
 
-
-
-
+<script src="/js/lib/home.js"></script>
 
 <link rel="stylesheet" href="/css/main.css" />
 
@@ -257,11 +255,32 @@ mjx-container[display="true"] + br {
 
             <transition name="into">
                 <div id="main" v-show="!loading">
-                    <div class="article">
-    <div>
-        <h1>Hello World</h1>
+                    <div id="home-head">
+    <div id="home-background" ref="homeBackground" data-images="/images/Quotefancy-1560504-3840x2160.jpg,/images/Quotefancy-1700728-3840x2160.jpg,/images/Quotefancy-5955-3840x2160.jpg,/images/Quotefancy-757-3840x2160.jpg,/images/Quotefancy-5703-3840x2160.jpg,/images/Quotefancy-2602-3840x2160.jpg,/images/Quotefancy-6361138-3840x2160.jpg,/images/Quotefancy-5801-3840x2160.jpg,/images/Quotefancy-856-3840x2160.jpg,/images/Quotefancy-21136-3840x2160.jpg,/images/Quotefancy-21296-3840x2160.jpg,/images/Quotefancy-6361218-3840x2160.jpg,/images/Quotefancy-16689-3840x2160.jpg,/images/Quotefancy-21095-3840x2160.jpg,/images/Quotefancy-21051-3840x2160.jpg,/images/Quotefancy-21531-3840x2160.jpg,/images/Quotefancy-2001790-3840x2160.jpg,/images/Quotefancy-2014-3840x2160.jpg,/images/Quotefancy-1927-3840x2160.jpg,/images/Quotefancy-2249-3840x2160.jpg,/images/Quotefancy-2078-3840x2160.jpg"></div>
+    <div id="home-info" @click="homeClick">
+        <span class="loop"></span>
+        <span class="loop"></span>
+        <span class="loop"></span>
+        <span class="loop"></span>
+        <span class="info">
+            <div class="wrap">
+                <h1>w33d&#39;s blog</h1>
+                <h3></h3>
+                <h5>Harbor for the last emo boy</h5>
+            </div>
+        </span>
     </div>
-    <div class="info">
+</div>
+<div id="home-posts-wrap" true ref="homePostsWrap">
+    <div id="home-posts">
+        
+
+<div class="post">
+    <a href="/2023/06/25/Hello-World-0/">
+        <h2 class="post-title">Hello World</h2>
+    </a>
+    <div class="category-and-date">
+        
         <span class="date">
             <span class="icon">
                 <i class="fa-solid fa-calendar fa-fw"></i>
@@ -270,22 +289,11 @@ mjx-container[display="true"] + br {
         </span>
         
         
-        <span class="tags">
-            <span class="icon">
-                <i class="fa-solid fa-tags fa-fw"></i>
-            </span>
-            
-            <span class="tag">
-                
-                <a href="/tags/Miscellanies/" style="color: #ffa2c4">Miscellanies</a>
-            </span>
-            
-        </span>
-        
     </div>
-    
-    <div class="content" v-pre>
-        <p>Behold the inaugural dispatch from me, (or as I'm known in other
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <p>Behold the inaugural dispatch from me, (or as I'm known in other
 circles, w33d, the last emo boy). As the future unfurls its uncertain
 scroll, updates shall materialize in synchronicity with destiny. I shall
 pen down an array of personal minutiae, musings on the art of
@@ -295,17 +303,82 @@ thoughts.</p>
 <p>Do remember to cast your subscription, lest you miss our shared
 journey. XD!</p>
 
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/Miscellanies/" style="color: #ff7d73">Miscellanies</a>
+        </span>
+        
+    </div>
+    <a href="/2023/06/25/Hello-World-0/" class="go-post">阅读全文</a>
+</div>
+
+
+        <div class="page-current">
+    <div class="prev">
+        
+        <a class="page-num" href="/page/2/">
+            <i class="fa-solid fa-caret-left fa-fw"></i>
+        </a>
+        
+    </div>
+    <div class="page-index">
+        
+        <span>
+            
+            
+            
+            <a class="page-num" href="/">1</a>
+            
+            
+            
+            <a class="page-num" href="/page/2/">2</a>
+        </span>
+        
+        <span class="current">3</span>
+        
+    </div>
+    <div class="next">
+        
+    </div>
+</div>
+
     </div>
     
-    
-    
-    
-    <div id="comment">
-        <div id="giscus-container" class="giscus"></div>
+    <div id="home-card">
+        <div id="card-div">
+    <div class="card-style">
+        <div class="avatar">
+            <img src="/images/avatar.png" alt="avatar" />
+        </div>
+        <div class="name">last emo boy</div>
+        <div class="description">
+            <p>A Foolishly Obstinate Individual</p>
+
+        </div>
+        
+        
+        <div class="friend-links">
+            
+            <div class="friend-link">
+                <a target="_blank" rel="noopener" href="https://github.com/Last-emo-boy/">My Github</a>
+            </div>
+            
+        </div>
+        
     </div>
-    
-    
-    
+</div>
+
+    </div>
     
 </div>
 
@@ -341,29 +414,6 @@ journey. XD!</p>
             <script src="/js/fireworks.min.js"></script>
         </div>
         <script src="/js/main.js"></script>
-        
-        
-<script
-    src="https://giscus.app/client.js"
-    data-repo="Last-emo-boy/Last-emo-boy.github.io"
-    data-repo-id="R_kgDOJz19bw"
-    data-category="Announcements"
-    data-category-id="DIC_kwDOJz19b84CXd_Q"
-    data-mapping="pathname"
-    data-strict="0"
-    data-reactions-enabled="1"
-    data-emit-metadata="0"
-    data-input-position="top"
-    data-theme="preferred_color_scheme"
-    data-lang="zh-CN"
-    crossorigin
-    async
-></script>
-
-
-
-
-
         
     </body>
 </html>
