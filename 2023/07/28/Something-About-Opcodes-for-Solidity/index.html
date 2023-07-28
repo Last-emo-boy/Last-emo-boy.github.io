@@ -277,12 +277,12 @@ mjx-container[display="true"] + br {
             
             <span class="tag">
                 
-                <a href="/tags/Solidity/" style="color: #00bcd4">Solidity</a>
+                <a href="/tags/Solidity/" style="color: #ffa2c4">Solidity</a>
             </span>
             
             <span class="tag">
                 
-                <a href="/tags/Coding/" style="color: #00a596">Coding</a>
+                <a href="/tags/Coding/" style="color: #03a9f4">Coding</a>
             </span>
             
         </span>
@@ -548,7 +548,6 @@ contract Adder {
     }
 }</code></pre>
 <p>在优化后的函数中，我们使用了汇编代码来执行加法操作，这样可以避免一些Solidity的开销。</p>
-<p>当然，更高级的优化技巧通常涉及到底层的EVM实现，以及对以太坊协议的深入理解。以下是一些更复杂的优化策略：</p>
 <ol start="4" type="1">
 <li><strong>利用存储布局</strong>：以太坊的存储是按照256位字（word）组织的，这意味着在一个存储位置可以存储256位的信息。因此，通过精心设计数据结构，可以使多个较小的状态变量共享同一个存储位置，从而减少SSTORE和SLOAD操作的次数。</li>
 </ol>
