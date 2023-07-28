@@ -1,0 +1,665 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Something About Opcodes for Solidity | w33d&#39;s blog</title>
+        <meta name="author" content="last emo boy" />
+        <meta name="description" content="Harbor for the last emo boy" />
+        <meta name="keywords" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+        <link rel="icon" href="/images/avatar.png" />
+        <script src="https://cdn.staticfile.org/vue/3.2.47/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.3.0/css/all.min.css" />
+<link rel="stylesheet" href="/css/fonts.min.css" />
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+
+
+<script src="https://cdn.staticfile.org/highlight.js/11.7.0/highlight.min.js"></script>
+<link
+    rel="stylesheet"
+    href="https://cdn.staticfile.org/highlight.js/11.7.0/styles/obsidian.min.css"
+/>
+<script src="/js/lib/highlight.js"></script>
+
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+    <meta name="generator" content="Hexo 6.3.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
+    <body>
+        <div id="layout">
+            <transition name="fade">
+                <div id="loading" v-show="loading">
+                    <div id="loading-circle">
+                        <h2>LOADING</h2>
+                        <p>加载过慢请开启缓存 浏览器默认开启</p>
+                        <img src="/images/loading.gif" />
+                    </div>
+                </div>
+            </transition>
+            <nav id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <div id="desktop-menu">
+        <a class="title" href="/">
+            <span>W33D&#39;S BLOG</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;Home</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;About</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;Archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;Categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;Tags</span>
+        </a>
+        
+    </div>
+    <div id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;W33D&#39;S BLOG</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </div>
+</nav>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+            <transition name="into">
+                <div id="main" v-show="!loading">
+                    <div class="article">
+    <div>
+        <h1>Something About Opcodes for Solidity</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/7/28
+        </span>
+        
+        
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/Solidity/" style="color: #00bcd4">Solidity</a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/Coding/" style="color: #00a596">Coding</a>
+            </span>
+            
+        </span>
+        
+    </div>
+    
+    <div class="content" v-pre>
+        <h2 id="solidity中的opcode一份详细教程">Solidity中的Opcode：一份详细教程</h2>
+<p>Solidity是以太坊智能合约的主要编程语言。当你在Solidity中编写智能合约并部署到以太坊网络时，Solidity编译器会将你的源代码编译成EVM（以太坊虚拟机）能理解的字节码。这个字节码就是由一系列的Opcode（操作码）组成。</p>
+<span id="more"></span>
+<p>Opcode（操作码）是一种低级语言，每一种Opcode都有特定的指令，例如，添加（ADD），乘法（MUL），跳转（JUMP）等等。EVM会按照这些Opcode来执行智能合约的逻辑。</p>
+<h3 id="示例简单的加法操作">示例：简单的加法操作</h3>
+<p>让我们从一个非常简单的例子开始，一个加法操作。以下是一个Solidity智能合约的示例，它有一个函数add，接收两个参数并返回它们的和：</p>
+<pre class="solidity"><code>// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.6;
+
+contract Adder {
+    function add(uint256 a, uint256 b) public pure returns (uint256) {
+        return a + b;
+    }
+}</code></pre>
+<p>当我们将这个智能合约编译并查看生成的字节码，我们会看到一系列的Opcode，例如：</p>
+<pre><code>PUSH1 0x60 PUSH1 0x40 MSTORE CALLVALUE DUP1 ISZERO PUSH2 0x10 JUMPI PUSH1 0x0 DUP1 REVERT JUMPDEST POP PUSH2 0x1E JUMP JUMPDEST STOP JUMPDEST PUSH1 0x2 SLOAD ...</code></pre>
+<p>这些Opcode在EVM中的执行会根据它们的指令完成相应的操作。例如，PUSH1操作会将接下来的字节（0x60）推送到栈中，MSTORE操作会将栈顶的两个元素出栈，并将第二个元素存储到由第一个元素指定的内存地址中。</p>
+<p>我们的关注点在于实现加法操作的那部分Opcode，它看起来像这样：</p>
+<pre><code>PUSH1 0x2 SLOAD PUSH1 0x3 SLOAD ADD</code></pre>
+<p>这段Opcode实现了add函数的功能。让我们逐一解释这些操作：</p>
+<ul>
+<li><code>PUSH1 0x2</code>：将0x2（也就是2）推送到栈中。</li>
+<li><code>SLOAD</code>：从存储位置加载一个字，该位置由栈顶的元素指定，并将结果推送到栈顶。这里，它会加载参数a的值。</li>
+<li><code>PUSH1 0x3</code>：将0x3（也就是3）推送到栈中。</li>
+<li><code>SLOAD</code>：同样的，加载参数b的值。</li>
+<li><code>ADD</code>：从栈顶弹出两个元素，将它们相加，并将结果推送回栈顶。这里，它实现了a和b的加法操作。</li>
+</ul>
+<p>理解并利用Solidity中的Opcode可以带来很多好处，比如：</p>
+<ol type="1">
+<li><p><strong>更好的理解合约行为</strong>：虽然Solidity是一个相对易于理解和使用的高级语言，但是在某些情况下，直接查看合约的Opcode可以提供更深入的理解。例如，通过查看Opcode，你可以更好地理解合约是如何处理数据和执行操作的，例如数据存储、函数调用和算术运算等。</p></li>
+<li><p><strong>优化Gas消耗</strong>：在以太坊中，每种Opcode都有对应的Gas消耗。通过理解各种Opcode的Gas消耗，你可以更好地优化合约的Gas消耗。例如，你可以选择使用消耗较少Gas的Opcode，或者减少某些不必要的操作。</p></li>
+<li><p><strong>安全性审计</strong>：理解Opcode也对合约的安全性审计非常有帮助。通过查看Opcode，你可以检查合约是否包含任何潜在的安全漏洞，例如重入攻击、整数溢出和未初始化的存储指针等。</p></li>
+<li><p><strong>调试和故障排查</strong>：当智能合约出现问题时，查看和理解Opcode可以帮助你找到问题的根源。虽然Solidity提供了很好的错误处理和调试工具，但是在某些复杂的情况下，直接查看Opcode可能更有帮助。</p></li>
+<li><p><strong>合约验证</strong>：在某些情况下，你可能需要验证一个合约的源代码。通过比较源代码编译出的Opcode和链上合约的Opcode，你可以验证这两者是否一致。</p></li>
+</ol>
+<p>基于以太坊黄皮书和EIP-150，EIP-160，EIP-170等Ethereum Improvement
+Proposals的内容，我们可以查阅到以下EVM Opcode的Gas消耗：</p>
+<table>
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Opcode</th>
+<th>Gas消耗</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>ADD</td>
+<td>3</td>
+<td>加法运算</td>
+</tr>
+<tr class="even">
+<td>MUL</td>
+<td>5</td>
+<td>乘法运算</td>
+</tr>
+<tr class="odd">
+<td>SUB</td>
+<td>3</td>
+<td>减法运算</td>
+</tr>
+<tr class="even">
+<td>DIV</td>
+<td>5</td>
+<td>除法运算</td>
+</tr>
+<tr class="odd">
+<td>SLOAD</td>
+<td>800</td>
+<td>从存储位置加载一个字</td>
+</tr>
+<tr class="even">
+<td>SSTORE</td>
+<td>20000/5000</td>
+<td>向存储位置存储一个字，如果存储位置的原值为0，则消耗20000
+Gas，否则消耗5000 Gas</td>
+</tr>
+<tr class="odd">
+<td>JUMP</td>
+<td>8</td>
+<td>无条件跳转</td>
+</tr>
+<tr class="even">
+<td>JUMPI</td>
+<td>10</td>
+<td>条件跳转</td>
+</tr>
+<tr class="odd">
+<td>PUSH</td>
+<td>3</td>
+<td>将一个字节数据推入栈顶</td>
+</tr>
+<tr class="even">
+<td>POP</td>
+<td>2</td>
+<td>弹出栈顶的一个字节数据</td>
+</tr>
+<tr class="odd">
+<td>CALL</td>
+<td>700</td>
+<td>执行消息调用</td>
+</tr>
+<tr class="even">
+<td>RETURN</td>
+<td>0</td>
+<td>停止执行并返回数据</td>
+</tr>
+<tr class="odd">
+<td>REVERT</td>
+<td>0</td>
+<td>停止执行并撤销所有的状态改变</td>
+</tr>
+<tr class="even">
+<td>SELFDESTRUCT</td>
+<td>5000</td>
+<td>销毁合约，并将合约的余额发送到指定地址</td>
+</tr>
+<tr class="odd">
+<td>CREATE</td>
+<td>32000</td>
+<td>创建一个新的合约</td>
+</tr>
+<tr class="even">
+<td>CREATE2</td>
+<td>32000</td>
+<td>使用给定的盐值创建一个新的合约</td>
+</tr>
+</tbody>
+</table>
+<p>这些都是基础的Gas消耗，实际的Gas消耗可能会因为各种因素而变化。例如，如果一个操作导致了存储的改变，那么它可能会消耗更多的Gas。此外，对于SSTORE操作，如果它是将一个非零值变为零值，那么它还会退回一部分Gas。</p>
+<p>为了更好的理解，我们以一个简单的Solidity合约为例，该合约有一个函数<code>store</code>，用于在合约的存储中存储一个<code>uint256</code>值：</p>
+<pre class="solidity"><code>// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.6;
+
+contract SimpleStore {
+    uint256 public storedData;
+
+    function store(uint256 x) public {
+        storedData = x;
+    }
+}</code></pre>
+<p>当我们调用<code>store</code>函数时，合约需要执行以下操作：</p>
+<ol type="1">
+<li>接收输入值（x）</li>
+<li>将这个值存储到合约的存储中（即变量<code>storedData</code>）</li>
+</ol>
+<p>现在我们来计算这个操作的Gas消耗。在EVM中，每个操作都有对应的Opcode，每个Opcode都有对应的Gas消耗。以下是这个操作对应的Opcode和Gas消耗：</p>
+<ul>
+<li><code>PUSH1 0x0</code>：将0x0（也就是0）推送到栈中，消耗3 Gas。</li>
+<li><code>CALLDATALOAD</code>：从调用数据加载一个字（32字节），消耗3
+Gas。</li>
+<li><code>SSTORE</code>：向存储位置存储一个字，消耗20000
+Gas（如果存储位置的原值为0）或5000 Gas（如果存储位置的原值不为0）。</li>
+</ul>
+<p>所以，如果我们是第一次调用<code>store</code>函数（即变量<code>storedData</code>的原值为0），那么总的Gas消耗为：3
+Gas + 3 Gas + 20000 Gas = 20006
+Gas。如果我们已经调用过<code>store</code>函数（即变量<code>storedData</code>的原值不为0），那么总的Gas消耗为：3
+Gas + 3 Gas + 5000 Gas = 5006 Gas。</p>
+<p>以上是一个简单具体的例子，实际上，由于Solidity合约可能包含更复杂的逻辑和更多的操作，所以计算Gas消耗可能会更复杂。但是通过理解各种Opcode和它们的Gas消耗，你应该可以对Gas消耗有一个基本的理解，并能进行初步的优化。</p>
+<p>### Gas，Gwei，Gas Limit</p>
+<p>在以太坊中，执行智能合约的操作需要消耗Gas，Gas是衡量执行操作所需工作量的单位。每种操作，比如加法、数据存储等，都有固定的Gas消耗。但Gas本身并不是一种货币，你不能拥有或转移Gas。当你在以太坊上执行操作时，你需要为这些操作付费，付费的单位就是以太币（ETH）。你需要为每单位Gas支付一定数量的ETH，这就是Gas价格，通常以Gwei为单位。</p>
+<p><strong>Gwei</strong>是以太币的一个单位，1 ETH等于10<sup>9</sup>
+Gwei。在以太坊中，Gas价格通常以Gwei为单位，而不是ETH，这是因为Gwei比ETH更小，更适合表示小额的Gas价格。</p>
+<p><strong>Gas
+Limit</strong>是你愿意为一个操作或一笔交易支付的最大Gas数量。如果操作的实际Gas消耗超过了Gas
+Limit，那么操作会失败，已经消耗的Gas不会退还。如果操作的实际Gas消耗小于Gas
+Limit，那么剩余的Gas会退还给你。</p>
+<p>以太坊上的每个操作都有一个固定的Gas消耗，但Gas价格是变动的，取决于网络的拥堵程度。如果网络很拥堵，那么你可能需要支付更高的Gas价格，以使你的操作得到更快的处理。反之，如果网络不拥堵，那么你可以支付较低的Gas价格。</p>
+<p>理解Gas、Gas价格和Gas
+Limit对于使用以太坊和开发智能合约非常重要，因为它们直接影响到操作的执行速度和成本。</p>
+<p>### 简单的优化实践</p>
+<p>当然，这是一个很好的问题。在Solidity中，有许多基于Opcode的优化策略可以帮助我们减少Gas消耗。以下是一些常用的策略：</p>
+<ol type="1">
+<li><strong>减少状态变量的存储和读取操作</strong>：在EVM中，读取（SLOAD）和写入（SSTORE）状态变量的操作是非常昂贵的，分别消耗800
+Gas和5000或20000
+Gas。我们可以通过在函数内部使用内存变量，而不是直接操作状态变量，来减少这些操作的次数。</li>
+</ol>
+<p>例如，以下代码中的<code>increment</code>函数直接操作了状态变量<code>counter</code>：</p>
+<pre class="solidity"><code>// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.6;
+
+contract Counter {
+    uint256 public counter;
+
+    function increment(uint256 value) public {
+        for (uint256 i = 0; i &lt; value; i++) {
+            counter++;
+        }
+    }
+}</code></pre>
+<p>在这个函数中，每次循环都会进行一次SSTORE操作，消耗5000或20000
+Gas。我们可以通过以下方式优化它：</p>
+<pre class="solidity"><code>// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.6;
+
+contract Counter {
+    uint256 public counter;
+
+    function increment(uint256 value) public {
+        uint256 newCounter = counter;
+        for (uint256 i = 0; i &lt; value; i++) {
+            newCounter++;
+        }
+        counter = newCounter;
+    }
+}</code></pre>
+<p>在优化后的函数中，我们只进行了一次SLOAD操作和一次SSTORE操作，无论<code>value</code>的值是多少。</p>
+<ol start="2" type="1">
+<li><strong>使用位操作进行算术操作</strong>：有时，我们可以使用位操作来代替一些算术操作，因为位操作的Gas消耗通常比算术操作低。例如，我们可以使用左移操作（SHL）来代替乘法操作，使用右移操作（SHR）来代替除法操作。</li>
+</ol>
+<p>例如，以下代码中的<code>double</code>函数使用了乘法操作来将输入值乘以2：</p>
+<pre class="solidity"><code>// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.6;
+
+contract Doubler {
+    function double(uint256 x) public pure returns (uint256) {
+        return x * 2;
+    }
+}</code></pre>
+<p>我们可以通过以下方式优化它：</p>
+<pre class="solidity"><code>// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.6;
+
+contract Doubler {
+    function double(uint256 x) public pure returns (uint256) {
+        return x &lt;&lt; 1;
+    }
+}</code></pre>
+<p>在优化后的函数中，我们使用了左移操作来代替乘法操作，这样可以节省Gas。</p>
+<ol start="3" type="1">
+<li><strong>使用汇编代码</strong>：在某些情况下，我们可以直接使用汇编代码来进行更底层的优化。但请注意，使用汇编代码需要更高的技能和更多的注意力，因为它可能会增加代码的复杂性和出错的风险。</li>
+</ol>
+<p>例如，以下代码中的<code>add</code>函数使用了Solidity的语法来执行加法操作：</p>
+<pre class="solidity"><code>// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.6;
+
+contract Adder {
+    function add(uint256 a, uint256 b) public pure returns (uint256) {
+        return a + b;
+    }
+}</code></pre>
+<p>我们可以通过以下方式优化它：</p>
+<pre class="solidity"><code>// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.6;
+
+contract Adder {
+    function add(uint256 a, uint256 b) public pure returns (uint256 result) {
+        assembly {
+            result := add(a, b)
+        }
+    }
+}</code></pre>
+<p>在优化后的函数中，我们使用了汇编代码来执行加法操作，这样可以避免一些Solidity的开销。</p>
+<p>当然，更高级的优化技巧通常涉及到底层的EVM实现，以及对以太坊协议的深入理解。以下是一些更复杂的优化策略：</p>
+<ol start="4" type="1">
+<li><strong>利用存储布局</strong>：以太坊的存储是按照256位字（word）组织的，这意味着在一个存储位置可以存储256位的信息。因此，通过精心设计数据结构，可以使多个较小的状态变量共享同一个存储位置，从而减少SSTORE和SLOAD操作的次数。</li>
+</ol>
+<p>例如，以下代码中的<code>set</code>和<code>get</code>函数每次都需要两次SSTORE或SLOAD操作：</p>
+<pre class="solidity"><code>// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.6;
+
+contract Pair {
+    uint128 public x;
+    uint128 public y;
+
+    function set(uint128 _x, uint128 _y) public {
+        x = _x;
+        y = _y;
+    }
+
+    function get() public view returns (uint128, uint128) {
+        return (x, y);
+    }
+}</code></pre>
+<p>我们可以通过以下方式优化它：</p>
+<pre class="solidity"><code>// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.6;
+
+contract Pair {
+    uint256 public xy;
+
+    function set(uint128 _x, uint128 _y) public {
+        xy = (uint256(_x) &lt;&lt; 128) | _y;
+    }
+
+    function get() public view returns (uint128, uint128) {
+        uint128 x = uint128(xy &gt;&gt; 128);
+        uint128 y = uint128(xy);
+        return (x, y);
+    }
+}</code></pre>
+<p>在优化后的代码中，<code>x</code>和<code>y</code>共享同一个存储位置<code>xy</code>，<code>set</code>和<code>get</code>函数每次只需要一次SSTORE或SLOAD操作。</p>
+<ol start="5" type="1">
+<li><strong>利用固定和动态数组的性质</strong>：在Solidity中，固定长度数组和动态长度数组的实现是不同的，了解它们的实现可以帮助我们进行一些优化。例如，动态长度数组的长度是存储在数组的第一个存储位置的，所以如果我们知道数组的长度不会改变，使用固定长度数组可以避免一些不必要的SLOAD操作。</li>
+</ol>
+
+    </div>
+    
+    
+    
+    
+    <div id="comment">
+        <div id="giscus-container" class="giscus"></div>
+    </div>
+    
+    
+    
+    
+</div>
+
+                    <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2022 - 2023 w33d&#39;s blog
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;last emo boy
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
+</footer>
+
+                </div>
+            </transition>
+            
+            <transition name="fade">
+                <div id="preview" ref="preview" v-show="previewShow">
+                    <img id="preview-content" ref="previewContent" />
+                </div>
+            </transition>
+            
+            <canvas id="fireworks" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 32767"></canvas>
+            <script src="https://cdn.staticfile.org/animejs/3.2.1/anime.min.js"></script>
+            <script src="/js/fireworks.min.js"></script>
+        </div>
+        <script src="/js/main.js"></script>
+        
+        
+<script
+    src="https://giscus.app/client.js"
+    data-repo="Last-emo-boy/Last-emo-boy.github.io"
+    data-repo-id="R_kgDOJz19bw"
+    data-category="Announcements"
+    data-category-id="DIC_kwDOJz19b84CXd_Q"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="top"
+    data-theme="preferred_color_scheme"
+    data-lang="zh-CN"
+    crossorigin
+    async
+></script>
+
+
+
+
+
+        
+    </body>
+</html>
