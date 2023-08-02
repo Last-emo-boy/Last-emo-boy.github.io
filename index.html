@@ -276,6 +276,44 @@ mjx-container[display="true"] + br {
         
 
 <div class="post">
+    <a href="/2023/08/02/Something-About-PoS-Proof-of-storage/">
+        <h2 class="post-title">Something About PoS (Proof of storage)</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/8/2
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <p>PoST是一种用来验证存储提供者是否在一定时间内持续存储了用户的数据的机制。它可以保证用户的数据不会被丢失或损坏，也可以让用户随时检查数据的完整性。PoST的基本原理是，存储提供者需要定期向用户或者第三方验证者提供一些证明，证明他们仍然拥有用户的数据，并且没有修改或删除它们。</p>
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/Study/" style="color: #ffa2c4">Study</a>
+        </span>
+        
+    </div>
+    <a href="/2023/08/02/Something-About-PoS-Proof-of-storage/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
     <a href="/2023/08/02/About-PPS-Panic-Profit-Syndrome/">
         <h2 class="post-title">About PPS(Panic Profit Syndrome)</h2>
     </a>
@@ -311,7 +349,7 @@ mjx-container[display="true"] + br {
         
         <span class="tag">
             
-            <a href="/tags/Psychology/" style="color: #00a596">Psychology</a>
+            <a href="/tags/Psychology/" style="color: #00bcd4">Psychology</a>
         </span>
         
     </div>
@@ -350,12 +388,12 @@ mjx-container[display="true"] + br {
         
         <span class="tag">
             
-            <a href="/tags/Solidity/" style="color: #ffa2c4">Solidity</a>
+            <a href="/tags/Solidity/" style="color: #ff7d73">Solidity</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/Coding/" style="color: #00bcd4">Coding</a>
+            <a href="/tags/Coding/" style="color: #ffa2c4">Coding</a>
         </span>
         
     </div>
@@ -400,7 +438,7 @@ Out）的首字母缩略词，它反映的是一种根植于人性深处的心�
         
         <span class="tag">
             
-            <a href="/tags/Web3/" style="color: #03a9f4">Web3</a>
+            <a href="/tags/Web3/" style="color: #00a596">Web3</a>
         </span>
         
     </div>
@@ -439,7 +477,7 @@ Out）的首字母缩略词，它反映的是一种根植于人性深处的心�
         
         <span class="tag">
             
-            <a href="/tags/Solidity/" style="color: #00a596">Solidity</a>
+            <a href="/tags/Solidity/" style="color: #03a9f4">Solidity</a>
         </span>
         
         <span class="tag">
@@ -449,12 +487,12 @@ Out）的首字母缩略词，它反映的是一种根植于人性深处的心�
         
         <span class="tag">
             
-            <a href="/tags/Zkp/" style="color: #00bcd4">Zkp</a>
+            <a href="/tags/Zkp/" style="color: #ff7d73">Zkp</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/Cryptography/" style="color: #03a9f4">Cryptography</a>
+            <a href="/tags/Cryptography/" style="color: #00a596">Cryptography</a>
         </span>
         
     </div>
@@ -492,7 +530,7 @@ Out）的首字母缩略词，它反映的是一种根植于人性深处的心�
         
         <span class="tag">
             
-            <a href="/tags/Blockchain/" style="color: #00bcd4">Blockchain</a>
+            <a href="/tags/Blockchain/" style="color: #00a596">Blockchain</a>
         </span>
         
     </div>
@@ -535,7 +573,7 @@ Out）的首字母缩略词，它反映的是一种根植于人性深处的心�
         
         <span class="tag">
             
-            <a href="/tags/Tokenomics/" style="color: #ff7d73">Tokenomics</a>
+            <a href="/tags/Tokenomics/" style="color: #03a9f4">Tokenomics</a>
         </span>
         
     </div>
@@ -657,60 +695,11 @@ barrier separates them from him.</p>
         
         <span class="tag">
             
-            <a href="/tags/Miscellanies/" style="color: #03a9f4">Miscellanies</a>
+            <a href="/tags/Miscellanies/" style="color: #ff7d73">Miscellanies</a>
         </span>
         
     </div>
     <a href="/2023/06/28/%E4%B8%80%E4%B8%AA%E6%95%85%E4%BA%8B/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2023/06/28/Code-review-Openzeppelin-Ownable/">
-        <h2 class="post-title">Code review: Openzeppelin - Ownable</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2023/6/28
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <h1 id="概述">概述：</h1>
-<p>该合约名为
-"Ownable"，它提供了一种基本的访问控制机制，有一个账户（所有者）可以被赋予对特定功能的独家访问权。这个机制是通过继承来使用的，它会使得修饰符
-<code>onlyOwner</code>
-可用，该修饰符可以应用到你的函数上以限制他们的使用只能是所有者。</p>
-<p>初始的所有者设置为部署者提供的地址，后期可以通过
-<code>transferOwnership</code> 方法更改。</p>
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        <span class="icon">
-            <i class="fa-solid fa-tags fa-fw"></i>
-        </span>
-        
-        
-        <span class="tag">
-            
-            <a href="/tags/Solidity/" style="color: #ff7d73">Solidity</a>
-        </span>
-        
-        <span class="tag">
-            
-            <a href="/tags/Coding/" style="color: #00bcd4">Coding</a>
-        </span>
-        
-    </div>
-    <a href="/2023/06/28/Code-review-Openzeppelin-Ownable/" class="go-post">阅读全文</a>
 </div>
 
 
