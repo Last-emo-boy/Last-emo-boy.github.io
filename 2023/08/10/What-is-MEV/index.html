@@ -277,7 +277,7 @@ mjx-container[display="true"] + br {
             
             <span class="tag">
                 
-                <a href="/tags/Coding/" style="color: #00a596">Coding</a>
+                <a href="/tags/Coding/" style="color: #ff7d73">Coding</a>
             </span>
             
         </span>
@@ -303,7 +303,8 @@ MEV（最大可提取价值）。</p>
 200,000 DAI。如果 Alice 想用 10 ETH 购买
 DAI，则预期价格是由以下公式决定的：</p>
 <p>[<br>
-(1000 + 10) (y - ) = 1000 ,000]</p>
+(1000 + 10) (y - ) = 1000 ,000<br>
+]</p>
 <p>但是，Bob 看到了 Alice 的交易，并在 Alice 之前使用 9 ETH 购买
 DAI。因此，当 Alice 的交易被执行时，池的状态已经发生了变化，导致她得到的
 DAI 少于预期。</p>
@@ -312,7 +313,8 @@ DAI 少于预期。</p>
 <p>继续上面的例子，假设 Alice 决定卖掉 10,000 DAI 换取 ETH。她预期的 ETH
 数量由以下公式给出：</p>
 <p>[<br>
-(x - ) (200,000 + 10,000) = 1000 ,000]</p>
+(x - ) (200,000 + 10,000) = 1000 ,000<br>
+]</p>
 <p>但如果 Bob 看到了这个交易并在 Alice 之后迅速交易，他可以利用由 Alice
 的交易导致的价格变动来获得更多的利益。</p>
 <h4 id="夹带sandwiching三明治攻击">3. 夹带（Sandwiching）三明治攻击</h4>
@@ -325,7 +327,8 @@ ETH，从而从中获得利润。</p>
 <p>考虑以下公式，其中 ( x ) 和 ( y ) 分别是 Bob 和 Charlie
 的交易量：</p>
 <p>[<br>
-(x + x_1 + x_2) (y - y_1 - y_2) = k]</p>
+(x + x_1 + x_2) (y - y_1 - y_2) = k<br>
+]</p>
 <h4 id="审查censorship">4. 审查（Censorship）</h4>
 <p>简单说，就是选择性地忽略或拒绝某些交易。</p>
 <p>为了更具体地说明，假设 Dave 看到了一个交易，它将大量的 DAI 购买为
@@ -338,9 +341,9 @@ ETH，这将导致 DAI 的价格上升。Dave
 <h4 id="交易费用的上升">1. 交易费用的上升</h4>
 <p>在为了捕获 MEV 而进行的交易中，参与者往往愿意支付更高的 Gas
 费用以确保他们的交易被优先处理。</p>
-<p>考虑普通用户的平均交易费用为 ( f )，而捕获 MEV 的交易费用为 ( f + f
-)，其中 ( f ) 是因 MEV 而增加的费用。随着 MEV
-交易的增加，整体的平均交易费用将趋向于 ( f + f )，从而导致费用上升。</p>
+<p>考虑普通用户的平均交易费用为 ( f )，而捕获 MEV 的交易费用为 ( f +
+<span class="math inline"><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: 0;" xmlns="http://www.w3.org/2000/svg" width="1.885ex" height="1.62ex" role="img" focusable="false" viewBox="0 -716 833 716"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="394" d="M51 0Q46 4 46 7Q46 9 215 357T388 709Q391 716 416 716Q439 716 444 709Q447 705 616 357T786 7Q786 4 781 0H51ZM507 344L384 596L137 92L383 91H630Q630 93 507 344Z"></path></g></g></g></svg></mjx-container></span> f )，其中 ( <span class="math inline"><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: 0;" xmlns="http://www.w3.org/2000/svg" width="1.885ex" height="1.62ex" role="img" focusable="false" viewBox="0 -716 833 716"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="394" d="M51 0Q46 4 46 7Q46 9 215 357T388 709Q391 716 416 716Q439 716 444 709Q447 705 616 357T786 7Q786 4 781 0H51ZM507 344L384 596L137 92L383 91H630Q630 93 507 344Z"></path></g></g></g></svg></mjx-container></span> f ) 是因 MEV 而增加的费用。随着
+MEV 交易的增加，整体的平均交易费用将趋向于 ( f + <span class="math inline"><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: 0;" xmlns="http://www.w3.org/2000/svg" width="1.885ex" height="1.62ex" role="img" focusable="false" viewBox="0 -716 833 716"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="394" d="M51 0Q46 4 46 7Q46 9 215 357T388 709Q391 716 416 716Q439 716 444 709Q447 705 616 357T786 7Q786 4 781 0H51ZM507 344L384 596L137 92L383 91H630Q630 93 507 344Z"></path></g></g></g></svg></mjx-container></span> f )，从而导致费用上升。</p>
 <h4 id="交易的不可靠性">2. 交易的不可靠性</h4>
 <p>MEV
 的存在意味着交易的执行顺序和是否被执行变得不确定。这种不确定性源于矿工或验证者为了追求更高的利润而对交易进行操纵。</p>
